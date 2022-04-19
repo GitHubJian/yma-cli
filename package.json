@@ -1,0 +1,26 @@
+{
+    "name": "cli-monorepo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "lerna run build",
+        "version": "lerna version --no-push --force-publish --conventional-prerelease --no-git-tag-version",
+        "publish": "lerna publish from-package"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/GitHubJian/yma-cli.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/GitHubJian/yma-cli/issues"
+    },
+    "homepage": "https://github.com/GitHubJian/yma-cli#readme",
+    "private": true,
+    "workspaces": [
+        "package/*"
+    ]
+}

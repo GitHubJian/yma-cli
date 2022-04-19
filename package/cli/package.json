@@ -1,0 +1,26 @@
+{
+    "name": "yma-cli",
+    "version": "1.0.0",
+    "description": "ZNB 的 CLI 工具",
+    "main": "./dist/index.js",
+    "bin": {
+        "yma": "./bin/cli.js"
+    },
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "yma-cli-build": "1.0.0",
+        "yargs": "17.4.0"
+    },
+    "devDependencies": {
+        "@types/yargs": "17.0.10",
+        "typescript": "4.1.3"
+    }
+}

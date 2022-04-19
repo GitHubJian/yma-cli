@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "lib": ["es2017", "es2016", "dom"],
+        "module": "commonjs",
+        "declaration": true,
+        "rootDir": "src",
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "downlevelIteration": true,
+        "noImplicitAny": false,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "strict": true,
+        "outDir": "./dist"
+    },
+    "include": ["src", "test", "./package.json"],
+    "exclude": ["node_modules"]
+}

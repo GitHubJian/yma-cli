@@ -1,0 +1,21 @@
+{
+    "name": "yma-cli-build",
+    "version": "1.0.0",
+    "description": "Webpack Build 构建命令",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {},
+    "devDependencies": {
+        "@types/node": "17.0.22",
+        "@types/yargs": "17.0.10",
+        "typescript": "4.1.3"
+    }
+}
