@@ -1,7 +1,7 @@
 {
     "name": "yma-babel-preset",
     "version": "1.0.0",
-    "description": "",
+    "description": "适用于大多项目，简易的 babel preset 配置",
     "main": "./index.js",
     "scripts": {
         "i": "rm -rf package-lock.json && npm install",
