@@ -1,0 +1,21 @@
+{
+    "name": "yma-config-plugin-chunk",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "dependencies": {
+        "yma-shared-util": "1.0.0"
+    },
+    "devDependencies": {
+        "yma-config-plugin": "1.0.0"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

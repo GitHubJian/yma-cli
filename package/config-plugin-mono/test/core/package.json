@@ -1,0 +1,6 @@
+{
+    "monoDependencies": {
+        "common": "../common",
+        "common1": "../common1"
+    }
+}

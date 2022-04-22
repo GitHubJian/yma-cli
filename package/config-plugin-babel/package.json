@@ -1,0 +1,23 @@
+{
+    "name": "yma-config-plugin-babel",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "dependencies": {
+        "@babel/core": "7.17.8",
+        "babel-loader": "8.2.4"
+    },
+    "devDependencies": {
+        "yma-config-plugin": "1.0.0",
+        "webpack": "5.70.0"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

@@ -1,0 +1,53 @@
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "common build",
+            "cwd": "${workspaceFolder}/package/common",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run-script", "debug"],
+            "stopOnEntry": false,
+            "port": 5858,
+            "runtimeVersion": "16.14.2",
+            "skipFiles": ["<node_internals>/**"],
+            "env": {
+                "DEBUG_COMMAND_NAME": "build"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Core-Dev",
+            "cwd": "${workspaceFolder}/package/core",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run-script", "debug"],
+            "stopOnEntry": false,
+            "port": 5858,
+            "runtimeVersion": "16.14.2",
+            "skipFiles": ["<node_internals>/**"],
+            "env": {
+                "DEBUG_COMMAND_NAME": "dev"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "core build",
+            "cwd": "${workspaceFolder}/package/core",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run-script", "debug"],
+            "stopOnEntry": false,
+            "port": 5858,
+            "runtimeVersion": "16.14.2",
+            "skipFiles": ["<node_internals>/**"],
+            "env": {
+                "DEBUG_COMMAND_NAME": "build"
+            }
+        }
+    ]
+}

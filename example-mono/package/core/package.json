@@ -1,0 +1,23 @@
+{
+    "name": "dll-by-mono-core",
+    "version": "3.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "i": "rm -rf package-lock.json yarn.lock node_modules && yarn install",
+        "debug": "yma build",
+        "b": "yma build"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@vue/composition-api": "1.4.9",
+        "vue": "2.6.11",
+        "vue-template-compiler": "2.6.11"
+    },
+    "devDependencies": {},
+    "monoDependencies": {
+        "common": "../common"
+    }
+}

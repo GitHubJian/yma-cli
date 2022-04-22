@@ -1,0 +1,20 @@
+{
+    "name": "dll-monorepo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "init": "lerna clean -y && lerna bootstrap",
+        "clean": "lerna clean -y",
+        "build": "lerna run build",
+        "b": "sh ./script/build.sh"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "private": true,
+    "devDependencies": {},
+    "workspaces": [
+        "package/*"
+    ]
+}

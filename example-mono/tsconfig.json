@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "esnext",
+        "lib": ["es5", "dom", "es2015", "es2015.promise"],
+        "outDir": "./dist/",
+        "noImplicitAny": false,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "paths": {
+            "@/*": ["src/*"],
+            "common/*": ["package/common/*"]
+        },
+        "declaration": true,
+        "strict": true
+    },
+    "include": ["package", "./shims.d.ts"],
+    "exclude": ["node_modules"]
+}
