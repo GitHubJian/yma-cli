@@ -135,6 +135,7 @@ export default async function (api: PluginAPI, options: Partial<Options> = {}) {
         });
 
         const apply = (chain: Chain) => {
+            // @ts-expect-error
             const pluginKeys = chain.plugins.store.keys();
             for (let key of pluginKeys) {
                 if (key.startsWith('html')) {

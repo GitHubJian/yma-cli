@@ -17,6 +17,7 @@
     "license": "ISC",
     "dependencies": {
         "yma-cli-build": "1.0.0",
+        "yma-cli-copy": "1.0.0",
         "yma-cli-dev": "1.0.0",
         "yargs": "17.4.0"
     },

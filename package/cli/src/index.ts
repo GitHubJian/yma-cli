@@ -1,6 +1,7 @@
 import yargs from 'yargs';
 import devCmd from 'yma-cli-dev';
 import buildCmd from 'yma-cli-build';
+import copyCmd from 'yma-cli-copy'
 
 export default function (argv: string[]) {
     const globalOptions = {};
@@ -29,5 +30,5 @@ export default function (argv: string[]) {
         .wrap(yargs.terminalWidth())
         .epilogue('For more information, find our manual at ');
 
-    return cli.command(devCmd).command(buildCmd).parse(argv);
+    return cli.command(devCmd).command(buildCmd).command(copyCmd).parse(argv);
 }

@@ -21,9 +21,6 @@
 ```json
 {
     "monoCommon": true,
-    "monoDependencies": {
-        "common": "../common"
-    }
 }
 ```
 
