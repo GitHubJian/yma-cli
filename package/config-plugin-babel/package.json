@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-babel",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -14,8 +14,8 @@
         "babel-loader": "8.2.4"
     },
     "devDependencies": {
-        "yma-config-plugin": "1.0.0",
-        "webpack": "5.70.0"
+        "webpack": "5.70.0",
+        "yma-config-plugin": "^1.0.1"
     },
     "keywords": [],
     "author": "",
