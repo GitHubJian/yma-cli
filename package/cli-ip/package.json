@@ -1,11 +1,8 @@
 {
-    "name": "yma-cli",
+    "name": "yma-cli-ip",
     "version": "1.0.1",
-    "description": "YMA 的 CLI 工具",
+    "description": "获取本机 IP",
     "main": "./dist/index.js",
-    "bin": {
-        "yma": "./bin/cli.js"
-    },
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",
         "start": "npm run build -- -w",
@@ -16,13 +13,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "yargs": "17.4.0",
-        "yma-cli-build": "^1.0.1",
-        "yma-cli-copy": "^1.0.1",
-        "yma-cli-dev": "^1.0.1",
-        "yma-cli-ip": "^1.0.1"
-    },
-    "devDependencies": {
-        "@types/yargs": "17.0.10"
+        "address": "1.1.2",
+        "clipboardy": "2.3.0",
+        "yma-shared-util": "^1.0.1"
     }
 }
