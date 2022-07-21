@@ -1,6 +1,6 @@
 {
     "name": "cli-monorepo",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -25,9 +25,10 @@
         "url": "https://github.com/GitHubJian/yma-cli/issues"
     },
     "homepage": "https://github.com/GitHubJian/yma-cli#readme",
-    "private": true,
     "workspaces": [
-        "package/*",
-        "example-mono/*"
-    ]
+        "package/*"
+    ],
+    "engines": {
+        "node": "16.14.2"
+    }
 }

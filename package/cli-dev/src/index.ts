@@ -13,7 +13,6 @@ export = {
         const api = new PluginAPI(process.cwd(), 'development', {
             config: argv.config,
         });
-        console.log(123);
 
         await dev({}, api);
     },

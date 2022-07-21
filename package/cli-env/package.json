@@ -1,7 +1,7 @@
 {
-    "name": "yma-cli-build",
+    "name": "yma-cli-env",
     "version": "1.0.5",
-    "description": "Webpack Build 构建命令",
+    "description": "调整开发环境",
     "main": "./dist/index.js",
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",
@@ -17,9 +17,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "fs-extra": "10.1.0",
-        "webpack-bundle-analyzer": "4.5.0",
-        "yma-config-plugin": "^1.0.5",
+        "execa": "5.0.0",
+        "semver": "7.3.7",
         "yma-shared-util": "^1.0.5"
     }
 }

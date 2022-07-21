@@ -1,6 +1,6 @@
 {
     "name": "yma-cli",
-    "version": "1.0.2",
+    "version": "1.0.5",
     "description": "YMA 的 CLI 工具",
     "main": "./dist/index.js",
     "bin": {
@@ -12,17 +12,26 @@
         "build": "npm run clean && tsc -p src",
         "clean": "rm -fr dist"
     },
+    "files": [
+        "bin",
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "yargs": "17.4.0",
-        "yma-cli-build": "^1.0.2",
-        "yma-cli-copy": "^1.0.2",
-        "yma-cli-dev": "^1.0.2",
-        "yma-cli-ip": "^1.0.2"
+        "yma-cli-build": "^1.0.5",
+        "yma-cli-copy": "^1.0.5",
+        "yma-cli-dev": "^1.0.5",
+        "yma-cli-env": "^1.0.5",
+        "yma-cli-ip": "^1.0.5"
     },
     "devDependencies": {
         "@types/yargs": "17.0.10"
+    },
+    "engines": {
+        "node": "16.14.2",
+        "yarn": "1.22.18"
     }
 }

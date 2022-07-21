@@ -132,6 +132,7 @@ export default async function dev(
                     warnings: false,
                 },
             },
+            port,
         },
         devServerOptions,
         {
@@ -166,10 +167,8 @@ export default async function dev(
             }
         });
 
-        server.listen(port, host, err => {
-            if (err) {
-                reject(err);
-            }
+        server.start().catch(err => {
+            reject(err);
         });
     });
 }

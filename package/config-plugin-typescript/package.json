@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-typescript",
-    "version": "1.0.2",
+    "version": "1.0.5",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -9,13 +9,20 @@
         "build": "npm run clean && tsc -p src",
         "clean": "rm -fr dist"
     },
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "dependencies": {
+        "@babel/core": "7.17.8",
+        "babel-loader": "8.2.4",
         "ts-loader": "9.2.8",
         "typescript": "4.1.3"
     },
     "devDependencies": {
         "webpack": "5.70.0",
-        "yma-config-plugin": "^1.0.2"
+        "yma-config-plugin": "^1.0.5"
     },
     "keywords": [],
     "author": "",

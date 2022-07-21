@@ -3,6 +3,7 @@ import devCmd from 'yma-cli-dev';
 import buildCmd from 'yma-cli-build';
 import copyCmd from 'yma-cli-copy';
 import ipCmd from 'yma-cli-ip';
+import envCmd from 'yma-cli-env';
 
 export default function (argv: string[]) {
     const globalOptions = {};
@@ -36,5 +37,6 @@ export default function (argv: string[]) {
         .command(buildCmd)
         .command(copyCmd)
         .command(ipCmd)
+        .command(envCmd)
         .parse(argv);
 }
