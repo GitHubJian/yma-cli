@@ -9,9 +9,5 @@ module.exports = {
         // polyfill: path.resolve(__dirname, './src/export/polyfill/index.ts'),
         util: path.resolve(__dirname, './src/export/util/index.ts'),
     },
-    plugins: [
-        'yma-config-plugin-babel',
-        'yma-config-plugin-typescript',
-        ['yma-config-plugin-mono'],
-    ],
+    plugins: ['yma-config-plugin-babel', 'yma-config-plugin-typescript', ['yma-config-plugin-mono']],
 };

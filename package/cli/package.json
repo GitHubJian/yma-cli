@@ -12,26 +12,25 @@
         "build": "npm run clean && tsc -p src",
         "clean": "rm -fr dist"
     },
-    "files": [
-        "bin",
-        "dist"
-    ],
+    "files": ["bin", "dist"],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "semver": "7.3.8",
         "yargs": "17.4.0",
         "yma-cli-build": "^1.0.5",
         "yma-cli-copy": "^1.0.5",
         "yma-cli-dev": "^1.0.5",
         "yma-cli-env": "^1.0.5",
-        "yma-cli-ip": "^1.0.5"
+        "yma-cli-ip": "^1.0.5",
+        "yma-cli-nsr": "^1.0.5",
+        "yma-cli-lint": "^1.0.5"
     },
     "devDependencies": {
         "@types/yargs": "17.0.10"
     },
     "engines": {
-        "node": "16.14.2",
-        "yarn": "1.22.18"
+        "node": ">=14.17.0"
     }
 }

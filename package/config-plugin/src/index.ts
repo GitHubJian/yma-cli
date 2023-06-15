@@ -28,11 +28,7 @@ export default class PluginAPI {
 
     webpackChainFns: WebpackChainFn[];
 
-    constructor(
-        context: string,
-        mode: 'development' | 'production' = 'production',
-        cliArgv: Partial<CLIArgv> = {}
-    ) {
+    constructor(context: string, mode: 'development' | 'production' = 'production', cliArgv: Partial<CLIArgv> = {}) {
         this.context = context || process.cwd();
         this.mode = mode;
         this.cliArgv = cliArgv || {};
@@ -93,10 +89,7 @@ export default class PluginAPI {
         ];
 
         for (let builtinPlugin of builtinPlugins) {
-            builtinPlugin =
-                typeof builtinPlugin === 'string'
-                    ? [builtinPlugin]
-                    : builtinPlugin;
+            builtinPlugin = typeof builtinPlugin === 'string' ? [builtinPlugin] : builtinPlugin;
             const [request, options] = builtinPlugin;
             const resourcePath = path.resolve(__dirname, request);
             const plugin = new Plugin(resourcePath, options);
@@ -143,9 +136,7 @@ export default class PluginAPI {
             return enforce === 'post';
         });
 
-        const webpackChainFns = webpackChainPreFns
-            .concat(webpackChainNormalFns)
-            .concat(webpackChainPostFns);
+        const webpackChainFns = webpackChainPreFns.concat(webpackChainNormalFns).concat(webpackChainPostFns);
 
         const chain = new Chain();
 

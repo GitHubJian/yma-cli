@@ -4,10 +4,7 @@ import chalk from 'chalk';
 import {error} from './logger';
 import {loadModule} from './module';
 
-export function loadOptions<T>(
-    filename: string,
-    cwd: string = process.cwd()
-): T | null {
+export function loadOptions<T>(filename: string, cwd: string = process.cwd()): T | null {
     let fileConfig: T | null;
 
     const possibleConfigPaths: string[] = [filename];

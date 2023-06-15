@@ -47,13 +47,9 @@ export default function (api: PluginAPI) {
 
         chain.plugin('vue-loader').use(require('vue-loader').VueLoaderPlugin);
 
-        chain
-            .plugin('define')
-            .use(DefinePlugin, [resolveClientEnv(api.projectOptions)]);
+        chain.plugin('define').use(DefinePlugin, [resolveClientEnv(api.projectOptions)]);
 
-        chain
-            .plugin('case-sensitive-paths')
-            .use(CaseSensitivePathsWebpackPlugin);
+        chain.plugin('case-sensitive-paths').use(CaseSensitivePathsWebpackPlugin);
 
         chain.plugin('friendly-errors').use(FriendlyErrorsWebpackPlugin);
 

@@ -7,6 +7,12 @@ export = {
     builder: function builder(yargs) {
         process.env.NODE_ENV = 'development';
 
+        yargs.options('mock', {
+            type: 'string',
+            description: '传入 MockData 文件夹路径',
+            default: 'mock',
+        });
+
         return yargs;
     },
     handler: async function (argv) {
@@ -14,6 +20,11 @@ export = {
             config: argv.config,
         });
 
-        await dev({}, api);
+        await dev(
+            {
+                mock: argv.mock,
+            },
+            api,
+        );
     },
 };

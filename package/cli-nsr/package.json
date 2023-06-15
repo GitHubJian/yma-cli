@@ -1,0 +1,23 @@
+{
+    "name": "yma-cli-nsr",
+    "version": "1.0.5",
+    "description": "切换 npm 的 registry",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "files": ["bin", "dist"],
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "yma-shared-util": "^1.0.5",
+        "ini": "3.0.1",
+        "inquirer": "6.5.2",
+        "commander": "6.1.0",
+        "semver": "7.3.4"
+    }
+}

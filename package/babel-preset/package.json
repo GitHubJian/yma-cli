@@ -8,10 +8,7 @@
         "build": "npm run clean",
         "clean": "rm -fr dist"
     },
-    "files": [
-        "util",
-        "index.js"
-    ],
+    "files": ["util", "index.js"],
     "keywords": [],
     "author": "",
     "license": "ISC",

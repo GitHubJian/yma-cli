@@ -5,10 +5,7 @@ const createRequire = Module.createRequire;
 
 const resolve = require.resolve;
 
-export function clearRequireCache(
-    id: string,
-    map: Map<string, boolean> | undefined = new Map()
-): void {
+export function clearRequireCache(id: string, map: Map<string, boolean> | undefined = new Map()): void {
     const module = require.cache[id];
     if (module) {
         map.set(id, true);
@@ -26,9 +23,7 @@ export function clearRequireCache(
 export function resolveModule(request: string, context: string): string {
     let resolvedPath;
     try {
-        resolvedPath = createRequire(
-            path.resolve(context, 'package.json')
-        ).resolve(request);
+        resolvedPath = createRequire(path.resolve(context, 'package.json')).resolve(request);
     } catch (e) {
         resolvedPath = resolve(request, {paths: [context]});
     }
@@ -40,15 +35,9 @@ function importDefault(mod) {
     return mod && mod.__esModule ? mod.default : mod;
 }
 
-export function loadModule(
-    request: string,
-    context: string,
-    force: boolean = false
-): any {
+export function loadModule(request: string, context: string, force: boolean = false): any {
     try {
-        const mod = createRequire(path.resolve(context, 'package.json'))(
-            request
-        );
+        const mod = createRequire(path.resolve(context, 'package.json'))(request);
         return importDefault(mod);
     } catch (e) {
         const resolvedPath = resolveModule(request, context);

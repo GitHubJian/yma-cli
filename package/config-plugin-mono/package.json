@@ -9,11 +9,7 @@
         "build": "npm run clean && tsc -p src",
         "clean": "rm -fr dist"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "dependencies": {
         "add-asset-html-webpack-plugin": "5.0.2",
         "assets-webpack-plugin": "7.1.1",

@@ -6,10 +6,7 @@ import {done, log, logWithSpinner, stopSpinner, chalk} from 'yma-shared-util';
 import WebpackAPI, {ProjectOptions} from 'yma-config-plugin';
 import formatStats from './util/format-stats';
 
-const modifyConfig = (
-    config: Configuration,
-    fn: (config: Configuration) => void
-): void => {
+const modifyConfig = (config: Configuration, fn: (config: Configuration) => void): void => {
     if (Array.isArray(config)) {
         config.forEach(c => fn(c));
     } else {
@@ -21,10 +18,7 @@ export interface BuildOptions {
     report: boolean;
 }
 
-export default async function build(
-    options: BuildOptions,
-    api: WebpackAPI
-): Promise<void> {
+export default async function build(options: BuildOptions, api: WebpackAPI): Promise<void> {
     log();
     logWithSpinner('Building App for production...');
 
@@ -35,10 +29,7 @@ export default async function build(
 
     if (options.report) {
         modifyConfig(webpackConfig, config => {
-            const bundleName = (config.output!.filename as string).replace(
-                /\.js$/,
-                '-'
-            );
+            const bundleName = (config.output!.filename as string).replace(/\.js$/, '-');
             config.plugins!.push(
                 new BundleAnalyzerPlugin({
                     logLevel: 'warn',
@@ -47,7 +38,7 @@ export default async function build(
                     reportFilename: `${bundleName}report.html`,
                     statsFilename: `${bundleName}report.json`,
                     generateStatsFile: !!options['report-json'],
-                })
+                }),
             );
         });
     }
@@ -69,11 +60,9 @@ export default async function build(
             log(formatStats(stats!, targetDirShort));
             const cost = stats!.endTime - stats!.startTime;
             done(
-                `Cost ${chalk.red(
-                    cost + ' ms'
-                )} Build complete. The ${chalk.cyan(
-                    targetDirShort
-                )} directory is ready to be deployed.`
+                `Cost ${chalk.red(cost + ' ms')} Build complete. The ${chalk.cyan(
+                    targetDirShort,
+                )} directory is ready to be deployed.`,
             );
 
             resolve(void 0);

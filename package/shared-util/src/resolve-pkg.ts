@@ -10,10 +10,7 @@ interface PackageJSON {
 
 export function resolvePkg<T>(context: string): T | PackageJSON | null {
     if (fs.existsSync(path.join(context, 'package.json'))) {
-        const content = fs.readFileSync(
-            path.join(context, 'package.json'),
-            'utf-8'
-        );
+        const content = fs.readFileSync(path.join(context, 'package.json'), 'utf-8');
         const json = JSON.parse(content);
         return json;
     }

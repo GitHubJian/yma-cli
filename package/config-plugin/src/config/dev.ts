@@ -7,9 +7,7 @@ export default function (api: PluginAPI) {
         if (!api.isProd) {
             chain.devtool('cheap-module-source-map');
             chain.plugin('hmr').use(HotModuleReplacementPlugin);
-            chain.output.globalObject(
-                "(typeof self !== 'undefined' ? self : this)"
-            );
+            chain.output.globalObject("(typeof self !== 'undefined' ? self : this)");
             chain.plugin('progress').use(ProgressPlugin);
         }
     });

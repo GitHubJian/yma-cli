@@ -21,7 +21,8 @@ export = {
                 default: 'npm',
             });
     },
-    handler: async function (argv: Argv) {
+    handler: async function (argv) {
+        argv = argv as Argv;
         await copy(argv.context, argv.bin);
     },
 };

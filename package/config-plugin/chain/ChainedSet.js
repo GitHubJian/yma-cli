@@ -39,15 +39,10 @@ module.exports = class extends Chainable {
         return this;
     }
 
-    when(
-        condition,
-        whenTruthy = Function.prototype,
-        whenFalsy = Function.prototype
-    ) {
+    when(condition, whenTruthy = Function.prototype, whenFalsy = Function.prototype) {
         if (condition) {
             whenTruthy(this);
-        }
-        else {
+        } else {
             whenFalsy(this);
         }
 

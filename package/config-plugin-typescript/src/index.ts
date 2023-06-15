@@ -5,9 +5,7 @@ export default async function (api: PluginAPI) {
     const apply = (chain: Chain) => {
         chain.resolve.extensions.prepend('.ts').prepend('.tsx');
 
-        chain.resolveLoader.modules.prepend(
-            path.join(__dirname, 'node_modules')
-        );
+        chain.resolveLoader.modules.prepend(path.join(__dirname, 'node_modules'));
 
         const tsRule = chain.module.rule('ts').test(/\.ts$/);
 

@@ -7,10 +7,7 @@ export interface PluginOptions {
     unitPrecision: number;
 }
 
-export default function (
-    api: PluginAPI,
-    pluginOptions: Partial<PluginOptions> = {}
-) {
+export default function (api: PluginAPI, pluginOptions: Partial<PluginOptions> = {}) {
     api.chainWebpack((chain: Chain) => {
         const plugin = [
             PostCSSPx2RemPlugin({
@@ -22,10 +19,8 @@ export default function (
         function updateOptions(lang) {
             function applyOptions(rule) {
                 rule.use('postcss-loader').tap(function (loaderOptions) {
-                    loaderOptions.postcssOptions =
-                        loaderOptions.postcssOptions || {};
-                    loaderOptions.postcssOptions.plugins =
-                        loaderOptions.postcssOptions.plugins || [];
+                    loaderOptions.postcssOptions = loaderOptions.postcssOptions || {};
+                    loaderOptions.postcssOptions.plugins = loaderOptions.postcssOptions.plugins || [];
 
                     loaderOptions.postcssOptions.plugins.push(plugin);
 

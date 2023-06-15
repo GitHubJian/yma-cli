@@ -2,9 +2,7 @@ const path = require('path');
 const {loadOptions} = require('yma-shared-util');
 
 module.exports = function (context, options = {}) {
-    const absoluteRuntime = path.dirname(
-        require.resolve('@babel/runtime/package.json')
-    );
+    const absoluteRuntime = path.dirname(require.resolve('@babel/runtime/package.json'));
     const version = require('@babel/runtime/package.json').version;
     const {useBuiltIns = 'usage'} = options;
 
@@ -16,9 +14,7 @@ module.exports = function (context, options = {}) {
             {
                 modules: false,
                 useBuiltIns: useBuiltIns,
-                corejs: useBuiltIns
-                    ? require('core-js/package.json').version
-                    : false,
+                corejs: useBuiltIns ? require('core-js/package.json').version : false,
                 debug: false,
                 shippedProposals: true,
                 targets: {

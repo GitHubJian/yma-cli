@@ -7,12 +7,12 @@ import AssetsWebpackPlugin from 'assets-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import {resolvePkg, error, exit} from 'yma-shared-util';
 
-type PackageJSON = {
+interface PackageJSON {
     monoCommon: boolean;
     monoDependencies: {
         [key: string]: string;
     };
-};
+}
 
 export function resolveMonoDependencies(context): Array<[string, string]> {
     const pkg = resolvePkg<PackageJSON>(context);
@@ -60,7 +60,7 @@ function resolveMonoManifest(dependenciesContext) {
                 const cachePattern = patternMap.get(entry)!;
                 error(
                     `存在重复 Entry(${entry}) at contexts\nlocation at:\n${cachePattern.context}\n${context})`,
-                    '[Config Plugin Mono]'
+                    '[Config Plugin Mono]',
                 );
 
                 exit(0);
@@ -93,16 +93,11 @@ export default async function (api: PluginAPI, options: Partial<Options> = {}) {
 
     if (isMono) {
         api.chainWebpack((chain: Chain) => {
-            const outputDir =
-                api.projectOptions.outputDir || api.resolve('dist');
+            const outputDir = api.projectOptions.outputDir || api.resolve('dist');
 
             const outputFilename = getAssetPath(
-                `js/[name]-dll${
-                    api.isProd && api.projectOptions.filenameHashing
-                        ? '.[contenthash:8]'
-                        : ''
-                }.js`,
-                api.projectOptions.assetsDir
+                `js/[name]-dll${api.isProd && api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`,
+                api.projectOptions.assetsDir,
             );
             chain.output.filename(outputFilename);
             chain.output.delete('chunkFilename');
@@ -111,10 +106,7 @@ export default async function (api: PluginAPI, options: Partial<Options> = {}) {
 
             chain.output.library(LIBRARY_NAME);
 
-            const manifestPath = path.resolve(
-                outputDir,
-                '[name].manifest.json'
-            );
+            const manifestPath = path.resolve(outputDir, '[name].manifest.json');
 
             chain.plugin('dll').use(DllPlugin, [
                 {
@@ -149,10 +141,7 @@ export default async function (api: PluginAPI, options: Partial<Options> = {}) {
         api.chainWebpack(apply);
     } else {
         const monoDependenciesAlias = resolveMonoDependencies(api.context);
-        const monoDependenciesContext = monoDependenciesAlias.map(function ([
-            key,
-            value,
-        ]) {
+        const monoDependenciesContext = monoDependenciesAlias.map(function ([key, value]) {
             return value;
         });
 
@@ -168,14 +157,12 @@ export default async function (api: PluginAPI, options: Partial<Options> = {}) {
 
             if (api.isProd) {
                 patternMap.forEach(function (pattern) {
-                    chain
-                        .plugin(`dll-reference-${pattern.entry}`)
-                        .use(DllReferencePlugin, [
-                            {
-                                context: pattern.context,
-                                manifest: pattern.manifest,
-                            },
-                        ]);
+                    chain.plugin(`dll-reference-${pattern.entry}`).use(DllReferencePlugin, [
+                        {
+                            context: pattern.context,
+                            manifest: pattern.manifest,
+                        },
+                    ]);
                 });
             }
         });

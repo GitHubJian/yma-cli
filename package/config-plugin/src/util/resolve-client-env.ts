@@ -2,7 +2,7 @@ import {ProjectOptions} from '../options';
 
 export default function resolveClientEnv(
     options: ProjectOptions,
-    raw?: boolean
+    raw?: boolean,
 ): {
     [key: string]: any;
 } {

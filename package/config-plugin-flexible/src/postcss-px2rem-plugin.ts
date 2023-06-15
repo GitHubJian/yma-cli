@@ -10,10 +10,7 @@ function toFixed(value: number, precision: number): number {
     return (Math.round(wholeNumber / 10) * 10) / multiplier;
 }
 
-function createReplaceFn(
-    baseUnit,
-    unitPrecision
-): (raw: string, $1: string) => string {
+function createReplaceFn(baseUnit, unitPrecision): (raw: string, $1: string) => string {
     return function (raw, $1) {
         if (!$1) {
             return raw;
@@ -41,25 +38,16 @@ function creator(options?: CreatorOptions): {
             baseUnit: 100,
             unitPrecision: 6,
         },
-        options || {}
+        options || {},
     );
 
-    const replacement = createReplaceFn(
-        options.baseUnit,
-        options.unitPrecision
-    );
+    const replacement = createReplaceFn(options.baseUnit, options.unitPrecision);
 
     const unit = 'px';
-    const unitRE = new RegExp(
-        `"[^"]+"|'[^']+'|url\\([^\\)]+\\)|(\\d*\\.?\\d+)(${unit})`,
-        'ig'
-    );
+    const unitRE = new RegExp(`"[^"]+"|'[^']+'|url\\([^\\)]+\\)|(\\d*\\.?\\d+)(${unit})`, 'ig');
     // 由于到 postcss 的时候已经成css片段了，就没有注释了，只能用比较 hack 的手法，自定义单位 tx 会被转成 px
     const customUnit = 'tx';
-    const customUnitRE = new RegExp(
-        `"[^"]+"|'[^']+'|url\\([^\\)]+\\)|(\\d*\\.?\\d+)(${customUnit})`,
-        'ig'
-    );
+    const customUnitRE = new RegExp(`"[^"]+"|'[^']+'|url\\([^\\)]+\\)|(\\d*\\.?\\d+)(${customUnit})`, 'ig');
 
     return {
         postcssPlugin: 'postcss-px2rem',
@@ -70,16 +58,13 @@ function creator(options?: CreatorOptions): {
                 }
 
                 if (decl.value.indexOf(customUnit) > -1) {
-                    decl.value = decl.value.replace(
-                        customUnitRE,
-                        function (raw, $1) {
-                            if (!$1) {
-                                return raw;
-                            }
-
-                            return `${$1}px`;
+                    decl.value = decl.value.replace(customUnitRE, function (raw, $1) {
+                        if (!$1) {
+                            return raw;
                         }
-                    );
+
+                        return `${$1}px`;
+                    });
                 }
             });
 
@@ -89,16 +74,13 @@ function creator(options?: CreatorOptions): {
                 }
 
                 if (rule.params.indexOf(customUnit) > -1) {
-                    rule.params = rule.params.replace(
-                        customUnitRE,
-                        function (raw, $1) {
-                            if (!$1) {
-                                return raw;
-                            }
-
-                            return `${$1}px`;
+                    rule.params = rule.params.replace(customUnitRE, function (raw, $1) {
+                        if (!$1) {
+                            return raw;
                         }
-                    );
+
+                        return `${$1}px`;
+                    });
                 }
             });
         },

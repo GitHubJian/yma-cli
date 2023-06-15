@@ -11,9 +11,7 @@ function getDepPathRegex(dependencies: Array<string | RegExp>): RegExp | null {
             return dep.source;
         }
 
-        throw new Error(
-            'transpileDependencies only accepts an array of string or regular expressions'
-        );
+        throw new Error('transpileDependencies only accepts an array of string or regular expressions');
     });
     return deps.length ? new RegExp(deps.join('|')) : null;
 }
@@ -38,8 +36,7 @@ export default async function (api: PluginAPI) {
                     return SHOULD_SKIP;
                 }
 
-                const transpileDependencies =
-                    api.projectOptions.transpileDependencies;
+                const transpileDependencies = api.projectOptions.transpileDependencies;
 
                 if (transpileDependencies === true) {
                     const NON_TRANSPILABLE_DEPS = [
@@ -53,34 +50,23 @@ export default async function (api: PluginAPI) {
                         'whatwg-fetch',
                     ];
 
-                    const nonTranspilableDepsRegex = getDepPathRegex(
-                        NON_TRANSPILABLE_DEPS
-                    );
-                    return nonTranspilableDepsRegex!.test(filepath)
-                        ? SHOULD_SKIP
-                        : SHOULD_TRANSPILE;
+                    const nonTranspilableDepsRegex = getDepPathRegex(NON_TRANSPILABLE_DEPS);
+                    return nonTranspilableDepsRegex!.test(filepath) ? SHOULD_SKIP : SHOULD_TRANSPILE;
                 }
 
                 if (Array.isArray(transpileDependencies)) {
-                    const transpileDepRegex = getDepPathRegex(
-                        transpileDependencies
-                    );
+                    const transpileDepRegex = getDepPathRegex(transpileDependencies);
                     if (transpileDepRegex && transpileDepRegex.test(filepath)) {
                         return SHOULD_TRANSPILE;
                     }
                 }
 
-                return filepath.includes('node_modules')
-                    ? SHOULD_SKIP
-                    : SHOULD_TRANSPILE;
+                return filepath.includes('node_modules') ? SHOULD_SKIP : SHOULD_TRANSPILE;
             })
             .end();
 
-        jsRule
-            .use('babel-loader')
-            .loader(require.resolve('babel-loader'))
-            .options({
-                cacheCompression: false,
-            });
+        jsRule.use('babel-loader').loader(require.resolve('babel-loader')).options({
+            cacheCompression: false,
+        });
     });
 }

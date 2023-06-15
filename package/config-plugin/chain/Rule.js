@@ -30,16 +30,7 @@ const Rule = Orderable(
             this.rules = new ChainedMap(this);
             this.oneOfs = new ChainedMap(this);
             this.resolve = new Resolve(this);
-            this.extend([
-                'enforce',
-                'issuer',
-                'parser',
-                'resource',
-                'resourceQuery',
-                'sideEffects',
-                'test',
-                'type',
-            ]);
+            this.extend(['enforce', 'issuer', 'parser', 'resource', 'resourceQuery', 'sideEffects', 'test', 'type']);
         }
 
         use(name) {
@@ -51,10 +42,7 @@ const Rule = Orderable(
         }
 
         oneOf(name) {
-            return this.oneOfs.getOrCompute(
-                name,
-                () => new Rule(this, name, 'oneOf')
-            );
+            return this.oneOfs.getOrCompute(name, () => new Rule(this, name, 'oneOf'));
         }
 
         pre() {
@@ -74,7 +62,7 @@ const Rule = Orderable(
                     oneOf: this.oneOfs.values().map(oneOf => oneOf.toConfig()),
                     use: this.uses.values().map(use => use.toConfig()),
                     resolve: this.resolve.toConfig(),
-                })
+                }),
             );
 
             Object.defineProperties(config, {
@@ -95,21 +83,15 @@ const Rule = Orderable(
             }
 
             if (!omit.includes('use') && 'use' in obj) {
-                Object.keys(obj.use).forEach(name =>
-                    this.use(name).merge(obj.use[name])
-                );
+                Object.keys(obj.use).forEach(name => this.use(name).merge(obj.use[name]));
             }
 
             if (!omit.includes('rules') && 'rules' in obj) {
-                Object.keys(obj.rules).forEach(name =>
-                    this.rule(name).merge(obj.rules[name])
-                );
+                Object.keys(obj.rules).forEach(name => this.rule(name).merge(obj.rules[name]));
             }
 
             if (!omit.includes('oneOf') && 'oneOf' in obj) {
-                Object.keys(obj.oneOf).forEach(name =>
-                    this.oneOf(name).merge(obj.oneOf[name])
-                );
+                Object.keys(obj.oneOf).forEach(name => this.oneOf(name).merge(obj.oneOf[name]));
             }
 
             if (!omit.includes('resolve') && 'resolve' in obj) {
@@ -118,24 +100,13 @@ const Rule = Orderable(
 
             if (!omit.includes('test') && 'test' in obj) {
                 this.test(
-                    obj.test instanceof RegExp || typeof obj.test === 'function'
-                        ? obj.test
-                        : new RegExp(obj.test)
+                    obj.test instanceof RegExp || typeof obj.test === 'function' ? obj.test : new RegExp(obj.test),
                 );
             }
 
-            return super.merge(obj, [
-                ...omit,
-                'include',
-                'exclude',
-                'use',
-                'rules',
-                'oneOf',
-                'resolve',
-                'test',
-            ]);
+            return super.merge(obj, [...omit, 'include', 'exclude', 'use', 'rules', 'oneOf', 'resolve', 'test']);
         }
-    }
+    },
 );
 
 module.exports = Rule;

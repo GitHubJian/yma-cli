@@ -45,7 +45,7 @@ module.exports = class extends ChainedMap {
     }
 
     static toString(config, {verbose = false, configPrefix = 'config'} = {}) {
-    // eslint-disable-next-line global-require
+        // eslint-disable-next-line global-require
         const {stringify} = require('javascript-stringify');
 
         return stringify(
@@ -56,8 +56,8 @@ module.exports = class extends ChainedMap {
                     const prefix = `/* ${configPrefix}.${value.__pluginType}('${value.__pluginName}') */\n`;
                     const constructorExpression = value.__pluginPath
                         ? // The path is stringified to ensure special characters are escaped
-                    // (such as the backslashes in Windows-style paths).
-                        `(require(${stringify(value.__pluginPath)}))`
+                          // (such as the backslashes in Windows-style paths).
+                          `(require(${stringify(value.__pluginPath)}))`
                         : value.__pluginConstructorName;
 
                     if (constructorExpression) {
@@ -67,12 +67,8 @@ module.exports = class extends ChainedMap {
                         return `${prefix}new ${constructorExpression}(${args})`;
                     }
                     return (
-                        prefix
-            + stringify(
-                value.__pluginArgs && value.__pluginArgs.length
-                    ? {args: value.__pluginArgs}
-                    : {}
-            )
+                        prefix +
+                        stringify(value.__pluginArgs && value.__pluginArgs.length ? {args: value.__pluginArgs} : {})
                     );
                 }
 
@@ -80,12 +76,8 @@ module.exports = class extends ChainedMap {
                 if (value && value.__ruleNames) {
                     const ruleTypes = value.__ruleTypes;
                     const prefix = `/* ${configPrefix}.module${value.__ruleNames
-                        .map(
-                            (r, index) => `.${ruleTypes ? ruleTypes[index] : 'rule'}('${r}')`
-                        )
-                        .join('')}${
-                        value.__useName ? `.use('${value.__useName}')` : ''
-                    } */\n`;
+                        .map((r, index) => `.${ruleTypes ? ruleTypes[index] : 'rule'}('${r}')`)
+                        .join('')}${value.__useName ? `.use('${value.__useName}')` : ''} */\n`;
                     return prefix + stringify(value);
                 }
 
@@ -102,7 +94,7 @@ module.exports = class extends ChainedMap {
 
                 return stringify(value);
             },
-            2
+            2,
         );
     }
 
@@ -129,11 +121,10 @@ module.exports = class extends ChainedMap {
                 plugins: this.plugins.values().map(plugin => plugin.toConfig()),
                 performance: this.performance.entries(),
                 entry: Object.keys(entryPoints).reduce(
-                    (acc, key) =>
-                        Object.assign(acc, {[key]: entryPoints[key].values()}),
-                    {}
+                    (acc, key) => Object.assign(acc, {[key]: entryPoints[key].values()}),
+                    {},
                 ),
-            })
+            }),
         );
     }
 
@@ -154,15 +145,11 @@ module.exports = class extends ChainedMap {
         ];
 
         if (!omit.includes('entry') && 'entry' in obj) {
-            Object.keys(obj.entry).forEach(name =>
-                this.entry(name).merge([].concat(obj.entry[name]))
-            );
+            Object.keys(obj.entry).forEach(name => this.entry(name).merge([].concat(obj.entry[name])));
         }
 
         if (!omit.includes('plugin') && 'plugin' in obj) {
-            Object.keys(obj.plugin).forEach(name =>
-                this.plugin(name).merge(obj.plugin[name])
-            );
+            Object.keys(obj.plugin).forEach(name => this.plugin(name).merge(obj.plugin[name]));
         }
 
         omissions.forEach(key => {

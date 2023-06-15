@@ -15,11 +15,7 @@ export default function formatStats(stats: webpack.Stats, dir: string): string {
 
     let assets = json.assets
         ? json.assets
-        : (json.children as []).reduce(
-              (acc, child: Record<string, any>) =>
-                  acc.concat(child.assets as []),
-              []
-          );
+        : (json.children as []).reduce((acc, child: Record<string, any>) => acc.concat(child.assets as []), []);
 
     const seenNames = new Map();
     const isJS = val => val.endsWith('.js');
@@ -70,13 +66,11 @@ export default function formatStats(stats: webpack.Stats, dir: string): string {
                         asset.name.endsWith('js')
                             ? chalk.green(path.join(dir, asset.name))
                             : chalk.blue(path.join(dir, asset.name)),
-                        formatSize(asset.size)
-                    )
+                        formatSize(asset.size),
+                    ),
                 )
-                .join('\n')
+                .join('\n'),
     );
 
-    return `${ui.toString()}\n\n  ${chalk.gray(
-        'Images and other types of assets omitted.'
-    )}\n`;
+    return `${ui.toString()}\n\n  ${chalk.gray('Images and other types of assets omitted.')}\n`;
 }

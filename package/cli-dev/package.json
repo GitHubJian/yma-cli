@@ -9,15 +9,13 @@
         "build": "npm run clean && tsc -p src",
         "clean": "rm -fr dist"
     },
-    "files": [
-        "bin",
-        "dist"
-    ],
+    "files": ["bin", "dist"],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "address": "1.1.2",
+        "path-to-regexp": "6.2.1",
         "portfinder": "1.0.28",
         "webpack-dev-server": "4.7.4",
         "yma-config-plugin": "^1.0.5",

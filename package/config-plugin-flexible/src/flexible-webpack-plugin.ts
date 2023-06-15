@@ -29,9 +29,7 @@ export default class FlexibleWebpackPlugin {
 
                     data.html = html.replace(OUTLET, replacement);
                 } else {
-                    console.error(
-                        `[FlexibleWebpackPlugin]: not found outlet(${OUTLET})`
-                    );
+                    console.error(`[FlexibleWebpackPlugin]: not found outlet(${OUTLET})`);
 
                     process.exit(0);
                 }

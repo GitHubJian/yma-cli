@@ -7,7 +7,7 @@ export default function (
     protocol: string,
     host: string,
     port: string | number,
-    pathname = '/'
+    pathname = '/',
 ): {
     lanUrlForConfig: any;
     lanUrlForTerminal: string;
@@ -40,11 +40,7 @@ export default function (
             const result = defaultGateway.v4.sync();
             lanUrlForConfig = address.ip(result && result.interface);
             if (lanUrlForConfig) {
-                if (
-                    /^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(
-                        lanUrlForConfig
-                    )
-                ) {
+                if (/^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(lanUrlForConfig)) {
                     lanUrlForTerminal = prettyPrintUrl(lanUrlForConfig);
                 } else {
                     lanUrlForConfig = undefined;

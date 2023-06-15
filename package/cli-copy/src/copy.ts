@@ -1,10 +1,7 @@
 import {PackageManager} from 'yma-package-manager';
 import {chalk, error, info, log, done} from 'yma-shared-util';
 
-export default async function (
-    context: string = process.cwd(),
-    forcePackageManager: string = 'npm'
-) {
+export default async function (context: string = process.cwd(), forcePackageManager: string = 'npm') {
     log('尝试复制 NPMRC 中 Auth Token...', 'COPY');
     log();
 

@@ -8,6 +8,7 @@ import WebpackAPI, {ProjectOptions} from 'yma-config-plugin';
 import prepareURL from './util/prepare-url';
 import isAbsoluteUrl from './util/is-absolute-url';
 import prepareProxy from './util/prepare-proxy';
+import createMiddleware from './middleware';
 
 const defaults = {
     host: '0.0.0.0',
@@ -28,7 +29,7 @@ function addDevClientToEntry(config: Configuration, devClient: string[]): void {
 
 function genHistoryApiFallbackRewrites(
     baseUrl: string,
-    pages = {}
+    pages = {},
 ): Array<{
     from: RegExp;
     to: any;
@@ -37,10 +38,7 @@ function genHistoryApiFallbackRewrites(
         .sort((a, b) => b.length - a.length)
         .map(name => ({
             from: new RegExp(`^/${name}`),
-            to: path.posix.join(
-                baseUrl,
-                pages[name].filename || `${name}.html`
-            ),
+            to: path.posix.join(baseUrl, pages[name].filename || `${name}.html`),
         }));
 
     return [
@@ -53,8 +51,10 @@ function genHistoryApiFallbackRewrites(
 }
 
 export default async function dev(
-    args: any,
-    api: WebpackAPI
+    args: {
+        mock: string;
+    },
+    api: WebpackAPI,
 ): Promise<{
     server: WebpackDevServer;
     url: string;
@@ -64,32 +64,17 @@ export default async function dev(
 
     const webpackConfig = await api.toConfig();
 
-    const devServerOptions = Object.assign(
-        webpackConfig.devServer || {},
-        options.devServer || {}
-    );
+    const devServerOptions = Object.assign(webpackConfig.devServer || {}, options.devServer || {});
 
     const protocol = 'http';
     const host = process.env.HOST || devServerOptions.host || defaults.host;
-    portfinder.basePort = +(
-        process.env.PORT ||
-        devServerOptions.port ||
-        defaults.port
-    );
+    portfinder.basePort = +(process.env.PORT || devServerOptions.port || defaults.port);
     const port = await portfinder.getPortPromise();
 
-    const urls = prepareURL(
-        protocol,
-        host,
-        port,
-        isAbsoluteUrl(options.publicPath) ? '/' : options.publicPath
-    );
+    const urls = prepareURL(protocol, host, port, isAbsoluteUrl(options.publicPath) ? '/' : options.publicPath);
     const localUrlForBrowser = urls.localUrlForBrowser;
 
-    const proxySettings = prepareProxy(
-        devServerOptions.proxy,
-        api.resolve('public')
-    );
+    const proxySettings = prepareProxy(devServerOptions.proxy, api.resolve('public'));
 
     const sockPath = '/sockjs-node';
     const sockjsUrl =
@@ -111,15 +96,14 @@ export default async function dev(
     addDevClientToEntry(webpackConfig, devClients);
     // create compiler
     const compiler = webpack(webpackConfig);
+    // create mock middleware
+    let setupMiddlewares = createMiddleware(api, args.mock);
     // create server
     const devServerConfig = Object.assign(
         {
             historyApiFallback: {
                 disableDotRule: true,
-                rewrites: genHistoryApiFallbackRewrites(
-                    options.publicPath,
-                    options.page
-                ),
+                rewrites: genHistoryApiFallbackRewrites(options.publicPath, options.page),
             },
             hot: true,
             compress: false,
@@ -133,11 +117,12 @@ export default async function dev(
                 },
             },
             port,
+            setupMiddlewares: setupMiddlewares,
         },
         devServerOptions,
         {
             proxy: proxySettings,
-        }
+        },
     );
     const server = new WebpackDevServer(devServerConfig, compiler);
 

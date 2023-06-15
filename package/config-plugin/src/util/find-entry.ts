@@ -13,29 +13,20 @@ const INDEX_FILE_NAME_WITHOUT_EXT = 'index';
 
 export default function findEntry(
     context: string,
-    entryType: EntryType
+    entryType: EntryType,
 ): {
     [key: string]: string;
 } {
     const ts = isTSRepo(context);
     const ext = ts ? '.ts' : '.js';
 
-    function findEntryFile(
-        entriesSourcePath: string,
-        entryFolderName: string
-    ): string | undefined {
+    function findEntryFile(entriesSourcePath: string, entryFolderName: string): string | undefined {
         const entryFileNameNoExt = INDEX_FILE_NAME_WITHOUT_EXT;
 
-        const entryFolderPath = path.resolve(
-            entriesSourcePath,
-            entryFolderName
-        );
+        const entryFolderPath = path.resolve(entriesSourcePath, entryFolderName);
         const entryFileBasename = entryFileNameNoExt + ext;
         const entryFilePath = path.resolve(entryFolderPath, entryFileBasename);
-        if (
-            fs.existsSync(entryFilePath) &&
-            fs.statSync(entryFilePath).isFile()
-        ) {
+        if (fs.existsSync(entryFilePath) && fs.statSync(entryFilePath).isFile()) {
             return entryFilePath;
         }
 
@@ -60,11 +51,10 @@ export default function findEntry(
             warn(`lib 目录[${entriesSourcePath}]不存在.`, '[Find Entries]');
 
             return {};
-        } else {
-            error(`entry 目录[${entriesSourcePath}]不存在.`, '[Find Entries]');
-
-            exit(0);
         }
+        error(`entry 目录[${entriesSourcePath}]不存在.`, '[Find Entries]');
+
+        exit(0);
     }
 
     if (entryType === EntryType.APP) {
@@ -74,21 +64,15 @@ export default function findEntry(
         return {
             app: entryPath,
         };
-    } else {
-        const entryFolderNameList = fs
-            .readdirSync(entriesSourcePath)
-            .filter(entryName => !entryName.startsWith('.'));
-
-        const entries = {};
-        entryFolderNameList.forEach(entryFolderName => {
-            const entryFilePath = findEntryFile(
-                entriesSourcePath,
-                entryFolderName
-            )!;
-
-            entries[entryFolderName] = entryFilePath;
-        });
-
-        return entries;
     }
+    const entryFolderNameList = fs.readdirSync(entriesSourcePath).filter(entryName => !entryName.startsWith('.'));
+
+    const entries = {};
+    entryFolderNameList.forEach(entryFolderName => {
+        const entryFilePath = findEntryFile(entriesSourcePath, entryFolderName)!;
+
+        entries[entryFolderName] = entryFilePath;
+    });
+
+    return entries;
 }

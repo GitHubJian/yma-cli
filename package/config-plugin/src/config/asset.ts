@@ -11,11 +11,7 @@ interface CSSLoaderOptions {
     import:
         | boolean
         | {
-              filter: (
-                  url: string,
-                  media: string,
-                  resourcePath: string
-              ) => boolean;
+              filter: (url: string, media: string, resourcePath: string) => boolean;
           };
     modules: boolean;
     sourceMap: false;
@@ -36,10 +32,8 @@ export default function (api: PluginAPI) {
 
         const genAssetSubPath = (dir: string): string => {
             return getAssetPath(
-                `${dir}/[name]${
-                    api.projectOptions.filenameHashing ? '.[hash:8]' : ''
-                }.[ext]`,
-                api.projectOptions.assetsDir
+                `${dir}/[name]${api.projectOptions.filenameHashing ? '.[hash:8]' : ''}.[ext]`,
+                api.projectOptions.assetsDir,
             );
         };
 
@@ -70,10 +64,7 @@ export default function (api: PluginAPI) {
             .options(genUrlLoaderOption('img'));
 
         let customSvgPaths: string[] = [];
-        if (
-            api.projectOptions.svgPaths &&
-            Array.isArray(api.projectOptions.svgPaths)
-        ) {
+        if (api.projectOptions.svgPaths && Array.isArray(api.projectOptions.svgPaths)) {
             customSvgPaths = api.projectOptions.svgPaths.map(p => {
                 return api.resolve(p);
             });

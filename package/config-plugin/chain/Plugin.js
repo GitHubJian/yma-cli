@@ -24,7 +24,7 @@ module.exports = Orderable(
         tap(f) {
             if (!this.has('plugin')) {
                 throw new Error(
-                    `Cannot call .tap() on a plugin that has not yet been defined. Call ${this.type}('${this.name}').use(<Plugin>) first.`
+                    `Cannot call .tap() on a plugin that has not yet been defined. Call ${this.type}('${this.name}').use(<Plugin>) first.`,
                 );
             }
             this.set('args', f(this.get('args') || []));
@@ -58,7 +58,7 @@ module.exports = Orderable(
 
             if (plugin === undefined) {
                 throw new Error(
-                    `Invalid ${this.type} configuration: ${this.type}('${this.name}').use(<Plugin>) was not called to specify the plugin`
+                    `Invalid ${this.type} configuration: ${this.type}('${this.name}').use(<Plugin>) was not called to specify the plugin`,
                 );
             }
 
@@ -71,9 +71,7 @@ module.exports = Orderable(
                 plugin = require(pluginPath);
             }
 
-            const constructorName = plugin.__expression
-                ? `(${plugin.__expression})`
-                : plugin.name;
+            const constructorName = plugin.__expression ? `(${plugin.__expression})` : plugin.name;
 
             const config = init(plugin, args);
 
@@ -87,5 +85,5 @@ module.exports = Orderable(
 
             return config;
         }
-    }
+    },
 );

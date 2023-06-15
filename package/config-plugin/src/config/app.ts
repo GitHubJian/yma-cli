@@ -26,21 +26,17 @@ interface PageConfig {
     [key: string]: any;
 }
 
-export type MultiPageConfig = {
+export interface MultiPageConfig {
     [key: string]: PageConfig | string;
-};
+}
 
 export default async function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
         const outputDir = api.resolve(api.projectOptions.outputDir);
 
         const outputFilename = getAssetPath(
-            `js/[name]${
-                api.isProd && api.projectOptions.filenameHashing
-                    ? '.[contenthash:8]'
-                    : ''
-            }.js`,
-            api.projectOptions.assetsDir
+            `js/[name]${api.isProd && api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`,
+            api.projectOptions.assetsDir,
         );
 
         chain.output.filename(outputFilename).chunkFilename(outputFilename);
@@ -55,10 +51,7 @@ export default async function (api: PluginAPI) {
         };
 
         const htmlPath = api.resolve('public/index.html');
-        const defaultHtmlPath = path.resolve(
-            __dirname,
-            '../../public/default.html'
-        );
+        const defaultHtmlPath = path.resolve(__dirname, '../../public/default.html');
 
         let multiPageConfig = api.projectOptions.page!;
 
@@ -77,23 +70,15 @@ export default async function (api: PluginAPI) {
 
         chain.entryPoints.clear();
         const pages = Object.keys(multiPageConfig);
-        const normalizePageConfig = c =>
-            typeof c === 'string' || Array.isArray(c) ? {entry: c} : c;
+        const normalizePageConfig = c => (typeof c === 'string' || Array.isArray(c) ? {entry: c} : c);
 
         pages.forEach(name => {
             const pageConfig = normalizePageConfig(multiPageConfig[name]);
-            const {
-                entry,
-                template = `public/${name}.html`,
-                filename = `${name}.html`,
-                chunks = [name],
-            } = pageConfig;
+            const {entry, template = `public/${name}.html`, filename = `${name}.html`, chunks = [name]} = pageConfig;
 
             const customHtmlOptions = {};
             for (const key in pageConfig) {
-                if (
-                    !['entry', 'template', 'filename', 'chunks'].includes(key)
-                ) {
+                if (!['entry', 'template', 'filename', 'chunks'].includes(key)) {
                     customHtmlOptions[key] = pageConfig[key];
                 }
             }
@@ -105,16 +90,12 @@ export default async function (api: PluginAPI) {
                 chain.entry(name).merge(
                     entries.map((entry: string) => {
                         return api.resolve(entry);
-                    })
+                    }),
                 );
             }
 
             const hasDedicatedTemplate = fs.existsSync(api.resolve(template));
-            const templatePath = hasDedicatedTemplate
-                ? template
-                : fs.existsSync(htmlPath)
-                ? htmlPath
-                : defaultHtmlPath;
+            const templatePath = hasDedicatedTemplate ? template : fs.existsSync(htmlPath) ? htmlPath : defaultHtmlPath;
 
             const pageHtmlOptions: {
                 chunks?: 'all' | string[];
@@ -131,9 +112,7 @@ export default async function (api: PluginAPI) {
                 ...customHtmlOptions,
             };
 
-            chain
-                .plugin(`html-${name}`)
-                .use(HtmlWebpackPlugin, [pageHtmlOptions]);
+            chain.plugin(`html-${name}`).use(HtmlWebpackPlugin, [pageHtmlOptions]);
         });
     });
 }

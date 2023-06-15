@@ -1,0 +1,24 @@
+{
+    "name": "yma-config-plugin-legal-deps",
+    "version": "1.0.5",
+    "description": "引入合法的第三方依赖",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "files": ["bin", "dist", "public"],
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "lodash.uniqby": "4.7.0",
+        "lodash.compact": "3.0.1",
+        "joi": "17.6.0"
+    },
+    "devDependencies": {
+        "yma-config-plugin": "^1.0.5"
+    }
+}

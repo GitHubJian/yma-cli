@@ -43,36 +43,27 @@ function onProxyError(proxy) {
                 chalk.cyan(host) +
                 ' to ' +
                 chalk.cyan(proxy) +
-                '.'
+                '.',
         );
 
         console.log();
         if (res.writeHead && !res.headersSent) {
             res.writeHead(500);
         }
-        res.end(
-            `Proxy error: Could not proxy request ${req.url} from ${host} to ${proxy} (${err.code}).`
-        );
+        res.end(`Proxy error: Could not proxy request ${req.url} from ${host} to ${proxy} (${err.code}).`);
     };
 }
 
 export default function prepareProxy(
-    proxy:
-        | undefined
-        | DevServer.ProxyConfigArray
-        | DevServer.ProxyConfigMap
-        | DevServer.ProxyConfigArrayItem,
-    appPublicFolder: string
+    proxy: undefined | DevServer.ProxyConfigArray | DevServer.ProxyConfigMap | DevServer.ProxyConfigArrayItem,
+    appPublicFolder: string,
 ): undefined | Record<string, unknown> | Array<Record<string, unknown>> {
     if (!proxy) {
         return undefined;
     }
 
     function mayProxy(pathname) {
-        const maybePublicPath = path.resolve(
-            appPublicFolder,
-            pathname.slice(1)
-        );
+        const maybePublicPath = path.resolve(appPublicFolder, pathname.slice(1));
         const isPublicFileRequest = fs.existsSync(maybePublicPath);
         const isWdsEndpointRequest = pathname.startsWith('/sockjs-node'); // used by webpackHotDevClient
         return !(isPublicFileRequest || isWdsEndpointRequest);
@@ -80,12 +71,8 @@ export default function prepareProxy(
 
     function createProxyEntry(
         target,
-        usersOnProxyReq?: (
-            proxyReq: http.ClientRequest,
-            req: http.IncomingMessage,
-            res: http.ServerResponse
-        ) => void,
-        context?: string
+        usersOnProxyReq?: (proxyReq: http.ClientRequest, req: http.IncomingMessage, res: http.ServerResponse) => void,
+        context?: string,
     ) {
         if (typeof target === 'string' && process.platform === 'win32') {
             target = resolveLoopback(target);
@@ -106,10 +93,7 @@ export default function prepareProxy(
                     return true;
                 }
 
-                return (
-                    req.headers.accept &&
-                    req.headers.accept.indexOf('text/html') === -1
-                );
+                return req.headers.accept && req.headers.accept.indexOf('text/html') === -1;
             },
             onProxyReq(proxyReq, req, res) {
                 if (usersOnProxyReq) {
@@ -127,9 +111,7 @@ export default function prepareProxy(
     if (typeof proxy === 'string') {
         if (!/^http(s)?:\/\//.test(proxy)) {
             console.log(
-                chalk.red(
-                    'When "proxy" is specified in yma.config.js it must start with either http:// or https://'
-                )
+                chalk.red('When "proxy" is specified in yma.config.js it must start with either http:// or https://'),
             );
             process.exit(1);
         }
@@ -144,17 +126,13 @@ export default function prepareProxy(
             console.log(
                 chalk.red(
                     'When `proxy` in yma.config.js is an object, each `context` object must have a ' +
-                        '`target` property specified as a url string'
-                )
+                        '`target` property specified as a url string',
+                ),
             );
             process.exit(1);
         }
 
-        const entry = createProxyEntry(
-            config.target,
-            config.onProxyReq,
-            context
-        );
+        const entry = createProxyEntry(config.target, config.onProxyReq, context);
 
         return Object.assign({}, defaultConfig, config, entry);
     });

@@ -8,9 +8,7 @@ export default function getPkg(projectPath: string): any {
     try {
         packageJson = fs.readFileSync(packagePath, 'utf-8');
     } catch (err) {
-        throw new Error(
-            `The package.json file at '${packagePath}' does not exist`
-        );
+        throw new Error(`The package.json file at '${packagePath}' does not exist`);
     }
 
     try {

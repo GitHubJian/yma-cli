@@ -1,13 +1,10 @@
 function hasComment(comment) {
-    return (
-        comment
-        && comment.value.replace(/\*+/g, '').trim().startsWith('webpackChunkName')
-    );
+    return comment && comment.value.replace(/\*+/g, '').trim().startsWith('webpackChunkName');
 }
 
 function tryNormalizePath(p) {
     // TODO merge .ts
-    const tryExts = ['.js', '.jsx', '.vue', '.json'];
+    const tryExts = ['.js', '.jsx', '.vue', '.ts', '.tsx'];
     // 目前项目中只有这三种导出文件名
     const tryNames = ['index', 'main', 'App'];
 
@@ -67,15 +64,11 @@ module.exports = function ({types: t}) {
                 if (!hasComment(comment)) {
                     const webpackChunkName = createWebpackChunkName(arg.value);
 
-                    t.addComment(
-                        arg,
-                        'leading',
-                        `webpackChunkName: '${webpackChunkName}'`
-                    );
+                    t.addComment(arg, 'leading', `webpackChunkName: '${webpackChunkName}'`);
 
                     // TODO 输出文件路径
                     console.warn(
-                        `[babel-webpack-chunkname-plugin]: 通过 [${arg.value}] 生成 WebpackChunkName [${webpackChunkName}]，建议手动调整更好的应用 HTTP Cache`
+                        `[babel-webpack-chunkname-plugin]: 通过 [${arg.value}] 生成 WebpackChunkName [${webpackChunkName}]，建议手动调整更好的应用 HTTP Cache`,
                     );
                 }
             },

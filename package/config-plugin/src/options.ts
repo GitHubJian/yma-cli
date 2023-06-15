@@ -29,8 +29,8 @@ export interface ProjectOptions {
     transpileDependencies?: boolean | Array<string | RegExp>;
     chainWebpack?: (chain: Config) => void;
     configureWebpack?: (config: Configuration) => Configuration;
-    plugins?: PluginConfig<any>[];
-    presets?: Array<string>;
+    plugins?: Array<PluginConfig<any>>;
+    presets?: string[];
     devServer?: DevServer;
 }
 

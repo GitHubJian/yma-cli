@@ -12,10 +12,8 @@ export default function (api: PluginAPI) {
         const shouldExtract = extract !== false && !shadowMode;
 
         const filename = getAssetPath(
-            `css/[name]${
-                api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''
-            }.css`,
-            api.projectOptions.assetsDir
+            `css/[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.css`,
+            api.projectOptions.assetsDir,
         );
 
         const extractOptions = Object.assign(
@@ -23,23 +21,16 @@ export default function (api: PluginAPI) {
                 filename,
                 chunkFilename: filename,
             },
-            extract && typeof extract === 'object' ? extract : {}
+            extract && typeof extract === 'object' ? extract : {},
         );
 
         const cssPublicPath = publicPath
             ? publicPath
-            : '../'.repeat(
-                  extractOptions.filename
-                      .replace(/^\.[\/\\]/, '')
-                      .split(/[\/\\]/g).length - 1
-              );
+            : '../'.repeat(extractOptions.filename.replace(/^\.[\/\\]/, '').split(/[\/\\]/g).length - 1);
 
         const plugins: any[] = [];
 
-        const browsers = loadOptions<Array<string>>(
-            'browserslist.config.js',
-            api.context
-        );
+        const browsers = loadOptions<string[]>('browserslist.config.js', api.context);
 
         plugins.push([
             'postcss-preset-env',
@@ -54,34 +45,22 @@ export default function (api: PluginAPI) {
             },
         };
 
-        function createCSSRule(
-            lang: string,
-            test: RegExp,
-            loader?: string
-        ): void {
+        function createCSSRule(lang: string, test: RegExp, loader?: string): void {
             function applyLoaders(rule: Chain.Rule<Chain.Rule<Chain.Module>>) {
                 if (shouldExtract) {
                     rule.use('extract-css-loader')
-                        .loader(
-                            require.resolve(
-                                'mini-css-extract-plugin/dist/loader.js'
-                            )
-                        )
+                        .loader(require.resolve('mini-css-extract-plugin/dist/loader.js'))
                         .options({
                             publicPath: cssPublicPath,
                             esModule: false,
                         });
                 } else {
-                    rule.use('style-loader')
-                        .loader(require.resolve('style-loader'))
-                        .options({});
+                    rule.use('style-loader').loader(require.resolve('style-loader')).options({});
                 }
 
-                rule.use('css-loader')
-                    .loader(require.resolve('css-loader'))
-                    .options({
-                        sourceMap: false,
-                    });
+                rule.use('css-loader').loader(require.resolve('css-loader')).options({
+                    sourceMap: false,
+                });
 
                 rule.use('postcss-loader')
                     .loader(require.resolve('postcss-loader'))
@@ -90,8 +69,8 @@ export default function (api: PluginAPI) {
                             {
                                 sourceMap: false,
                             },
-                            postcssOptions
-                        )
+                            postcssOptions,
+                        ),
                     );
 
                 if (loader) {
@@ -122,9 +101,7 @@ export default function (api: PluginAPI) {
         createCSSRule('less', /\.less$/, 'less-loader');
 
         if (shouldExtract) {
-            chain
-                .plugin('extract-css')
-                .use(require('mini-css-extract-plugin'), [extractOptions]);
+            chain.plugin('extract-css').use(require('mini-css-extract-plugin'), [extractOptions]);
 
             if (api.isProd) {
                 chain.optimization.minimizer('css').use(CssMinimizerPlugin, [
