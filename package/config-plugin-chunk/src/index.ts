@@ -1,6 +1,6 @@
 import path from 'path';
 import PluginAPI, {Chain, findEntry} from 'yma-config-plugin';
-import {EntryType} from 'yma-config-plugin/dist/util/find-entry';
+import {EntryType} from 'yma-config-plugin';
 import {error} from 'yma-shared-util';
 
 const MAX_GROUP_LENGTH = 3;

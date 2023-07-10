@@ -1,0 +1,31 @@
+{
+    "name": "yma-cli-tinyify",
+    "version": "1.0.5",
+    "description": "TinyPNG 压缩图片",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "files": [
+        "bin",
+        "dist"
+    ],
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "yma-shared-util": "^1.0.5",
+        "chalk": "4.1.2",
+        "cli-table": "0.3.6",
+        "deepmerge": "4.2.2",
+        "fs-extra": "10.0.0",
+        "glob": "7.2.0",
+        "mime-types": "2.1.33",
+        "progress": "2.0.3",
+        "semver": "7.3.5",
+        "tinify": "1.6.1"
+    }
+}

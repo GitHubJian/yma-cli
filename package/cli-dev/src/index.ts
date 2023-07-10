@@ -1,7 +1,7 @@
 import PluginAPI from 'yma-config-plugin';
 import dev from './dev';
 
-export = {
+const options = {
     command: 'dev',
     describe: 'Webpack Development 模式构建',
     builder: function builder(yargs) {
@@ -24,7 +24,9 @@ export = {
             {
                 mock: argv.mock,
             },
-            api,
+            api
         );
     },
 };
+
+export = options;

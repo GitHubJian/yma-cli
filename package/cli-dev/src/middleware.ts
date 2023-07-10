@@ -1,6 +1,6 @@
 import {pathToRegexp} from 'path-to-regexp';
 import fs from 'fs';
-import {error} from 'yma-shared-util';
+import {log, warn} from 'yma-shared-util';
 
 export default function createMiddleware(api, mock) {
     const mockPath = api.resolve(mock);
@@ -18,9 +18,20 @@ export default function createMiddleware(api, mock) {
             middlewares.unshift({
                 path: '/',
                 middleware: (req, res, next) => {
-                    delete require.cache[require.resolve(mockPath)];
+                    let mock;
 
-                    const mock = require(mockPath);
+                    try {
+                        let filepath = require.resolve(mockPath);
+                        delete require.cache[filepath];
+                        mock = require(mockPath);
+                    } catch (error) {
+                        warn(`未能找到 Mock 文件（${mockPath}）`, 'CLI DEV');
+
+                        next();
+
+                        return;
+                    }
+
                     const url = req.path;
                     const method = req.method.toLowerCase();
 
@@ -29,7 +40,10 @@ export default function createMiddleware(api, mock) {
                         let item = mock[i];
                         const re = pathToRegexp(item.url);
 
-                        if (re.exec(url) && method == item.method.toLowerCase()) {
+                        if (
+                            re.exec(url) &&
+                            method == item.method.toLowerCase()
+                        ) {
                             response = item.response;
                             break;
                         }
@@ -47,7 +61,8 @@ export default function createMiddleware(api, mock) {
             return middlewares;
         };
     }
-    error(`未能找到 Mock 文件夹（${mock}）`, 'CLI DEV');
+
+    log(`未能找到 Mock 文件夹（${mock}）`, 'CLI DEV');
 
     return (middlewares, devServer) => {
         if (!devServer) {

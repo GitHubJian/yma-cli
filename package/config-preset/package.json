@@ -1,0 +1,19 @@
+{
+    "name": "yma-config-preset",
+    "version": "1.0.5",
+    "description": "YMA CLI Webpack 预配置",
+    "main": "./src/index.js",
+    "scripts": {},
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
+    "dependencies": {
+        "deepmerge": "4.2.2"
+    },
+    "devDependencies": {},
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

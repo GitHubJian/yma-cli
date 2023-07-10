@@ -9,7 +9,12 @@
         "build": "npm run clean && tsc -p src",
         "clean": "rm -fr dist"
     },
-    "files": ["chain", "bin", "dist", "public"],
+    "files": [
+        "chain",
+        "bin",
+        "dist",
+        "public"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -34,7 +39,7 @@
         "url-loader": "4.1.1",
         "vue-loader": "15.9.3",
         "webpack": "5.70.0",
-        "yma-load-config": "1.0.3",
-        "yma-shared-util": "^1.0.5"
+        "yma-shared-util": "^1.0.5",
+        "vue-template-compiler": "2.6.11"
     }
 }

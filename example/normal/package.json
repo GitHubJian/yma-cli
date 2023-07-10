@@ -1,0 +1,14 @@
+{
+    "name": "normal",
+    "scripts": {
+        "dev": "yma dev",
+        "build": "cross-env NODE_ENV=production tb-cli"
+    },
+    "dependencies": {
+        "vue": "2.6.11",
+        "vue-template-compiler": "2.6.11"
+    },
+    "devDependencies": {
+        "typescript": "4.2.3"
+    }
+}

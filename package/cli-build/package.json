@@ -9,7 +9,11 @@
         "build": "npm run clean && tsc -p src",
         "clean": "rm -fr dist"
     },
-    "files": ["bin", "dist"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",

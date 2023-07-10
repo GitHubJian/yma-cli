@@ -105,7 +105,7 @@ export default async function dev(
                 disableDotRule: true,
                 rewrites: genHistoryApiFallbackRewrites(options.publicPath, options.page),
             },
-            hot: true,
+            // hot: true,
             compress: false,
             open: false,
             allowedHosts: 'all',
@@ -117,13 +117,14 @@ export default async function dev(
                 },
             },
             port,
-            setupMiddlewares: setupMiddlewares,
+            // setupMiddlewares: setupMiddlewares,
         },
         devServerOptions,
         {
             proxy: proxySettings,
         },
     );
+    debugger;
     const server = new WebpackDevServer(devServerConfig, compiler);
 
     return new Promise((resolve, reject) => {

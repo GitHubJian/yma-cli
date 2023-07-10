@@ -6,7 +6,7 @@
     "scripts": {
         "init": "lerna clean -y && lerna bootstrap",
         "bootstrap": "lerna bootstrap",
-        "clean": "lerna clean -y",
+        "clean": "lerna clean -y && rm -rf **/dist",
         "build": "lerna run build",
         "version": "lerna version --no-push --force-publish --conventional-prerelease --no-git-tag-version",
         "publish": "lerna publish from-package",

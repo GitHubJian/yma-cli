@@ -1,7 +1,7 @@
 import path from 'path';
 import {Configuration} from 'webpack';
 import defaultsDeep from 'lodash.defaultsdeep';
-import loadConfig from 'yma-load-config';
+import confitInheriter from 'yma-config-inheriter';
 import Plugin from './plugin';
 import Chain from '../chain';
 import {defaults, ProjectOptions} from './options';
@@ -35,7 +35,7 @@ export default class PluginAPI {
         this.plugins = [];
         this.webpackChainFns = [];
 
-        const customOptions = loadConfig<ProjectOptions>('yma.config.js', {
+        const customOptions = confitInheriter<ProjectOptions>('yma.config.js', {
             props: [
                 'publicPath',
                 'outputDir',
@@ -160,5 +160,5 @@ export default class PluginAPI {
 }
 
 export {default as Chain} from '../chain';
-export {default as findEntry} from './util/find-entry';
+export {default as findEntry, EntryType} from './util/find-entry';
 export {ProjectOptions} from './options';

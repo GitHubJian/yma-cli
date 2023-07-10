@@ -20,11 +20,7 @@
         "semver": "7.3.8",
         "yargs": "17.4.0",
         "yma-cli-build": "^1.0.5",
-        "yma-cli-copy": "^1.0.5",
         "yma-cli-dev": "^1.0.5",
-        "yma-cli-env": "^1.0.5",
-        "yma-cli-ip": "^1.0.5",
-        "yma-cli-nsr": "^1.0.5",
         "yma-cli-lint": "^1.0.5"
     },
     "devDependencies": {

@@ -1,0 +1,24 @@
+{
+    "name": "yma-config-plugin-dll",
+    "version": "1.0.5",
+    "description": "Webpack 配置 DLL 模式",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "add-asset-html-webpack-plugin": "5.0.2",
+        "assets-webpack-plugin": "7.1.1",
+        "copy-webpack-plugin": "10.2.4",
+        "html-webpack-tags-plugin": "3.0.2"
+    },
+    "devDependencies": {
+        "yma-config-plugin": "^1.0.5"
+    }
+}

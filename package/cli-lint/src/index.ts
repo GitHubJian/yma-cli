@@ -6,7 +6,7 @@ function commaSeparatedList(value: string): string[] {
 
 export = {
     command: 'lint',
-    describe: '格式化项目',
+    describe: 'Lint 格式化项目',
     builder: function builder(yargs) {
         yargs.options('paths', {
             type: 'string',
