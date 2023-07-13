@@ -1,0 +1,55 @@
+<html>
+    <body>
+        <!-- <script>
+            (function (win, doc) {
+                var queue = (win.__em_queue__ = function (exception) {
+                    queue.data.push(exception);
+                });
+
+                queue.data = [];
+
+                win.addEventListener(
+                    'error',
+                    function (e) {
+                        if (e.target !== window) {
+                            queue({
+                                e: [].slice.call(arguments),
+                            });
+                        }
+
+                        return true;
+                    },
+                    true
+                );
+
+                var rawOnerror = win.onerror;
+                win.onerror = function (
+                    message,
+                    source,
+                    lineno,
+                    colno,
+                    exception
+                ) {
+                    queue({
+                        e: [].slice.call(arguments),
+                    });
+
+                    if (rawOnerror) {
+                        rawOnerror.apply(win, arguments);
+                    }
+                };
+
+                var rawOnunhandledrejection = win.onunhandledrejection;
+                win.rawOnunhandledrejection = function (exception) {
+                    queue({
+                        p: exception.reason,
+                    });
+                    if (rawOnunhandledrejection) {
+                        rawOnunhandledrejection.apply(_window, arguments);
+                    }
+                };
+            })(window, document);
+        </script> -->
+        <img src="http://aaa/a.jpg" />
+    </body>
+</html>

@@ -78,11 +78,11 @@ export function assign(
     return merge(false, source, target);
 }
 
-export function deepmerge(
+export function deepmerge<T extends Record<string, any>>(
     source: Record<string, any>,
     target: Record<string, any>
-): Record<string, any> {
-    return merge(true, source, target);
+): T {
+    return merge(true, source, target) as T;
 }
 
 export function clone(target: Record<string, any>): Record<string, any> {

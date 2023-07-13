@@ -220,6 +220,9 @@ export class Configure {
 
             return this.loadData(filepath, context);
         } catch (e) {
+            console.error(`[Config Inheriter]: Not Found Module (${name})`);
+            console.error(e);
+
             throw e;
         }
     }

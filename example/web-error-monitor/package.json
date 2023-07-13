@@ -1,0 +1,14 @@
+{
+    "name": "example",
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "yma dev",
+        "build": "yma build"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "yma-cli": "^1.0.5",
+        "yma-config-preset": "^1.0.5",
+        "typescript": "4.2.3"
+    }
+}

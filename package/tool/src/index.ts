@@ -4,8 +4,10 @@
 */
 
 export * from './is';
+export * from './hasOwn';
 export * from './loose-equal';
 export * from './merge';
 export * from './p-limit';
 export * from './parse-url';
+export * from './safeJoin';
 export * from './toArray';

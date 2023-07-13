@@ -6,6 +6,6 @@ module.exports = {
                 transpileDependencies: true,
             },
         ],
-        'yam-config-plugin-typescript',
+        'yma-config-plugin-typescript',
     ],
 };

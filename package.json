@@ -7,6 +7,7 @@
         "init": "lerna clean -y && lerna bootstrap",
         "bootstrap": "lerna bootstrap",
         "clean": "lerna clean -y && rm -rf **/dist",
+        "link": "lerna link",
         "build": "lerna run build",
         "version": "lerna version --no-push --force-publish --conventional-prerelease --no-git-tag-version",
         "publish": "lerna publish from-package",
@@ -28,9 +29,12 @@
         "url": "https://github.com/GitHubJian/yma-cli/issues"
     },
     "homepage": "https://github.com/GitHubJian/yma-cli#readme",
-    "workspaces": ["package/*"],
+    "workspaces": [
+        "package/*"
+    ],
     "engines": {
         "node": ">=14.17.0"
     },
-    "private": "true"
+    "private": "true",
+    "dependencies": {}
 }

@@ -1,0 +1,27 @@
+{
+    "name": "yma-web-error-monitor",
+    "version": "1.0.5",
+    "description": "YMA Tool 工具库函数",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist"
+    },
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
+    "dependencies": {
+        "yma-tool": "^1.0.5"
+    },
+    "devDependencies": {
+        "yma-cli": "^1.0.5",
+        "typescript": "4.2.3"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

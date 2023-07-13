@@ -1,7 +1,7 @@
+const deepmerge = require('deepmerge');
 const normal = require('./normal');
-import {merge} from './util';
 
-module.exports = merge(normal, {
+module.exports = deepmerge(normal, {
     plugins: [
         'yma-config-plugin-sdk',
         {
