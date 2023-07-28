@@ -1,6 +1,6 @@
 {
     "name": "yma-cli",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "YMA CLI 工具包",
     "main": "./dist/index.js",
     "bin": {
@@ -21,6 +21,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "chalk": "4.1.0",
         "semver": "7.3.8",
         "yargs": "17.4.0"
     },

@@ -1,6 +1,6 @@
 {
     "name": "yma-config-preset",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "YMA CLI Webpack 预配置",
     "main": "./src/index.js",
     "scripts": {
@@ -12,11 +12,11 @@
         "public"
     ],
     "dependencies": {
-        "yma-babel-preset": "^1.0.9",
-        "yma-config-plugin-babel": "^1.0.9",
-        "yma-config-plugin-flexible": "^1.0.9",
-        "yma-config-plugin-sdk": "^1.0.9",
-        "yma-config-plugin-typescript": "^1.0.9"
+        "yma-babel-preset": "^1.0.10",
+        "yma-config-plugin-babel": "^1.0.10",
+        "yma-config-plugin-flexible": "^1.0.10",
+        "yma-config-plugin-sdk": "^1.0.10",
+        "yma-config-plugin-typescript": "^1.0.10"
     },
     "keywords": [],
     "author": "",

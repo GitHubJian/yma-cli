@@ -10726,6 +10726,14 @@ yazl@^2.2.2:
   dependencies:
     buffer-crc32 "~0.2.3"
 
+yma-cli@1.0.9-alpha.0:
+  version "1.0.9-alpha.0"
+  resolved "https://registry.npmjs.org/yma-cli/-/yma-cli-1.0.9-alpha.0.tgz#764ffb7d4d2eb919bbdc9d3502217a4ca82adbb7"
+  integrity sha512-Y2S8gzRKvNVprqS0muBPEo4fje8yEMU30NinVHJnKJLZrGQaRYAN4MDjHWcRo3NYEhKprxwjJyLOj2GHcodnEQ==
+  dependencies:
+    semver "7.3.8"
+    yargs "17.4.0"
+
 yma-package-manager@1.0.3:
   version "1.0.3"
   resolved "https://registry.npmjs.org/yma-package-manager/-/yma-package-manager-1.0.3.tgz#5d562516b11ebec1c8e0038c6cbee741b27a00cd"

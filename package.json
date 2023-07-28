@@ -40,6 +40,6 @@
     "dependencies": {
         "global": "^4.4.0",
         "yma-cli": "1.0.9-alpha.0",
-        "yma-cli-branch": "1.0.9-alpha.0"
+        "yma-cli-branch": "1.0.9"
     }
 }
