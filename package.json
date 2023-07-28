@@ -15,9 +15,9 @@
         "lint": "eslint . --ext .ts --config './config/.eslintrc.js' --ignore-path './config/.eslintignore'"
     },
     "devDependencies": {
-        "yarn": "1.22.19",
         "@types/node": "20.4.4",
-        "typescript": "5.1.6"
+        "typescript": "5.1.6",
+        "yarn": "1.22.19"
     },
     "repository": {
         "type": "git",
@@ -30,9 +30,16 @@
         "url": "https://github.com/GitHubJian/yma-cli/issues"
     },
     "homepage": "https://github.com/GitHubJian/yma-cli#readme",
-    "workspaces": ["package/*"],
+    "workspaces": [
+        "package/*"
+    ],
     "engines": {
         "node": ">=14.17.0"
     },
-    "private": true
+    "private": true,
+    "dependencies": {
+        "global": "^4.4.0",
+        "yma-cli": "1.0.9-alpha.0",
+        "yma-cli-branch": "1.0.9-alpha.0"
+    }
 }

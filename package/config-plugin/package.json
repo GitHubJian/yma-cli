@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin",
-    "version": "1.0.9-alpha.0",
+    "version": "1.0.9",
     "description": "基于 Webpack5.0 开发的 YMA 打包插件层配置",
     "main": "./dist/index.js",
     "scripts": {
@@ -41,7 +41,7 @@
         "vue-loader": "15.9.3",
         "vue-template-compiler": "2.6.11",
         "webpack": "5.70.0",
-        "yma-config-inheriter": "^1.0.9-alpha.0",
-        "yma-shared-util": "^1.0.9-alpha.0"
+        "yma-config-inheriter": "^1.0.9",
+        "yma-shared-util": "^1.0.9"
     }
 }

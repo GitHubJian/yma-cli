@@ -1,6 +1,6 @@
 {
     "name": "yma-cli",
-    "version": "1.0.9-alpha.0",
+    "version": "1.0.9",
     "description": "YMA CLI 工具包",
     "main": "./dist/index.js",
     "bin": {
