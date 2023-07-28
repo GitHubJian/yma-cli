@@ -1,7 +1,7 @@
 {
     "name": "yma-cli",
-    "version": "1.0.8",
-    "description": "YMA 的 CLI 工具",
+    "version": "1.0.9-alpha.0",
+    "description": "YMA CLI 工具包",
     "main": "./dist/index.js",
     "bin": {
         "yma": "./bin/cli.js"

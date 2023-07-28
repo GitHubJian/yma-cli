@@ -1,6 +1,6 @@
 {
     "name": "yma-test-react",
-    "version": "1.0.8",
+    "version": "1.0.9-alpha.0",
     "description": "YMA Test 包装函数",
     "main": "./src/index.js",
     "scripts": {
