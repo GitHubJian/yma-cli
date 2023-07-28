@@ -1,6 +1,6 @@
 {
     "name": "yma-test-react",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "YMA Test 包装函数",
     "main": "./src/index.js",
     "scripts": {
@@ -10,7 +10,11 @@
         "clean": "rm -fr dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "dependencies": {
         "@testing-library/react": "11.2.3",
         "@testing-library/react-hooks": "8.0.1",
@@ -19,10 +23,10 @@
         "jest-axe": "7.0.0",
         "jest-transform-stub": "2.0.0",
         "jest-watch-typeahead": "1.0.0",
+        "react": "18.2.0",
         "sinon": "13.0.2",
         "ts-jest": "27.1.4",
-        "typescript": "5.1.6",
-        "react": "18.2.0"
+        "typescript": "5.1.6"
     },
     "peerDependencies": {
         "react": "^18.0.0"

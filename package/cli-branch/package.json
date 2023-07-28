@@ -1,7 +1,7 @@
 {
-    "name": "yma-config-inheriter",
+    "name": "yma-cli-branch",
     "version": "1.0.7",
-    "description": "简易获取配置文件，支持 Presets & Plugins",
+    "description": "Git 快速创建分支",
     "main": "./dist/index.js",
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",
@@ -11,13 +11,15 @@
         "link": "npm link"
     },
     "files": [
+        "bin",
         "dist",
-        "src"
+        "public"
     ],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "fs-extra": "10.0.1",
         "yma-shared-util": "^1.0.7"
     }
 }

@@ -1,10 +1,14 @@
 {
     "name": "yma-babel-plugin-async-name",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "",
     "main": "./src/index.js",
     "scripts": {},
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC"

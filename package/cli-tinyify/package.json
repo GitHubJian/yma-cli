@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-tinyify",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "TinyPNG 压缩图片",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,7 +10,10 @@
         "clean": "rm -fr dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist"],
+    "files": [
+        "bin",
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -24,6 +27,6 @@
         "progress": "2.0.3",
         "semver": "7.3.5",
         "tinify": "1.6.1",
-        "yma-shared-util": "^1.0.6"
+        "yma-shared-util": "^1.0.7"
     }
 }

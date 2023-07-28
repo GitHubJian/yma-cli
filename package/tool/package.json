@@ -1,6 +1,6 @@
 {
     "name": "yma-tool",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "YMA Tool 工具库函数",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,8 +10,11 @@
         "clean": "rm -fr dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
-    "devDependencies": {},
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC"

@@ -2,8 +2,6 @@ import os from 'os';
 import yargs from 'yargs';
 import execa from 'execa';
 import glob from 'glob';
-import buildCmd from 'yma-cli-build';
-import devCmd from 'yma-cli-dev';
 
 const prefix = 'yma-cli';
 
@@ -57,10 +55,9 @@ export default function (argv: string[]) {
         .wrap(yargs.terminalWidth())
         .epilogue('For more information, find our manual at ');
 
-    const customPlugins = findGlobalPlugins(['dev', 'build']);
-    const buildinPlugins = [devCmd, buildCmd];
-
-    const allPlugins = buildinPlugins.concat(customPlugins);
+    const allPlugins = findGlobalPlugins([]);
+    // const buildinPlugins = [];
+    // const allPlugins = buildinPlugins.concat(customPlugins);
 
     allPlugins.forEach(plugin => {
         cli = cli.command(plugin);
