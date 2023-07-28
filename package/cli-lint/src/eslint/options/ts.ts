@@ -1,5 +1,5 @@
 export = {
-    extends: ['@ecomfe/eslint-config', '@ecomfe/eslint-config/import', '@ecomfe/eslint-config/typescript'],
+    extends: ['./base/index', './base/import', './base/ts'],
     rules: {
         '@typescript-eslint/no-explicit-any': [2],
         'import/no-unresolved': 1,

@@ -10,8 +10,7 @@ import deepmerge from 'deepmerge';
  * @param {Array<unknown>} b
  * @returns {Array<unknown>}
  */
-const mergeArrayWithDedupe = (a: unknown[], b: unknown[]) =>
-    Array.from(new Set([...a, ...b]));
+const mergeArrayWithDedupe = (a: unknown[], b: unknown[]) => Array.from(new Set([...a, ...b]));
 
 /**
  * 合并数据

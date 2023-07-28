@@ -1,5 +1,5 @@
 export = {
-    extends: ['@ecomfe/eslint-config'],
+    extends: ['./base/index'],
     parserOptions: {
         ecmaFeatures: {
             globalReturn: true,

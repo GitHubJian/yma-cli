@@ -1,26 +1,23 @@
 {
     "name": "yma-cli-build",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Webpack Build 构建命令",
     "main": "./dist/index.js",
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist"
+        "clean": "rm -fr dist",
+        "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "fs-extra": "10.1.0",
         "webpack-bundle-analyzer": "4.5.0",
-        "yma-config-plugin": "^1.0.5",
-        "yma-shared-util": "^1.0.5"
+        "yma-config-plugin": "^1.0.6",
+        "yma-shared-util": "^1.0.6"
     }
 }

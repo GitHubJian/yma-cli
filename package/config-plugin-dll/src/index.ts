@@ -26,27 +26,19 @@ export interface PluginOptions {
 const DLL_ASSETS_FILENAME = 'dll-assets-manifest.json';
 
 export default function (api: WebpackAPI, pluginOptions: PluginOptions) {
-    const patterns = Array.isArray(pluginOptions.patterns)
-        ? pluginOptions.patterns
-        : [pluginOptions.patterns];
+    const patterns = Array.isArray(pluginOptions.patterns) ? pluginOptions.patterns : [pluginOptions.patterns];
 
     const apply = (chain: Chain) => {
         // 打包 DLL
         if (pluginOptions.isDll) {
             const pattern = patterns[0];
-            const outputDir = api.resolve(
-                pattern.outputDir || api.projectOptions.outputDir
-            );
+            const outputDir = api.resolve(pattern.outputDir || api.projectOptions.outputDir);
 
             api.projectOptions.outputDir = outputDir;
 
             const outputFilename = getAssetPath(
-                `js/[name]-dll${
-                    api.isProd && api.projectOptions.filenameHashing
-                        ? '.[contenthash:8]'
-                        : ''
-                }.js`,
-                api.projectOptions.assetsDir
+                `js/[name]-dll${api.isProd && api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`,
+                api.projectOptions.assetsDir,
             );
 
             chain.output.path(outputDir).filename(outputFilename);
@@ -75,28 +67,19 @@ export default function (api: WebpackAPI, pluginOptions: PluginOptions) {
                     prettyPrint: true,
                 },
             ]);
-        }
-        else {
+        } else {
             patterns.forEach(function (pattern) {
-                const outputDir = path.resolve(
-                    pattern.context || api.context,
-                    pattern.outputDir || 'dist'
-                );
+                const outputDir = path.resolve(pattern.context || api.context, pattern.outputDir || 'dist');
 
                 Object.keys(pattern.entries).forEach(function (entry) {
-                    const manifest = path.resolve(
-                        outputDir,
-                        `${entry}.manifest.json`
-                    );
+                    const manifest = path.resolve(outputDir, `${entry}.manifest.json`);
 
-                    chain
-                        .plugin(`dll-reference-${entry}`)
-                        .use(DllReferencePlugin, [
-                            {
-                                context: api.context,
-                                manifest: require(manifest),
-                            },
-                        ]);
+                    chain.plugin(`dll-reference-${entry}`).use(DllReferencePlugin, [
+                        {
+                            context: api.context,
+                            manifest: require(manifest),
+                        },
+                    ]);
                 });
             });
         }
@@ -127,47 +110,32 @@ export default function (api: WebpackAPI, pluginOptions: PluginOptions) {
             }
 
             chain.optimization.clear();
-        }
-        else {
+        } else {
             patterns.forEach(function (pattern) {
-                const outputDir = path.resolve(
-                    pattern.context || api.context,
-                    pattern.outputDir || 'dist'
-                );
+                const outputDir = path.resolve(pattern.context || api.context, pattern.outputDir || 'dist');
 
                 let assetsJSON = {};
                 try {
-                    assetsJSON = require(path.resolve(
-                        outputDir,
-                        DLL_ASSETS_FILENAME
-                    ));
-                }
-                catch (e) {}
+                    assetsJSON = require(path.resolve(outputDir, DLL_ASSETS_FILENAME));
+                } catch (e) {}
                 let tags: string[] = [];
                 Object.entries(assetsJSON).forEach(function ([entry, value]) {
-                    const paths = Object.values(
-                        value as Record<string, string>
-                    );
+                    const paths = Object.values(value as Record<string, string>);
                     tags = tags.concat(paths);
                 });
                 if (tags.length > 0) {
-                    chain
-                        .plugin('html-webpack-tags-plugin')
-                        .use(HtmlWebpackTagsPlugin, [
-                            {
-                                tags,
-                                append: false,
-                                usePublicPath: false,
-                            },
-                        ]);
+                    chain.plugin('html-webpack-tags-plugin').use(HtmlWebpackTagsPlugin, [
+                        {
+                            tags,
+                            append: false,
+                            usePublicPath: false,
+                        },
+                    ]);
 
                     const copyPluginPatterns = tags.map(function (value) {
                         const pattern = {
                             from: path.join(outputDir, value),
-                            to: path.join(
-                                api.resolve(api.projectOptions.outputDir),
-                                value
-                            ),
+                            to: path.join(api.resolve(api.projectOptions.outputDir), value),
                         };
 
                         return pattern;

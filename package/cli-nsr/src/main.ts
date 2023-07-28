@@ -70,6 +70,10 @@ export default async function main(context) {
                     name: 'baidu-int',
                     value: 'http://registry.npm.baidu-int.com',
                 },
+                {
+                    name: 'didi',
+                    value: 'http://registry.npm.xiaojukeji.com',
+                },
             ],
         },
     ]);

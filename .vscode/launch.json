@@ -43,6 +43,13 @@
             "name": "config-webpack",
             "skipFiles": ["<node_internals>/**"],
             "program": "${workspaceFolder}/package/config-webpack/test/index.spec.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "A",
+            "skipFiles": ["<node_internals>/**"],
+            "program": "${workspaceFolder}/a.js"
         }
     ]
 }

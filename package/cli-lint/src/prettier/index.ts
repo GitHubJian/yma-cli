@@ -11,10 +11,11 @@ const Parser = {
     '.js': 'babel',
     '.json': 'json',
     '.md': 'markdown',
-    // '.conf': 'nginx',
+    '.conf': 'nginx',
     '.ts': 'typescript',
     '.yml': 'yaml',
     '.yaml': 'yaml',
+    '.jsx': 'babel', // for react.jsx
 };
 
 const Extnames = Object.keys(Parser);
@@ -34,11 +35,12 @@ function format(filepath): null | Error {
             ignorePath: path.resolve(__dirname, '../../public/.prettierignore'),
         };
 
-        // if (extname === '.conf') {
-        //     realOptions.plugins = realOptions.plugins || [];
+        if (extname === '.conf') {
+            realOptions.plugins = realOptions.plugins || [];
 
-        //     realOptions.plugins.push();
-        // }
+            // @ts-ignore
+            realOptions.plugins.push(require.resolve('../../public/plugin/ng.js'));
+        }
 
         const newCotent = prettier.format(content, realOptions);
 

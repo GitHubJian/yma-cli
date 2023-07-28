@@ -39,7 +39,7 @@ module.exports = class extends ChainedMap {
                 mainFiles: this.mainFiles.values(),
                 modules: this.modules.values(),
                 plugins: this.plugins.values().map(plugin => plugin.toConfig()),
-            }),
+            })
         );
     }
 

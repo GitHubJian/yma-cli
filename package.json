@@ -1,12 +1,13 @@
 {
     "name": "cli-monorepo",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "YMA CLI 工具包",
     "main": "index.js",
     "scripts": {
-        "init": "lerna clean -y && lerna bootstrap",
+        "init": "rm -rf node_modules && npm run clean && lerna bootstrap",
         "bootstrap": "lerna bootstrap",
-        "clean": "lerna clean -y && rm -rf **/dist",
+        "clean": "lerna clean --yes",
+        "nlink": "lerna run link --scope yma-cli && lerna run link --scope yma-config-preset",
         "link": "lerna link",
         "build": "lerna run build",
         "version": "lerna version --no-push --force-publish --conventional-prerelease --no-git-tag-version",
@@ -14,8 +15,8 @@
         "lint": "eslint . --ext .ts --config './config/.eslintrc.js' --ignore-path './config/.eslintignore'"
     },
     "devDependencies": {
-        "@ecomfe/eslint-config": "7.4.0",
-        "@types/node": "17.0.25",
+        "yarn": "1.22.19",
+        "@types/node": "20.4.4",
         "typescript": "4.2.3"
     },
     "repository": {
@@ -29,12 +30,9 @@
         "url": "https://github.com/GitHubJian/yma-cli/issues"
     },
     "homepage": "https://github.com/GitHubJian/yma-cli#readme",
-    "workspaces": [
-        "package/*"
-    ],
+    "workspaces": ["package/*"],
     "engines": {
         "node": ">=14.17.0"
     },
-    "private": "true",
-    "dependencies": {}
+    "private": true
 }

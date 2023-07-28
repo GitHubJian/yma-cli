@@ -62,7 +62,7 @@ const Rule = Orderable(
                     oneOf: this.oneOfs.values().map(oneOf => oneOf.toConfig()),
                     use: this.uses.values().map(use => use.toConfig()),
                     resolve: this.resolve.toConfig(),
-                }),
+                })
             );
 
             Object.defineProperties(config, {
@@ -100,13 +100,13 @@ const Rule = Orderable(
 
             if (!omit.includes('test') && 'test' in obj) {
                 this.test(
-                    obj.test instanceof RegExp || typeof obj.test === 'function' ? obj.test : new RegExp(obj.test),
+                    obj.test instanceof RegExp || typeof obj.test === 'function' ? obj.test : new RegExp(obj.test)
                 );
             }
 
             return super.merge(obj, [...omit, 'include', 'exclude', 'use', 'rules', 'oneOf', 'resolve', 'test']);
         }
-    },
+    }
 );
 
 module.exports = Rule;

@@ -53,11 +53,7 @@ interface FilterReturns {
  * @param {string} cwd 运行时目录
  * @returns {FilterReturns}
  */
-function filter(
-    inputs: string[],
-    cached: Cached | null,
-    cwd: string
-): FilterReturns {
+function filter(inputs: string[], cached: Cached | null, cwd: string): FilterReturns {
     const repeateds: Repeated[] = [];
     const filteds: Filted[] = [];
 
@@ -85,9 +81,7 @@ function filter(
 
         const isCached =
             (cached.list || []).find(function (fileinfo: CachedFileInfo) {
-                return (
-                    fileinfo.newHash === oldHash || fileinfo.oldHash === oldHash
-                );
+                return fileinfo.newHash === oldHash || fileinfo.oldHash === oldHash;
             }) ||
             (cached.exclude || []).find(function (fileinfo: ExcludeFileInfo) {
                 return fileinfo.oldHash === oldHash;
@@ -125,11 +119,7 @@ function filter(
  * @param {number} length 长度
  * @returns {Filted[]}
  */
-function getCurrentFilteds(
-    filteds: Filted[],
-    start: number,
-    length: number
-): Filted[] {
+function getCurrentFilteds(filteds: Filted[], start: number, length: number): Filted[] {
     return filteds.slice(start, start + length);
 }
 
@@ -170,10 +160,7 @@ interface TokenGroup {
  * @param {Filted[]} filteds 待处理图片信息
  * @returns {Promise<TokenGroup[]>}
  */
-async function createTokenGroups(
-    tokens: string[],
-    filteds: Filted[]
-): Promise<TokenGroup[]> {
+async function createTokenGroups(tokens: string[], filteds: Filted[]): Promise<TokenGroup[]> {
     let idx = 0;
     let pos = 0;
     const tokenGroups: TokenGroup[] = [];
@@ -182,16 +169,9 @@ async function createTokenGroups(
         const token = tokens[idx];
         tinify.key = token;
         const {code, compressionCount} = await validToken();
-        if (
-            code === VALIDATE_SUCCESS_CODE &&
-            compressionCount < TOKEN_MAX_LIMIT
-        ) {
+        if (code === VALIDATE_SUCCESS_CODE && compressionCount < TOKEN_MAX_LIMIT) {
             const restCount = TOKEN_MAX_LIMIT - compressionCount;
-            const currentFilteds = getCurrentFilteds(
-                filteds,
-                pos,
-                TOKEN_MAX_LIMIT - compressionCount
-            );
+            const currentFilteds = getCurrentFilteds(filteds, pos, TOKEN_MAX_LIMIT - compressionCount);
 
             pos += restCount;
 
@@ -227,11 +207,7 @@ type UploadReturns = Promise<{input: string; data: Uint8Array; error?: Error}>;
  * @param {number} retry 重试次数
  * @returns {UploadReturns}
  */
-async function upload(
-    input: string,
-    token: string,
-    retry: number = 3
-): UploadReturns {
+async function upload(input: string, token: string, retry: number = 3): UploadReturns {
     let retryCount = 0;
     let data;
     let error;
@@ -300,11 +276,7 @@ function write(results: Result[], cwd: string) {
  * @param { Result[]} results 压缩结果
  * @param {Cached} cached 缓存文件信息
  */
-function writeCached(
-    filepath: string,
-    results: Result[],
-    cached: Cached | null
-) {
+function writeCached(filepath: string, results: Result[], cached: Cached | null) {
     const list: CachedFileInfo[] = [];
     const exclude: ExcludeFileInfo[] = [];
 
@@ -343,11 +315,7 @@ interface TinyifyOptions {
  * @param {string[]} allInputs 待处理图片绝对路径
  * @param {Options} opts 配置信息
  */
-export async function tinyify(
-    allInputs: string[],
-    tokens: string[],
-    opts: TinyifyOptions
-): Promise<void> {
+export async function tinyify(allInputs: string[], tokens: string[], opts: TinyifyOptions): Promise<void> {
     const cwd = opts.cwd;
     info('Checking', 'Tinyify');
     log(cwd);
@@ -378,10 +346,7 @@ export async function tinyify(
             while (pos < filteds.length) {
                 const filted = filteds[pos];
                 const uploaded = results.find(function (result) {
-                    return (
-                        result.oldHash === filted.oldHash ||
-                        result.newHash === filted.oldHash
-                    );
+                    return result.oldHash === filted.oldHash || result.newHash === filted.oldHash;
                 });
 
                 if (uploaded) {
@@ -458,11 +423,9 @@ export default async function main(cliOpts: CLIOptions): Promise<void> {
                 ignore: ['**/node_modules/**', '**/coverage/**'],
             });
 
-            const expectedFilePaths = allFilePaths.filter(
-                (p: string): boolean => {
-                    return mimes.includes(mime.contentType(path.basename(p)));
-                }
-            );
+            const expectedFilePaths = allFilePaths.filter((p: string): boolean => {
+                return mimes.includes(mime.contentType(path.basename(p)));
+            });
 
             return expectedFilePaths;
         })

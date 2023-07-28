@@ -1,4 +1,4 @@
-import {isIPhone} from './isIPhone'
+import {isIPhone} from './isIPhone';
 
 export function isIPhoneX(ua) {
     if (!isIPhone(ua)) {
@@ -6,7 +6,5 @@ export function isIPhoneX(ua) {
     }
 
     const {width, height} = window.screen;
-    return (
-        (height === 812 && width === 375) || (height === 896 && width === 414)
-    );
+    return (height === 812 && width === 375) || (height === 896 && width === 414);
 }

@@ -1,14 +1,10 @@
 export = {
-    extends: [
-        '@ecomfe/eslint-config',
-        '@ecomfe/eslint-config/import',
-        '@ecomfe/eslint-config/typescript',
-        '@ecomfe/eslint-config/react',
-    ],
+    extends: ['./base/index', './base/import', './base/ts', './base/react'],
     parserOptions: {
         project: './**/tsconfig.json',
     },
     rules: {
+        'react/jsx-uses-react': 2,
         'react/jsx-indent': [
             2,
             4,

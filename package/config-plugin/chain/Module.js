@@ -22,7 +22,7 @@ module.exports = class extends ChainedMap {
             Object.assign(this.entries() || {}, {
                 defaultRules: this.defaultRules.values().map(r => r.toConfig()),
                 rules: this.rules.values().map(r => r.toConfig()),
-            }),
+            })
         );
     }
 

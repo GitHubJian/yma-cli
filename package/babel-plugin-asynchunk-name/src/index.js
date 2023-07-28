@@ -1,8 +1,5 @@
 function hasComment(comment) {
-    return (
-        comment &&
-        comment.value.replace(/\*+/g, '').trim().startsWith('webpackChunkName')
-    );
+    return comment && comment.value.replace(/\*+/g, '').trim().startsWith('webpackChunkName');
 }
 
 function tryNormalizePath(p) {
@@ -36,9 +33,9 @@ function tryNormalizePath(p) {
 }
 
 module.exports = function ({types: t}, options = {}) {
-    const replace =
-        options.replace ||
-        function tryReplace(p) {
+    const replace
+        = options.replace
+        || function tryReplace(p) {
             // TODO relative path
             if (p.startsWith('@/')) {
                 p = p.replace('@/', '');
@@ -69,11 +66,7 @@ module.exports = function ({types: t}, options = {}) {
                 if (!hasComment(comment)) {
                     const webpackChunkName = createWebpackChunkName(arg.value);
 
-                    t.addComment(
-                        arg,
-                        'leading',
-                        `webpackChunkName: '${webpackChunkName}'`
-                    );
+                    t.addComment(arg, 'leading', `webpackChunkName: '${webpackChunkName}'`);
 
                     // TODO 输出文件路径
                     console.warn(

@@ -21,28 +21,21 @@ function throwUnknownError(type) {
     throw unknownOptErr;
 }
 
-export function renderToString(
-    manifestPath: string,
-    templatePath: string
-): string {
+export function renderToString(manifestPath: string, templatePath: string): string {
     const manifest: {
         [key: string]: {
             [key: string]: string;
         };
     } = require(manifestPath);
 
-    const dependencies = Object.entries(manifest).reduce(function (
-        prev,
-        [key, value]
-    ) {
+    const dependencies = Object.entries(manifest).reduce(function (prev, [key, value]) {
         Object.entries(value).forEach(function ([type, path]) {
             prev[type] = prev[type] || [];
             prev[type].push(path);
         });
 
         return prev;
-    },
-    {} as {[key: string]: string[]});
+    }, {} as {[key: string]: string[]});
 
     const tags = Object.entries(dependencies).reduce(
         function (prev, [key, value]) {
@@ -59,7 +52,7 @@ export function renderToString(
         },
         {} as {
             [key: string]: string;
-        }
+        },
     );
 
     let content: string = fs.readFileSync(templatePath, 'utf-8');

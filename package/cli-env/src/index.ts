@@ -1,8 +1,8 @@
-import {error, info, log} from 'yma-shared-util';
 import fs from 'fs';
 import path from 'path';
-import semver from 'semver';
 import {exit} from 'process';
+import semver from 'semver';
+import {error, info, log} from 'yma-shared-util';
 
 function getPkg<T>(projectPath: string): T {
     const packagePath = path.join(projectPath, 'package.json');

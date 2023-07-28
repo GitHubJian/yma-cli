@@ -22,6 +22,7 @@ module.exports = function (context, options = {}) {
                 },
             },
         ],
+        ['@babel/preset-react'],
     ];
 
     const plugins = [
@@ -38,6 +39,11 @@ module.exports = function (context, options = {}) {
         ['@babel/plugin-syntax-dynamic-import'],
         // ['@babel/plugin-transform-modules-commonjs'],
         [require.resolve('./util/chunkname-plugin')],
+
+        ['@babel/plugin-proposal-export-default-from'],
+        ['@babel/plugin-proposal-decorators', {legacy: true}],
+        ['@babel/plugin-proposal-private-methods', {loose: true}],
+        ['@babel/plugin-proposal-class-properties', {loose: true}],
     ];
 
     return {

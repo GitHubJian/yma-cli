@@ -63,10 +63,7 @@ export default function generate(dir: string, opts: GenerateOptions): void {
 
     const filetype = options.filetype;
     const list = findExportedFile(dir, {
-        ignore: [options.ignore].concat(
-            '_',
-            filename + '.' + options.filetype
-        ),
+        ignore: [options.ignore].concat('_', filename + '.' + options.filetype),
         filetype: filetype,
     });
 

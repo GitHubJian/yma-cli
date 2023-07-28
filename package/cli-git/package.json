@@ -1,0 +1,24 @@
+{
+    "name": "yma-cli-git",
+    "version": "1.0.6",
+    "description": "统计团队 Repo 代码行数据",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "rm -fr dist",
+        "link": "npm link"
+    },
+    "files": ["bin", "dist", "public"],
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "4.1.2",
+        "dayjs": "1.11.9",
+        "execa": "5.0.0",
+        "table": "6.8.1",
+        "yma-shared-util": "^1.0.6"
+    }
+}

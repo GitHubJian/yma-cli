@@ -1,5 +1,5 @@
-import lib, {GenerateOptions, Tool} from './gen';
 import {CommandModule} from 'yargs';
+import lib, {GenerateOptions, Tool} from './gen';
 
 const options: CommandModule = {
     command: 'gi',

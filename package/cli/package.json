@@ -1,6 +1,6 @@
 {
     "name": "yma-cli",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "YMA 的 CLI 工具",
     "main": "./dist/index.js",
     "bin": {
@@ -10,7 +10,8 @@
         "init": "rm -rf package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist"
+        "clean": "rm -fr dist",
+        "link": "npm link"
     },
     "files": ["bin", "dist"],
     "keywords": [],
@@ -19,9 +20,8 @@
     "dependencies": {
         "semver": "7.3.8",
         "yargs": "17.4.0",
-        "yma-cli-build": "^1.0.5",
-        "yma-cli-dev": "^1.0.5",
-        "yma-cli-lint": "^1.0.5"
+        "yma-cli-build": "^1.0.6",
+        "yma-cli-dev": "^1.0.6"
     },
     "devDependencies": {
         "@types/yargs": "17.0.10"

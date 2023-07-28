@@ -1,9 +1,7 @@
 export function isBrowser() {
     if (
         typeof navigator !== 'undefined' &&
-        (navigator.product === 'ReactNative' ||
-            navigator.product === 'NativeScript' ||
-            navigator.product === 'NS')
+        (navigator.product === 'ReactNative' || navigator.product === 'NativeScript' || navigator.product === 'NS')
     ) {
         return false;
     }

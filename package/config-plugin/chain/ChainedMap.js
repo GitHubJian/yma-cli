@@ -43,7 +43,8 @@ module.exports = class extends Chainable {
             if (__before && order.includes(__before)) {
                 order.splice(order.indexOf(name), 1);
                 order.splice(order.indexOf(__before), 0, name);
-            } else if (__after && order.includes(__after)) {
+            }
+            else if (__after && order.includes(__after)) {
                 order.splice(order.indexOf(name), 1);
                 order.splice(order.indexOf(__after) + 1, 0, name);
             }
@@ -98,7 +99,8 @@ module.exports = class extends Chainable {
 
             if ((!Array.isArray(value) && typeof value !== 'object') || value === null || !this.has(key)) {
                 this.set(key, value);
-            } else {
+            }
+            else {
                 this.set(key, merge(this.get(key), value));
             }
         });
@@ -131,7 +133,8 @@ module.exports = class extends Chainable {
     when(condition, whenTruthy = Function.prototype, whenFalsy = Function.prototype) {
         if (condition) {
             whenTruthy(this);
-        } else {
+        }
+        else {
             whenFalsy(this);
         }
 

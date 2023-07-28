@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-lint",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "LINT 集成工具",
     "bin": {
         "yma-lint": "bin/cli.js"
@@ -10,7 +10,8 @@
         "init": "rm -rf package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist"
+        "clean": "rm -fr dist",
+        "link": "npm link"
     },
     "files": ["bin", "dist", "public"],
     "dependencies": {
@@ -18,13 +19,11 @@
         "@babel/eslint-plugin": "7.17.7",
         "chalk": "4.1.0",
         "eslint-plugin-import": "2.26.0",
-        "eslint-plugin-react": "7.30.0",
+        "eslint-plugin-react": "7.33.0",
         "eslint-plugin-react-hooks": "4.5.0",
         "eslint-plugin-vue": "7.20.0",
         "@typescript-eslint/eslint-plugin": "5.27.1",
         "@typescript-eslint/parser": "5.27.1",
-        "@ecomfe/eslint-config": "7.4.0",
-        "commander": "6.2.1",
         "eslint": "8.17.0",
         "eslint-config-prettier": "8.5.0",
         "eslint-plugin-prettier": "4.0.0",
@@ -36,12 +35,11 @@
         "typescript": "4.2.3",
         "vue": "2.6.11",
         "react": "18.0.0",
-        "yma-shared-util": "^1.0.5"
+        "yma-shared-util": "^1.0.6"
     },
     "devDependencies": {
         "@types/prettier": "2.7.1",
         "@types/glob": "7.2.0",
-        "@types/node": "17.0.0",
         "@types/stylelint": "13.13.3"
     },
     "author": "xiaowensheng",

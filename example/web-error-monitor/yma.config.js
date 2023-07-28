@@ -8,13 +8,10 @@ module.exports = {
         index: {
             entry: path.resolve(__dirname, 'src/page/index/index.ts'),
             template: path.resolve(__dirname, 'public/index.html'),
-            inject: 'head'
+            inject: 'head',
         },
     },
     chainWebpack: function (chain) {
-        chain.resolve.alias.set(
-            '@ErrorMinotor',
-            path.resolve(cwd, '../../package/web-error-monitor')
-        );
+        chain.resolve.alias.set('@ErrorMinotor', path.resolve(cwd, '../../package/web-error-monitor'));
     },
 };

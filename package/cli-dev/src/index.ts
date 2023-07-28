@@ -24,7 +24,7 @@ const options = {
             {
                 mock: argv.mock,
             },
-            api
+            api,
         );
     },
 };

@@ -1,13 +1,14 @@
 {
     "name": "yma-config-plugin-babel",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist"
+        "clean": "rm -fr dist",
+        "link": "npm link"
     },
     "dependencies": {
         "@babel/core": "7.17.8",
@@ -15,7 +16,7 @@
     },
     "devDependencies": {
         "webpack": "5.70.0",
-        "yma-config-plugin": "^1.0.5"
+        "yma-config-plugin": "^1.0.6"
     },
     "files": ["bin", "dist", "public"],
     "keywords": [],

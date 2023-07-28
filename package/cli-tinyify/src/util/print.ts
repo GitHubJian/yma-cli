@@ -29,7 +29,7 @@ export function print(message: string, method: Method = 'log'): void {
 function sortObject(
     obj: Record<string, unknown>,
     keyOrder?: string[],
-    dontSortByUnicode?: boolean
+    dontSortByUnicode?: boolean,
 ): Record<string, any> {
     const res = {};
     if (keyOrder) {
@@ -57,19 +57,9 @@ const MAX_LIMIT_SIZE = 1024 * 1024;
  * @param {Result[]} results 信息
  * @param {number} maxLimitSize 最大值
  */
-export function printTinyify(
-    results: Result[],
-    maxLimitSize: number = MAX_LIMIT_SIZE
-): void {
+export function printTinyify(results: Result[], maxLimitSize: number = MAX_LIMIT_SIZE): void {
     const table = new Table({
-        head: [
-            'file path',
-            'old size',
-            'new size',
-            'ratio',
-            'error',
-            'repeated',
-        ].map(function (msg) {
+        head: ['file path', 'old size', 'new size', 'ratio', 'error', 'repeated'].map(function (msg) {
             return chalk.green(msg);
         }),
     });
@@ -82,29 +72,16 @@ export function printTinyify(
             Object.values(
                 sortObject(
                     {
-                        input:
-                            res.error || res.repeated
-                                ? chalk.red(res.input)
-                                : res.input,
+                        input: res.error || res.repeated ? chalk.red(res.input) : res.input,
                         oldSize: formatSize(oldSize),
-                        newSize:
-                            newSize > maxLimitSize
-                                ? chalk.red(formatSize(newSize))
-                                : formatSize(newSize),
+                        newSize: newSize > maxLimitSize ? chalk.red(formatSize(newSize)) : formatSize(newSize),
                         ratio: formatRatio(oldSize, newSize),
                         error: !!res.error,
                         repeated: res.repeated || '',
                     },
-                    [
-                        'input',
-                        'oldSize',
-                        'newSize',
-                        'ratio',
-                        'error',
-                        'repeated',
-                    ]
-                )
-            )
+                    ['input', 'oldSize', 'newSize', 'ratio', 'error', 'repeated'],
+                ),
+            ),
         );
     });
 

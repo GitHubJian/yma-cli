@@ -1,13 +1,11 @@
 import Module from 'module';
 import path from 'path';
+import {error} from 'yma-shared-util';
 
 const createRequire = Module.createRequire;
 const resolve = require.resolve;
 
-function clearRequireCache(
-    id: string,
-    map: Map<string, boolean> | undefined = new Map()
-): void {
+function clearRequireCache(id: string, map: Map<string, boolean> | undefined = new Map()): void {
     const module = require.cache[id];
     if (module) {
         map.set(id, true);
@@ -25,11 +23,11 @@ function clearRequireCache(
 function resolveModule(request: string, context: string): string {
     let resolvedPath;
     try {
-        resolvedPath = createRequire(
-            path.resolve(context, 'package.json')
-        ).resolve(request);
+        resolvedPath = createRequire(path.resolve(context, 'package.json')).resolve(request);
     } catch (e) {
-        resolvedPath = resolve(request, {paths: [context]});
+        // 从全局去查找
+        // resolvedPath = resolve(request, {paths: [context]});
+        resolvedPath = resolve(request);
     }
 
     return resolvedPath;
@@ -39,15 +37,9 @@ function importDefault<T>(mod): T {
     return mod && mod.__esModule ? mod.default : mod;
 }
 
-function loadModule<T>(
-    request: string,
-    context: string,
-    force: boolean = false
-): T {
+function loadModule<T>(request: string, context: string, force: boolean = false): T {
     try {
-        const mod = createRequire(path.resolve(context, 'package.json'))(
-            request
-        );
+        const mod = createRequire(path.resolve(context, 'package.json'))(request);
         return importDefault<T>(mod);
     } catch (e) {
         const resolvedPath = resolveModule(request, context);
@@ -61,9 +53,7 @@ function loadModule<T>(
             return importDefault<T>(mod);
         }
 
-        throw new Error(
-            `not found module path(${request}) at context(${context})`
-        );
+        throw new Error(`not found module path(${request}) at context(${context})`);
     }
 }
 
@@ -121,11 +111,9 @@ export class Configure {
 
         const data = this.createData(flatDatas);
 
-        const plugins: PluginObject[] = Object.entries(data.plugins).map(
-            function ([key, value]) {
-                return value;
-            }
-        );
+        const plugins: PluginObject[] = Object.entries(data.plugins).map(function ([key, value]) {
+            return value;
+        });
 
         const result: ConfigureResult = {
             ...data,
@@ -229,7 +217,7 @@ export class Configure {
 
     private loadPlugins(
         pairs,
-        context: string
+        context: string,
     ): {
         [key: string]: PluginObject;
     } {
@@ -266,6 +254,7 @@ export class Configure {
                 options: options,
             };
         } catch (e) {
+            error(`Not Found Plugin(${request})`, 'YMA Inheriter');
             throw e;
         }
     }
@@ -276,9 +265,7 @@ export class Configure {
         return this.normalize(loadModule(filepath, context), ctx);
     }
 
-    private translate(data: {
-        plugins: {[key: string]: PluginObject};
-    }): FlatData[] {
+    private translate(data: {plugins: {[key: string]: PluginObject}}): FlatData[] {
         const configs: FlatData[] = [];
         const flatData: FlatData = {};
 
@@ -292,8 +279,7 @@ export class Configure {
             flatData.plugins = {};
 
             for (const pluginName of Object.keys(data.plugins)) {
-                (flatData.plugins as Record<string, any>)[pluginName] =
-                    data.plugins[pluginName];
+                (flatData.plugins as Record<string, any>)[pluginName] = data.plugins[pluginName];
             }
         }
 
@@ -310,7 +296,7 @@ export default function inherite<T>(
     options: Partial<{
         context: string;
         props: string[];
-    }> = {}
+    }> = {},
 ): T {
     const context = options.context || process.cwd();
     const props = options.props || [];

@@ -15,8 +15,7 @@ import fs from 'fs';
 export function readFile(filepath: string): string | null {
     try {
         return fse.readFileSync(filepath, 'utf-8');
-    }
-    catch (e) {
+    } catch (e) {
         // TODO log
         return null;
     }
@@ -30,8 +29,7 @@ export function readFile(filepath: string): string | null {
 export function writeFile(filepath: string, content: string): void {
     try {
         fse.writeFileSync(filepath, content, 'utf-8');
-    }
-    catch (error) {
+    } catch (error) {
         // TODO log
     }
 }
@@ -44,8 +42,7 @@ export function writeFile(filepath: string, content: string): void {
 export function readImageFile(filepath: string): Buffer | null {
     try {
         return fs.readFileSync(filepath);
-    }
-    catch (e) {
+    } catch (e) {
         // TODO log
         return null;
     }
@@ -59,8 +56,7 @@ export function readImageFile(filepath: string): Buffer | null {
 export function writeImageFile(filepath: string, buffer: Buffer): void {
     try {
         fse.writeFileSync(filepath, buffer);
-    }
-    catch (error) {
+    } catch (error) {
         // TODO log
     }
 }

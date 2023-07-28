@@ -1,6 +1,6 @@
 import path from 'path';
-import webpack, {Configuration} from 'webpack';
 import url from 'url';
+import webpack, {Configuration} from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import portfinder from 'portfinder';
 import {info, chalk} from 'yma-shared-util';
@@ -117,14 +117,14 @@ export default async function dev(
                 },
             },
             port,
-            // setupMiddlewares: setupMiddlewares,
+            setupMiddlewares: setupMiddlewares,
         },
         devServerOptions,
         {
             proxy: proxySettings,
         },
     );
-    debugger;
+
     const server = new WebpackDevServer(devServerConfig, compiler);
 
     return new Promise((resolve, reject) => {

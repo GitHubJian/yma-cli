@@ -29,8 +29,7 @@ export interface Cached {
 export function loadCache(filepath: string): Cached | null {
     try {
         return fse.readJsonSync(filepath) as Cached;
-    }
-    catch (e) {
+    } catch (e) {
         // TODO log
         return null;
     }
@@ -45,8 +44,7 @@ export function loadCache(filepath: string): Cached | null {
 export function saveCache(filepath: string, cached: Cached): void {
     try {
         fse.writeJsonSync(filepath, cached, 'utf-8');
-    }
-    catch (error) {
+    } catch (error) {
         // TODO log
     }
 }

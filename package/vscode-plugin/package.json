@@ -1,0 +1,59 @@
+{
+    "name": "yma-vscode-plugin",
+    "displayName": "VSCode Plugin for YMA",
+    "description": "配合 YMA 使用的 VSCode 插件",
+    "version": "1.0.6",
+    "main": "./src/extension.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "",
+        "build": "npm run clean && vsce package",
+        "clean": "rm -fr yma-vscode-plugin-**"
+    },
+    "devDependencies": {
+        "@vscode/vsce": "2.15.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": ["Other"],
+    "contributes": {
+        "commands": [
+            {
+                "title": "YMA Env",
+                "command": "yma.env"
+            },
+            {
+                "title": "YMA Lint",
+                "command": "yma.lint"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "when": "editorFocus",
+                    "command": "yma.env"
+                },
+                {
+                    "when": "editorFocus",
+                    "command": "yma.lint"
+                }
+            ],
+            "explorer/context": [
+                {
+                    "command": "yma.env",
+                    "group": "yma"
+                },
+                {
+                    "command": "yma.lint",
+                    "group": "yma"
+                }
+            ]
+        }
+    },
+    "activationEvents": ["onLanguage:json"]
+}

@@ -1,8 +1,8 @@
 import fs from 'fs';
 import url from 'url';
 import path from 'path';
-import address from 'address';
 import http from 'http';
+import address from 'address';
 import {chalk} from 'yma-shared-util';
 import DevServer from 'webpack-dev-server';
 

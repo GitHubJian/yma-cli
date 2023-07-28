@@ -23,8 +23,7 @@ export function formatRatio(oldSize: number, newSize: number): string {
         const radio = (oldSize - newSize) / oldSize;
 
         return (radio * 100).toFixed(2) + '%';
-    }
-    catch (error) {
+    } catch (error) {
         return '0%';
     }
 }

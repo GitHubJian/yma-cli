@@ -1,19 +1,16 @@
 {
     "name": "yma-cli-gen-index",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Webpack Dev 构建命令",
     "main": "./dist/index.js",
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist"
+        "clean": "rm -fr dist",
+        "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "keywords": [],
     "author": "",
     "license": "ISC",

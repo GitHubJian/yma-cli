@@ -58,7 +58,7 @@ function translateOptions(configPath) {
 function classify(paths): {
     [key: string]: string[];
 } {
-    const extnames = ['.js', '.ts', '.tsx', '.vue'];
+    const extnames = ['.jsx', '.js', '.ts', '.tsx', '.vue'];
 
     const allFilepaths: string[] = [];
     for (let i = 0, len = paths.length; i < len; i++) {
@@ -110,6 +110,10 @@ function resolveOptionsPath(extname) {
 
     if (extname === '.vue') {
         return require.resolve('./options/vue');
+    }
+
+    if (extname === '.jsx') {
+        return require.resolve('./options/jsx');
     }
 }
 

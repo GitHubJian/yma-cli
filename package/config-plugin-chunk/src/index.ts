@@ -12,7 +12,7 @@ function createChunks(
     string,
     {
         name: string;
-        test: ({context: string}) => boolean;
+        test: ({context}: {context: string}) => boolean;
         reuseExistingChunk: true;
         minChunks: 1;
         priority: -5;

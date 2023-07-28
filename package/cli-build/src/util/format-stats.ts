@@ -1,7 +1,7 @@
+import path from 'path';
 import webpack from 'webpack';
 
 import {chalk} from 'yma-shared-util';
-import path from 'path';
 import cliui from 'cliui';
 
 const ui = cliui({width: 80});

@@ -2,8 +2,7 @@ import {toString} from './constant';
 
 const fnToStr = Function.prototype.toString;
 const re = /^\s*(?:function)?\*/;
-const hasToStringTag =
-    typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+const hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
 const getProto = Object.getPrototypeOf;
 
 let getGeneratorFunc = function () {

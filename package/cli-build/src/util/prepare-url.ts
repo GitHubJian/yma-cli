@@ -1,5 +1,5 @@
-import {chalk} from 'yma-shared-util';
 import url from 'url';
+import {chalk} from 'yma-shared-util';
 import address from 'address';
 import defaultGateway from 'default-gateway';
 

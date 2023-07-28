@@ -7,10 +7,7 @@ export function isTSRepo(rootDir: string): boolean {
 
     const tsconfigFilePath = path.relative(rootDir, filename);
 
-    return (
-        fs.existsSync(tsconfigFilePath) &&
-        fs.statSync(tsconfigFilePath).isFile()
-    );
+    return fs.existsSync(tsconfigFilePath) && fs.statSync(tsconfigFilePath).isFile();
 }
 
 function _upperFirst(str: string): string {
@@ -33,10 +30,7 @@ interface FindExportedFileOptions {
     ignore: string[];
 }
 
-export function findExportedFile(
-    dir: string,
-    options: FindExportedFileOptions
-): Array<string> {
+export function findExportedFile(dir: string, options: FindExportedFileOptions): string[] {
     const ignore = options.ignore || ['_'];
     const extname = `.${options.filetype}`;
 
@@ -55,17 +49,15 @@ export function findExportedFile(
         .filter(function (v) {
             if (v.isDirectory()) {
                 return true;
-            } else {
-                const currentExtname = path.extname(v.name);
-
-                if (currentExtname == extname) {
-                    const basename = path.basename(v.name, extname);
-
-                    return !(exclude.indexOf(basename) > -1);
-                } else {
-                    return false;
-                }
             }
+            const currentExtname = path.extname(v.name);
+
+            if (currentExtname == extname) {
+                const basename = path.basename(v.name, extname);
+
+                return !exclude.includes(basename);
+            }
+            return false;
         })
         .map(function (v) {
             return path.basename(v.name, extname);

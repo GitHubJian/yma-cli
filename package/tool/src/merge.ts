@@ -1,10 +1,6 @@
 import {isFunction, isPlainObject, isArray} from './is';
 
-function merge(
-    deep: boolean,
-    source: Record<string, any>,
-    target: Record<string, any>
-): Record<string, any>;
+function merge(deep: boolean, source: Record<string, any>, target: Record<string, any>): Record<string, any>;
 function merge() {
     var clone;
     var options;
@@ -43,11 +39,7 @@ function merge() {
                     continue;
                 }
 
-                if (
-                    deep &&
-                    copy &&
-                    (isPlainObject(copy) || (copyIsArray = isArray(copy)))
-                ) {
+                if (deep && copy && (isPlainObject(copy) || (copyIsArray = isArray(copy)))) {
                     src = target[name];
 
                     if (copyIsArray && isArray(src)) {
@@ -71,17 +63,11 @@ function merge() {
     return target;
 }
 
-export function assign(
-    source: Record<string, any>,
-    target: Record<string, any>
-) {
+export function assign(source: Record<string, any>, target: Record<string, any>) {
     return merge(false, source, target);
 }
 
-export function deepmerge<T extends Record<string, any>>(
-    source: Record<string, any>,
-    target: Record<string, any>
-): T {
+export function deepmerge<T extends Record<string, any>>(source: Record<string, any>, target: Record<string, any>): T {
     return merge(true, source, target) as T;
 }
 

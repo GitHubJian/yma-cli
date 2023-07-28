@@ -1,7 +1,7 @@
 /**
-* @file export file
-* @desc 由 GEF 自动生成
-*/
+ * @file export file
+ * @desc 由 GEF 自动生成
+ */
 
 export * from './constant';
 export * from './isAndroid';

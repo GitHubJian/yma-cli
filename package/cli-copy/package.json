@@ -1,18 +1,19 @@
 {
     "name": "yma-cli-copy",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist"
+        "clean": "rm -fr dist",
+        "link": "npm link"
     },
     "dependencies": {
         "clipboardy": "2.3.0",
         "yma-package-manager": "1.0.3",
-        "yma-shared-util": "^1.0.5"
+        "yma-shared-util": "^1.0.6"
     },
     "files": ["bin", "dist"],
     "keywords": [],

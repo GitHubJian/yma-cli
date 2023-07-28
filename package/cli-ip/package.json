@@ -1,13 +1,14 @@
 {
     "name": "yma-cli-ip",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "获取本机 IP",
     "main": "./dist/index.js",
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist"
+        "clean": "rm -fr dist",
+        "link": "npm link"
     },
     "files": ["bin", "dist"],
     "keywords": [],
@@ -16,6 +17,6 @@
     "dependencies": {
         "address": "1.1.2",
         "clipboardy": "2.3.0",
-        "yma-shared-util": "^1.0.5"
+        "yma-shared-util": "^1.0.6"
     }
 }

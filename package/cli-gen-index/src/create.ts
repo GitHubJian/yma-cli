@@ -1,15 +1,11 @@
 import {pascalCase, camelCase} from './util';
 import {ExportContentType, ExportContentTarget, Tool} from './gen';
 
-const FILE_COMMENT =
-    '/**\n* @file export file\n* @desc 由 GEF 自动生成\n*/\n\n';
+const FILE_COMMENT = '/**\n* @file export file\n* @desc 由 GEF 自动生成\n*/\n\n';
 
-type List = Array<string>;
+type List = string[];
 
-function createModuleContent(
-    list: List,
-    exportContentType: ExportContentType = ExportContentType.UNITE
-): string {
+function createModuleContent(list: List, exportContentType: ExportContentType = ExportContentType.UNITE): string {
     if (exportContentType === ExportContentType.UNITE) {
         const content = list
             .map(function (v) {
@@ -18,31 +14,25 @@ function createModuleContent(
             .join('\n');
 
         return FILE_COMMENT + content + '\n';
-    } else {
-        const importStatements = list
-            .map(function (v) {
-                return `import ${camelCase(v)} from './${v}';`;
-            })
-            .join('\n');
-
-        const exportValues = list
-            .map(function (v) {
-                return camelCase(v);
-            })
-            .join(',\n    ');
-
-        const exportStatements = `export {\n    ${exportValues}\n}\n`;
-
-        return (
-            FILE_COMMENT + importStatements + '\n\n' + exportStatements + '\n'
-        );
     }
+    const importStatements = list
+        .map(function (v) {
+            return `import ${camelCase(v)} from './${v}';`;
+        })
+        .join('\n');
+
+    const exportValues = list
+        .map(function (v) {
+            return camelCase(v);
+        })
+        .join(',\n    ');
+
+    const exportStatements = `export {\n    ${exportValues}\n}\n`;
+
+    return FILE_COMMENT + importStatements + '\n\n' + exportStatements + '\n';
 }
 
-function createCommonjsContent(
-    list: List,
-    exportContentType: ExportContentType = ExportContentType.UNITE
-): string {
+function createCommonjsContent(list: List, exportContentType: ExportContentType = ExportContentType.UNITE): string {
     if (exportContentType === ExportContentType.UNITE) {
         const exportFiles = list
             .map(function (v) {
@@ -55,22 +45,21 @@ function createCommonjsContent(
 `;
 
         return FILE_COMMENT + content;
-    } else {
-        const exportNames: string[] = [];
-        const constStatements = list
-            .map(function (v) {
-                const exportName = camelCase(v);
-                exportNames.push(exportName);
-
-                return `const ${exportName} = require('./${v}');`;
-            })
-            .join('\n');
-
-        const exportNameStr = exportNames.join(',\n    ');
-        const exportStatement = `module.exports = {\n    ${exportNameStr}\n};\n`;
-
-        return FILE_COMMENT + constStatements + '\n\n' + exportStatement;
     }
+    const exportNames: string[] = [];
+    const constStatements = list
+        .map(function (v) {
+            const exportName = camelCase(v);
+            exportNames.push(exportName);
+
+            return `const ${exportName} = require('./${v}');`;
+        })
+        .join('\n');
+
+    const exportNameStr = exportNames.join(',\n    ');
+    const exportStatement = `module.exports = {\n    ${exportNameStr}\n};\n`;
+
+    return FILE_COMMENT + constStatements + '\n\n' + exportStatement;
 }
 
 function createComponentContent(list: List) {
@@ -120,10 +109,8 @@ export default function create(list: List, options: CreateOptions) {
     if (options.tool === Tool.UTIL) {
         if (options.exportContentTarget === ExportContentTarget.MODULE) {
             return createModuleContent(list, options.exportContentType);
-        } else {
-            return createCommonjsContent(list, options.exportContentType);
         }
-    } else {
-        return createComponentContent(list);
+        return createCommonjsContent(list, options.exportContentType);
     }
+    return createComponentContent(list);
 }

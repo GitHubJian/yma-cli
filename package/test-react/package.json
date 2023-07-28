@@ -1,0 +1,38 @@
+{
+    "name": "yma-test-react",
+    "version": "1.0.6",
+    "description": "YMA Test 包装函数",
+    "main": "./src/index.js",
+    "scripts": {
+        "init": "rm -rf package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "",
+        "clean": "rm -fr dist",
+        "link": "npm link"
+    },
+    "files": ["bin", "dist", "public"],
+    "dependencies": {
+        "@testing-library/react": "11.2.3",
+        "@testing-library/react-hooks": "8.0.1",
+        "@testing-library/user-event": "12.6.0",
+        "jest": "27.5.1",
+        "jest-axe": "7.0.0",
+        "jest-transform-stub": "2.0.0",
+        "jest-watch-typeahead": "1.0.0",
+        "sinon": "13.0.2",
+        "ts-jest": "27.1.4",
+        "typescript": "5.1.6",
+        "react": "18.2.0"
+    },
+    "peerDependencies": {
+        "react": "^18.0.0"
+    },
+    "peerDependenciesMeta": {
+        "react": {
+            "optional": true
+        }
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

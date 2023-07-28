@@ -1,5 +1,5 @@
-import {pathToRegexp} from 'path-to-regexp';
 import fs from 'fs';
+import {pathToRegexp} from 'path-to-regexp';
 import {log, warn} from 'yma-shared-util';
 
 export default function createMiddleware(api, mock) {
@@ -40,10 +40,7 @@ export default function createMiddleware(api, mock) {
                         let item = mock[i];
                         const re = pathToRegexp(item.url);
 
-                        if (
-                            re.exec(url) &&
-                            method == item.method.toLowerCase()
-                        ) {
+                        if (re.exec(url) && method == item.method.toLowerCase()) {
                             response = item.response;
                             break;
                         }
