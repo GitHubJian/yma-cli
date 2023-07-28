@@ -75,7 +75,7 @@ export function rc(name, defaults = {}) {
     }
 
     function save(toSave = {}) {
-        const options = deepmerge({}, load(), toSave);
+        const options = deepmerge({}, load(), toSave) as Record<string, any>;
 
         if (defaults) {
             for (const key in options) {

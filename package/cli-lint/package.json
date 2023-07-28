@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-lint",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "LINT 集成工具",
     "bin": {
         "yma-lint": "bin/cli.js"
@@ -37,14 +37,15 @@
         "react": "18.0.0",
         "stylelint": "13.8.0",
         "stylelint-order": "4.1.0",
-        "typescript": "4.2.3",
-        "vue": "2.6.11",
-        "yma-shared-util": "^1.0.7"
+        "yma-shared-util": "^1.0.8"
     },
     "devDependencies": {
         "@types/glob": "7.2.0",
         "@types/prettier": "2.7.1",
         "@types/stylelint": "13.13.3"
+    },
+    "peerDependencies": {
+        "typescript": "^4.2.3"
     },
     "author": "xiaowensheng",
     "license": "ISC",

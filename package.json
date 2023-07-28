@@ -17,7 +17,7 @@
     "devDependencies": {
         "yarn": "1.22.19",
         "@types/node": "20.4.4",
-        "typescript": "4.2.3"
+        "typescript": "5.1.6"
     },
     "repository": {
         "type": "git",

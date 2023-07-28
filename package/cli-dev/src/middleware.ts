@@ -2,6 +2,10 @@ import fs from 'fs';
 import {pathToRegexp} from 'path-to-regexp';
 import {log, warn} from 'yma-shared-util';
 
+function isPlainObject(value) {
+    return Object.prototype.toString.call(value) === '[object Object]';
+}
+
 export default function createMiddleware(api, mock) {
     const mockPath = api.resolve(mock);
 
@@ -18,12 +22,12 @@ export default function createMiddleware(api, mock) {
             middlewares.unshift({
                 path: '/',
                 middleware: (req, res, next) => {
-                    let mock;
+                    let mockContent;
 
                     try {
                         let filepath = require.resolve(mockPath);
                         delete require.cache[filepath];
-                        mock = require(mockPath);
+                        mockContent = require(mockPath);
                     } catch (error) {
                         warn(`未能找到 Mock 文件（${mockPath}）`, 'CLI DEV');
 
@@ -33,24 +37,50 @@ export default function createMiddleware(api, mock) {
                     }
 
                     const url = req.path;
-                    const method = req.method.toLowerCase();
+                    const method = req.method.toUpperCase();
 
-                    let response;
-                    for (let i = 0; i < mock.length; i++) {
-                        let item = mock[i];
-                        const re = pathToRegexp(item.url);
+                    if (isPlainObject(isPlainObject)) {
+                        const key = `${method} ${url}`;
 
-                        if (re.exec(url) && method == item.method.toLowerCase()) {
-                            response = item.response;
-                            break;
+                        const mock = mockContent[key];
+                        if (typeof mock === 'function') {
+                            mock.call(null, req, res);
+                        } else if (isPlainObject(mock)) {
+                            res.send(mock);
+                        } else if (typeof mock === 'string') {
+                            res.send({
+                                code: 200,
+                                message: mock,
+                            });
+                        } else if (typeof mock === 'number') {
+                            res.send({
+                                code: mock,
+                                message: 'success',
+                            });
+                        } else {
+                            next();
                         }
-                    }
-
-                    if (response) {
-                        const result = response(req, res);
-                        res.send(result);
                     } else {
-                        next();
+                        let response;
+                        for (let i = 0; i < mock.length; i++) {
+                            let item = mock[i];
+                            const re = pathToRegexp(item.url);
+
+                            if (
+                                re.exec(url) &&
+                                method == item.method.toLowerCase()
+                            ) {
+                                response = item.response;
+                                break;
+                            }
+                        }
+
+                        if (response) {
+                            const result = response(req, res);
+                            res.send(result);
+                        } else {
+                            next();
+                        }
                     }
                 },
             });

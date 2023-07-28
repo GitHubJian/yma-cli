@@ -1,6 +1,6 @@
 {
     "name": "yma-tool",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "YMA Tool 工具库函数",
     "main": "./dist/index.js",
     "scripts": {
