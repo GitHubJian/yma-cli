@@ -2,7 +2,7 @@
     "name": "yma-vscode-plugin",
     "displayName": "VSCode Plugin for YMA",
     "description": "配合 YMA 使用的 VSCode 插件",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "main": "./src/extension.js",
     "scripts": {
         "init": "rm -rf package-lock.json && npm install",

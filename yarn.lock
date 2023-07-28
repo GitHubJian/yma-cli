@@ -10726,6 +10726,14 @@ yazl@^2.2.2:
   dependencies:
     buffer-crc32 "~0.2.3"
 
+yma-cli-branch@1.0.9:
+  version "1.0.9"
+  resolved "https://registry.npmjs.org/yma-cli-branch/-/yma-cli-branch-1.0.9.tgz#792245dbc154317327014bbe3b1ff61ec080eef7"
+  integrity sha512-4/46afeFVuZKidzdpIqDYZ0XPkzunfR8B/r1eIVFnh3OpFAvGDpMOBRYrz7TOjcAMnyi1+GDaf/aC8CmQ1IMGw==
+  dependencies:
+    fs-extra "10.0.1"
+    yma-shared-util "^1.0.9"
+
 yma-cli@1.0.9-alpha.0:
   version "1.0.9-alpha.0"
   resolved "https://registry.npmjs.org/yma-cli/-/yma-cli-1.0.9-alpha.0.tgz#764ffb7d4d2eb919bbdc9d3502217a4ca82adbb7"
