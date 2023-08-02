@@ -12,7 +12,9 @@
 
 Runtime 时期的一些问题
 
-## CR List
+## Case List
+
+> 只做 [ESLINT](https://eslint.org/) & [Prettier](https://prettier.io/) 做不了的 CR
 
 #### 变量命名
 
