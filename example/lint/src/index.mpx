@@ -1,0 +1,187 @@
+<style lang="stylus" src='./mixins/stylus/global.styl'></style>
+<script>
+import {createApp, mpx} from '@didi/es-mpx-creator';
+import usex from '@didi/es-mpx-usex';
+import '@/common/omega'; // 这里的顺序要保证放在mpx 引入后面
+import '@/common/updateManager'; // 这里的顺序要保证放在mpx 引入后面
+import storeRe, {
+    show,
+    getTripList,
+    getPermissionBooking,
+} from '@didi/es-mpx-material/block/rule/main';
+import '@/common/global_use';
+import store from '@/store';
+import '@/common/raven-init/init'; // 这里的顺序要保证放在mpx 引入后面
+import raven from '@/common/raven-init/init';
+import {getStore} from '@didi/es-mpx-usex';
+import {Omega as OG} from '@didi/es-mpx-bridge';
+import {getPublick} from './common/publicParams';
+
+const Omega = OG.getOmega();
+
+function getPlugins() {
+    const context = require.context('@/plugins', true, /\.js$/);
+    return context.keys().map(path => context(path).default);
+}
+
+createApp({
+    Omega,
+    plugins: [...getPlugins(), usex],
+    async onLaunch(options) {
+        console.log('机票开始启动');
+        if (
+            __mpx_mode__ == 'web'
+        && window.location?.href?.indexOf('pre-release-') > -1
+        ) {
+            import('vconsole').then(VConsole => {
+                // h5预发环境临时加vconsole
+                const cotr = VConsole?.default || VConsole;
+                const vConsole = new cotr();
+            });
+        }
+        raven.trackEvent('app_launch_options_info', {options});
+        setTimeout(() => {
+            mpx.getSystemInfo().then(e => {
+                store.dispatch('system.setSystemInfo', e);
+            });
+        }, 500);
+
+        const pages = getCurrentPages();
+        let currentPage = pages[pages.length - 1];
+        const {query, path} = options;
+        const {is_guest, requisition_id, approval_id} = query;
+        // 启动时进入的页面不是首页时，请求差旅数据，进入首页时有首页的请求差旅逻辑
+        if (!is_guest) {
+        // getPermissionBooking需在getTripList前
+            await getPermissionBooking();
+            getTripList({
+                type: 2,
+                service: 6,
+                show_loading: false,
+                requisition_id: approval_id || requisition_id,
+                reset: !!path?.includes('/home/index'),
+            }).finally(async () => {
+                const {
+                    userInfo: {uid: pub_es_uid, member_id: pub_es_member_id},
+                } = getStore();
+                // 给Omega注入公参 uid
+                Omega.addCommonAttrs({pub_es_uid, pub_es_member_id});
+                Omega.trackEvent && Omega.trackEvent('tech_es_mpxapp_launch');
+            });
+        }
+    },
+    /**
+     * @description: 全局错误事件
+     */
+    onError(error) {
+        console.error('发生错误：----  ', error);
+        Omega.trackEvent
+        && Omega.trackEvent('tech_es_flight_app_error', {error_content: error});
+    },
+    /**
+     * @description: 小程序有未处理的 Promise 拒绝时触发, async函数内部错误导致阻塞执行，接口的promise reject等
+     * */
+    onUnhandledRejection({reason}) {
+        try {
+            raven.trackError('unhandled_rejection', {
+                source: 'App.onError',
+                error: reason,
+            });
+        }
+        catch (e) {
+            console.log('onUnhandledRejection======>', e);
+        }
+    },
+    onShow(data) {
+        console.log('onShow----  ', data);
+        raven?.trackEvent('app_lifecycle', {
+            type: 'onShow',
+            options: data,
+        });
+    },
+    onHide() {
+        console.log('onHide----  ');
+        raven.trackEvent('app_lifecycle', {type: 'onHide'});
+    },
+});
+</script>
+
+
+<script name="json">
+  const config = {
+    pages: [
+      // './pages/demo', // 开发便捷入口页 !开发期打开、不提交到仓库
+      './pages/home/index', // 首页
+      './pages/home/city', // 选择城市
+      './pages/home/service', // 联系客服
+      './pages/search/list', // 航班列表
+      './pages/search/list-round', // 国际航班列表
+      './pages/flight-detail/index', // 航班报价
+      './pages/flight-detail-intl/index', // 国际化航班报价
+      './pages/rc-selected/index', // 选择超标原因
+      './pages/make-order/order-create', // 订单填写页
+      './pages/make-order/budget-center', // 成本中心选择页
+      './pages/make-order/verify-user', // 审批人选择页
+      './pages/order/detail', // 订单详情页
+      './pages/order/modify-phone', // 修改手机号页
+      './pages/order/send-confirm', // 发送确认单页
+      './pages/result/result', // 结果页
+      './pages/change-ticket/select-original-flight', // 改签、退票选择原本航班页
+      './pages/change-ticket/internal-select-original-flight', // 国际化: 改签、退票选择原本航班页
+      './pages/change-ticket/apply-change-ticket', // 申请改签页
+      './pages/change-ticket/select-change-flight-list', // 选择改签航班列表页
+      './pages/change-ticket/confirm-change-ticket', // 确认改签页
+      './pages/change-ticket/change-ticket-detail', // 改签详情页
+      './pages/refund-ticket/apply-refund-ticket', // 申请退票页
+      './pages/refund-ticket/upload-flie', //退票申请上传附件页
+      './pages/refund-ticket/refund-ticket-detail', // 退票详情页
+      './pages/refund-ticket/internal-refund-ticket-detail', // 国际化退票详情页
+      './pages/change-ticket/internal-change-ticket-detail', // 国际化改签详情页
+      './pages/reimburse/index', // 我的报销、报销列表页
+      './pages/reimburse/token', // 填入提交报销凭证页
+      './pages/reimburse/details', // 报销凭证详情
+      './pages/reimburse/internal-reimbursement', // 修改报销信息页
+      './pages/reimburse/commit', // 提交凭证结果页
+      './pages/reimburse/address', // 配送地址列表
+      './pages/reimburse/add-address', // 添加配送地址,
+      './pages/reimburse/invoice-header', // 添加电子发票抬头
+      './pages/reimburse/add-invoice-header',
+      './pages/change-ticket/internal-select-original-flight', // 国际化: 改签、退票选择原本航班页
+      './pages/refund-ticket/internal-apply-refund-ticket', // 国际化申请退票页
+      './pages/change-ticket/internal-apply-change-ticket',
+      './pages/change-ticket/internal-confirm-change-ticket', // 国际化确认改签页
+      './pages/invoice/index', //电子发票 报销详情
+      './pages/error/index',
+      './pages/jump',
+      './pages/webview'
+    ],
+    // packages: [ '@didi/fe-escontact/src/app.mpx?root=contact&independent=true'],
+    packages: [],
+    permission: {
+      // 'scope.userLocation': {
+      //   desc: '用于获取您当前所在城市或具体位置，以方便查找酒店、机场、火车站等'
+      // }
+    },
+    window: {
+      navigationStyle: 'custom'
+    },
+    usingComponents: {
+      'es-icon': '@didi/es-mpx-ui/lib/icon',
+      'es-layout': '@didi/es-mpx-ui/lib/layout/index',
+      'es-drawer-bottom': '@didi/es-mpx-ui/lib/drawer-bottom',
+      'es-card-wrap1': '@didi/es-mpx-ui/lib/card/card-wrap1',
+      'es-descriptions': '@didi/es-mpx-ui/lib/descriptions',
+      'es-cell': '@didi/es-mpx-ui/lib/cell',
+      'es-card-wrap1': '@didi/es-mpx-ui/lib/card/card-wrap1'
+    }
+  }
+  if (__mpx_mode__ !== 'web') {
+    config.packages.push('@didi/fe-escontact/src/app.mpx?root=contact')
+  } else {
+    config.packages.push(
+      '@didi/fe-escontact/src/app.mpx?root=contact&independent=true'
+    )
+  }
+
+  module.exports = config
+</script>

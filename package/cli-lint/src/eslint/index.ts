@@ -34,7 +34,7 @@ function translateOptions(configPath) {
         allowInlineConfig: true,
         cache: false,
         errorOnUnmatchedPattern: false,
-        extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue', '.mpx'],
         fix: true,
         ignore: true,
         ignorePath: path.resolve(__dirname, '../../public/.eslintignore'),
@@ -58,7 +58,7 @@ function translateOptions(configPath) {
 function classify(paths): {
     [key: string]: string[];
 } {
-    const extnames = ['.jsx', '.js', '.ts', '.tsx', '.vue'];
+    const extnames = ['.jsx', '.js', '.ts', '.tsx', '.vue', '.mpx'];
 
     const allFilepaths: string[] = [];
     for (let i = 0, len = paths.length; i < len; i++) {
@@ -108,7 +108,7 @@ function resolveOptionsPath(extname) {
         return require.resolve('./options/ts');
     }
 
-    if (extname === '.vue') {
+    if (extname === '.vue' || extname === '.mpx') {
         return require.resolve('./options/vue');
     }
 
@@ -122,7 +122,6 @@ async function lint(files, extname) {
 
     const opts = translateOptions(optionsPath);
     const engine = new ESLint(opts);
-
     const results: ESLint.LintResult[] = await engine.lintFiles(files);
 
     return results;

@@ -1,0 +1,13 @@
+{
+    "name": "lint",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "mpx": "yma lint --paths 'src/index.mpx'",
+        "vue": "yma lint --paths 'src/index.vue'"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
