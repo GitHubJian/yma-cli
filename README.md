@@ -35,15 +35,15 @@ npm run publish
 
 ## 工程化之规范
 
-[Technical Review](./doc/technical-review.md)
-[Code Review](./doc/code-review.md)
-[Unit Test](./doc/unit-test.md)
-[Vue Component](./doc/vue-component.md)
-[React Component](./doc/react-component.md)
-[CSS Kit](./doc/css-kit.md)
-[Project Folder](./doc/project-folder.md)
-[Version Tag](./doc/version-tag.md)
-[Git Flow](./doc/git-flow.md)
+- 技术评审 [Technical Review](./doc/technical-review.md)
+- 代码 CR [Code Review](./doc/code-review.md)
+- 单元测试 [Unit Test](./doc/unit-test.md)
+- Vue 组件库 [Vue Component](./doc/vue-component.md)
+- React 组件库 [React Component](./doc/react-component.md)
+- CSS 原子 [CSS Kit](./doc/css-kit.md)
+- Repo 文件夹 [Project Folder](./doc/project-folder.md)
+- 版本控制 [Version Tag](./doc/version-tag.md)
+- Git 工作流 [Git Flow](./doc/git-flow.md)
 
 ## 参与
 
