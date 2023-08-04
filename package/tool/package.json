@@ -17,5 +17,15 @@
     ],
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "devDependencies": {
+        "react": "18.2.0",
+        "@types/react": "18.2.18"
+    },
+    "peerDependencies": {
+        "react": "18.0.0"
+    },
+    "optionalDependencies": {
+        "react": "^18.0.0"
+    }
 }
