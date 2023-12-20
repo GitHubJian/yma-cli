@@ -4,10 +4,10 @@
     "description": "YMA Tool 工具库函数",
     "main": "./dist/index.js",
     "scripts": {
-        "init": "rm -rf package-lock.json && npm install",
+        "init": "del-cli -f package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist",
+        "clean": "del-cli -f dist",
         "link": "npm link"
     },
     "files": [
@@ -19,7 +19,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "react": "18.2.0",
+        "react": "18.0.0",
         "@types/react": "18.2.18"
     },
     "peerDependencies": {

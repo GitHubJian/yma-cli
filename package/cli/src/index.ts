@@ -11,11 +11,15 @@ function findGlobalPlugins(ignores: string[]): Array<{
     builder: (yargs: any) => any;
     handler: (argv: any) => Promise<void>;
 }> {
+    function isWindows() {
+        return process.platform === 'win32';
+    }
+
     const {stdout} = execa.sync('npm', ['config', 'get', 'prefix'], {
         cwd: os.homedir(),
     });
 
-    const dir = `${stdout}/lib/node_modules/`;
+    const dir = isWindows() ? `${stdout}/node_modules/` : `${stdout}/lib/node_modules/`;
     const pattern = dir + `${prefix}-*`;
     const list = glob.sync(pattern);
 

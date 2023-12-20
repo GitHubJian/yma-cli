@@ -1,11 +1,7 @@
-module.exports = {
-    plugins: [
-        [
-            'yma-config-plugin-babel',
-            {
-                transpileDependencies: true,
-            },
-        ],
-        'yma-config-plugin-typescript',
-    ],
-};
+const {deepmerge} = require('yma-shared-util');
+const base = require('./base');
+
+module.exports = deepmerge(base, {
+    plugins: ['yma-config-plugin-typescript'],
+});
+

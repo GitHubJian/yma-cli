@@ -1,12 +1,14 @@
 import path from 'path';
 import PluginAPI, {Chain} from 'yma-config-plugin';
+import {isWindows} from 'yma-shared-util';
 
 function getDepPathRegex(dependencies: Array<string | RegExp>): RegExp | null {
     const deps = dependencies.map(dep => {
         if (typeof dep === 'string') {
             const depPath = path.join('node_modules', dep, '/');
-            // TODO windows
-            return depPath;
+            return isWindows
+            ? depPath.replace(/\\/g, '\\\\')
+            : depPath
         } else if (dep instanceof RegExp) {
             return dep.source;
         }

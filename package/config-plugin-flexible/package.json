@@ -4,10 +4,10 @@
     "description": "基于 yma-config-plugin 的 适配 H5 打包插件",
     "main": "./dist/index.js",
     "scripts": {
-        "init": "rm -rf package-lock.json && npm install",
+        "init": "del-cli -f package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
-        "clean": "rm -fr dist",
+        "clean": "del-cli -f dist",
         "link": "npm link"
     },
     "files": [

@@ -16,7 +16,8 @@
         "yma-config-plugin-babel": "^1.0.11",
         "yma-config-plugin-flexible": "^1.0.11",
         "yma-config-plugin-sdk": "^1.0.11",
-        "yma-config-plugin-typescript": "^1.0.11"
+        "yma-config-plugin-typescript": "^1.0.11",
+        "yma-config-plugin-chunk": "^1.0.11"
     },
     "keywords": [],
     "author": "",

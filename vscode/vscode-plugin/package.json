@@ -5,10 +5,10 @@
     "version": "1.0.11",
     "main": "./src/extension.js",
     "scripts": {
-        "init": "rm -rf package-lock.json && npm install",
+        "init": "del-cli -f package-lock.json && npm install",
         "start": "",
         "build": "npm run clean && vsce package",
-        "clean": "rm -fr yma-vscode-plugin-**"
+        "clean": "del-cli -f yma-vscode-plugin-**"
     },
     "devDependencies": {
         "@vscode/vsce": "2.15.0"

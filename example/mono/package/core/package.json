@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "i": "rm -rf package-lock.json yarn.lock node_modules && yarn install",
+        "i": "del-cli -f package-lock.json yarn.lock node_modules && yarn install",
         "debug": "yma build",
         "b": "yma build"
     },

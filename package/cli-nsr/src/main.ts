@@ -39,42 +39,14 @@ function update(registry, dirs) {
 export default async function main(context) {
     log('感谢使用 NPM 源切换工具 ...', '[YMA NSR]');
     console.log();
+    const registryList = require('../public/registry.js');
 
     const {registry} = await inquirer.prompt([
         {
             name: 'registry',
             type: 'list',
             message: '请选择镜像源：',
-            choices: [
-                {
-                    name: 'npm',
-                    value: 'https://registry.npmjs.org',
-                },
-                {
-                    name: 'yarn',
-                    value: 'https://registry.yarnpkg.com',
-                },
-                {
-                    name: 'tencent',
-                    value: 'https://mirrors.cloud.tencent.com/npm',
-                },
-                {
-                    name: 'cnpm',
-                    value: 'https://r.cnpmjs.org',
-                },
-                {
-                    name: 'taobao',
-                    value: 'https://registry.npmmirror.com',
-                },
-                {
-                    name: 'baidu-int',
-                    value: 'http://registry.npm.baidu-int.com',
-                },
-                {
-                    name: 'didi',
-                    value: 'http://registry.npm.xiaojukeji.com',
-                },
-            ],
+            choices: registryList,
         },
     ]);
 

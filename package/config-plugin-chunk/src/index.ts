@@ -54,7 +54,7 @@ export default function (api: PluginAPI, options: Partial<Options> = {}) {
             const cacheGroups = createChunks(api.context, libs);
             const autarkies = options.autarkies || [];
 
-            const providersOptions = {
+            const vendorsOptions = {
                 exclude: [api.resolve('./src/lib'), ...autarkies],
                 include: ['node_modules'], // 引入
             };
@@ -70,14 +70,14 @@ export default function (api: PluginAPI, options: Partial<Options> = {}) {
                 maxInitialRequests: 4,
                 chunks: 'all',
                 cacheGroups: {
-                    providers: {
-                        name: 'providers',
+                    vendors: {
+                        name: 'vendors',
                         test: function (module) {
                             return (
-                                providersOptions.exclude.every(function (v) {
+                                vendorsOptions.exclude.every(function (v) {
                                     return module?.context?.indexOf(v) === -1;
                                 }) &&
-                                providersOptions.include.some(function (v) {
+                                vendorsOptions.include.some(function (v) {
                                     return module?.context?.indexOf(v) > -1;
                                 })
                             );
