@@ -1,6 +1,6 @@
 {
     "name": "yma-babel-preset",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "description": "适用于大多项目，简易的 babel preset 配置",
     "main": "./index.js",
     "scripts": {
@@ -28,6 +28,6 @@
         "@babel/preset-react": "7.22.5",
         "@babel/runtime-corejs3": "7.22.6",
         "core-js": "3.31.1",
-        "yma-config-plugin": "^1.0.11"
+        "yma-config-plugin": "^1.0.12"
     }
 }
