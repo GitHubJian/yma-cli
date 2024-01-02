@@ -1,0 +1,61 @@
+name: build
+# 触发 workflow 的事件
+on:
+    push:
+        # 分支
+        branches:
+            - main
+            - master
+# 一个 workflow 由执行的一项或多项 JOB
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            # 新建一个名为checkout_actions的步骤
+            - name: checkout_actions
+              # 使用checkout@v2这个action获取源码
+              uses: actions/checkout@v2
+            # 使用建一个名为 setup-node 的步骤
+            - name: setup-node
+              # 使用 setup-node@v1 这个 action
+              uses: actions/setup-node@v1
+              # 指定某个 action 可能需要输入的参数
+              with:
+                  node-version: '14.17.1'
+                  registry-url: https://registry.npmjs.org/
+            - name: npm install and build
+              # 执行执行某个 shell 命令或脚本
+              run: |
+                  git config --global user.name actions
+                  git config --global user.email actions@qq.com
+                  git pull
+                  node -v
+                  npm install -g npm@9.1.1
+                  npm -v
+                  npm install
+                  npm run build
+                  npm run lint
+
+            - name: commit push
+              # 执行执行某个 shell 命令或脚本
+              run: |
+                  if [[ -n $(git diff --stat)  ]]
+                  then
+                    git add .
+                    git commit -m "build" -a
+                    git push
+                  fi
+
+            - name: npm version
+              run: |
+                  npm run version
+                  git push
+              env:
+                  NPM_CONFIG_USERCONFIG: ${{ github.workspace }}
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+            - name: npm publish
+              run: |
+                  npm run publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

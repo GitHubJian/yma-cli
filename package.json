@@ -17,8 +17,8 @@
     "dependencies": {
         "del-cli": "5.1.0",
         "global": "4.4.0",
-        "yma-cli": "1.0.9-alpha.0",
-        "yma-cli-branch": "1.0.9"
+        "yma-cli": "^1.0.0",
+        "yma-cli-branch": "^1.0.0"
     },
     "devDependencies": {
         "@types/node": "20.4.4",
