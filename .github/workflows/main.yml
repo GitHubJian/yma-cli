@@ -32,7 +32,7 @@ jobs:
                   node -v
                   npm install -g npm@9.1.1
                   npm -v
-                  npm install
+                  npm run init
                   npm run build
                   npm run lint
 
