@@ -8,7 +8,7 @@ export function loadOptions<T>(filename: string, cwd: string = process.cwd()): T
     let fileConfig: T | null;
 
     const possibleConfigPaths: string[] = [filename];
-    let fileConfigPath: string;
+    let fileConfigPath!: string;
 
     for (const p of possibleConfigPaths) {
         const resolvedPath: string = path.resolve(cwd, p);

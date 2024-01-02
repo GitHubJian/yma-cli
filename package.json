@@ -4,7 +4,9 @@
     "description": "YMA CLI 工具包",
     "main": "index.js",
     "scripts": {
-        "init": "npm install && del-cli -f node_modules && npm run clean && lerna bootstrap",
+        "preinit": "npm install && npm install -g lerna@6.5.1 yarn@1.22.19",
+        "init": "npm run clear && npm run bootstrap",
+        "clear": "del-cli -f node_modules && npm run clean",
         "bootstrap": "lerna bootstrap",
         "clean": "lerna clean --yes",
         "nlink": "lerna run link --scope yma-cli-*",
@@ -12,7 +14,7 @@
         "build": "lerna run build",
         "version": "lerna version --no-push --force-publish --conventional-prerelease --no-git-tag-version",
         "publish": "lerna publish from-package",
-        "lint": "eslint . --ext .ts --config './config/.eslintrc.js' --ignore-path './config/.eslintignore'"
+        "lint": "yma lint"
     },
     "dependencies": {
         "del-cli": "5.1.0",
@@ -22,7 +24,8 @@
     "devDependencies": {
         "@types/node": "20.4.4",
         "typescript": "4.7.4",
-        "yarn": "1.22.19"
+        "yarn": "1.22.19",
+        "lerna": "6.5.1"
     },
     "repository": {
         "type": "git",

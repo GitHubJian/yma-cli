@@ -21,22 +21,12 @@
     "dependencies": {
         "safe-require": "1.0.4",
         "uglify-js": "3.15.3",
-        "yma-shared-util": "^1.0.14"
+        "yma-shared-util": "^1.0.14",
+        "html-webpack-plugin": "5.5.0",
+        "postcss-preset-env": "7.4.3"
     },
     "devDependencies": {
         "webpack": "5.70.0",
         "yma-config-plugin": "^1.0.14"
-    },
-    "peerDependencies": {
-        "html-webpack-plugin": "^5.5.0",
-        "postcss-preset-env": "^7.4.3"
-    },
-    "peerDependenciesMeta": {
-        "postcss-preset-env": {
-            "optional": true
-        },
-        "html-webpack-plugin": {
-            "optional": true
-        }
     }
 }

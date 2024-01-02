@@ -70,7 +70,7 @@ export function rc(name, defaults = {}) {
     }
 
     function save(toSave = {}) {
-        const options = deepmerge({}, load(), toSave);
+        const options: any = deepmerge({}, load(), toSave);
 
         if (defaults) {
             for (const key in options) {
