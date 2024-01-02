@@ -6,11 +6,7 @@
     "scripts": {
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "dependencies": {
         "yma-babel-preset": "^1.0.12",
         "yma-config-plugin-babel": "^1.0.12",

@@ -56,8 +56,8 @@ module.exports = class extends ChainedMap {
                     const prefix = `/* ${configPrefix}.${value.__pluginType}('${value.__pluginName}') */\n`;
                     const constructorExpression = value.__pluginPath
                         ? // The path is stringified to ensure special characters are escaped
-                    // (such as the backslashes in Windows-style paths).
-                        `(require(${stringify(value.__pluginPath)}))`
+                          // (such as the backslashes in Windows-style paths).
+                          `(require(${stringify(value.__pluginPath)}))`
                         : value.__pluginConstructorName;
 
                     if (constructorExpression) {
@@ -67,8 +67,8 @@ module.exports = class extends ChainedMap {
                         return `${prefix}new ${constructorExpression}(${args})`;
                     }
                     return (
-                        prefix
-                        + stringify(value.__pluginArgs && value.__pluginArgs.length ? {args: value.__pluginArgs} : {})
+                        prefix +
+                        stringify(value.__pluginArgs && value.__pluginArgs.length ? {args: value.__pluginArgs} : {})
                     );
                 }
 
@@ -94,7 +94,7 @@ module.exports = class extends ChainedMap {
 
                 return stringify(value);
             },
-            2
+            2,
         );
     }
 
@@ -122,9 +122,9 @@ module.exports = class extends ChainedMap {
                 performance: this.performance.entries(),
                 entry: Object.keys(entryPoints).reduce(
                     (acc, key) => Object.assign(acc, {[key]: entryPoints[key].values()}),
-                    {}
+                    {},
                 ),
-            })
+            }),
         );
     }
 

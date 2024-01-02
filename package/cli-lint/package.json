@@ -1,58 +1,54 @@
 {
-  "name": "yma-cli-lint",
-  "version": "1.0.12",
-  "description": "LINT 集成工具",
-  "bin": {
-    "yma-lint": "bin/cli.js"
-  },
-  "main": "./dist/index.js",
-  "scripts": {
-    "init": "del-cli -f package-lock.json && npm install",
-    "start": "npm run build -- -w",
-    "build": "npm run clean && tsc -p src",
-    "clean": "del-cli -f dist",
-    "link": "npm link"
-  },
-  "files": [
-    "bin",
-    "dist",
-    "public"
-  ],
-  "dependencies": {
-    "@babel/eslint-parser": "7.18.2",
-    "@babel/eslint-plugin": "7.17.7",
-    "@typescript-eslint/eslint-plugin": "5.27.1",
-    "@typescript-eslint/parser": "5.27.1",
-    "chalk": "4.1.0",
-    "eslint": "8.17.0",
-    "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.33.0",
-    "eslint-plugin-react-hooks": "4.5.0",
-    "eslint-plugin-vue": "7.20.0",
-    "fs-extra": "10.1.0",
-    "glob": "7.1.6",
-    "prettier": "2.7.1",
-    "react": "18.0.0",
-    "stylelint": "13.8.0",
-    "stylelint-order": "4.1.0",
-    "typescript": "5.1.6",
-    "yma-shared-util": "^1.0.12"
-  },
-  "devDependencies": {
-    "@types/glob": "7.2.0",
-    "@types/prettier": "2.7.1",
-    "@types/stylelint": "13.13.3"
-  },
-  "peerDependencies": {
-    "typescript": "^4.2.3"
-  },
-  "author": "xiaowensheng",
-  "license": "ISC",
-  "keywords": [],
-  "types": "./dist/index.d.ts",
-  "directories": {
-    "example": "example"
-  }
+    "name": "yma-cli-lint",
+    "version": "1.0.12",
+    "description": "LINT 集成工具",
+    "bin": {
+        "yma-lint": "bin/cli.js"
+    },
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "del-cli -f package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "del-cli -f dist",
+        "link": "npm link"
+    },
+    "files": ["bin", "dist", "public"],
+    "dependencies": {
+        "@babel/eslint-parser": "7.18.2",
+        "@babel/eslint-plugin": "7.17.7",
+        "@typescript-eslint/eslint-plugin": "5.27.1",
+        "@typescript-eslint/parser": "5.27.1",
+        "chalk": "4.1.0",
+        "eslint": "8.17.0",
+        "eslint-config-prettier": "8.5.0",
+        "eslint-plugin-import": "2.26.0",
+        "eslint-plugin-prettier": "4.0.0",
+        "eslint-plugin-react": "7.33.0",
+        "eslint-plugin-react-hooks": "4.5.0",
+        "eslint-plugin-vue": "7.20.0",
+        "fs-extra": "10.1.0",
+        "glob": "7.1.6",
+        "prettier": "2.7.1",
+        "react": "18.0.0",
+        "stylelint": "13.8.0",
+        "stylelint-order": "4.1.0",
+        "typescript": "5.1.6",
+        "yma-shared-util": "^1.0.12"
+    },
+    "devDependencies": {
+        "@types/glob": "7.2.0",
+        "@types/prettier": "2.7.1",
+        "@types/stylelint": "13.13.3"
+    },
+    "peerDependencies": {
+        "typescript": "^4.2.3"
+    },
+    "author": "xiaowensheng",
+    "license": "ISC",
+    "keywords": [],
+    "types": "./dist/index.d.ts",
+    "directories": {
+        "example": "example"
+    }
 }

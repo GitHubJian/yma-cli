@@ -10,11 +10,7 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "dependencies": {
         "@babel/core": "7.17.8",
         "babel-loader": "8.2.4",

@@ -9,10 +9,7 @@ import {useState, useEffect, useRef} from 'react';
  *
  * @returns {string} 当前状态 idle | loading
  */
-export function useAppendScript(
-    src: string,
-    options: Partial<{removeOnUnmount: boolean}> = {}
-) {
+export function useAppendScript(src: string, options: Partial<{removeOnUnmount: boolean}> = {}) {
     const [status, setStatus] = useState(() => {
         if (!src) {
             return 'idle';

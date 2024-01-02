@@ -143,12 +143,7 @@ EventEmitter.prototype.once = function once(event, fn, context) {
     return addListener(this, event, fn, context, true);
 };
 
-EventEmitter.prototype.removeListener = function removeListener(
-    event,
-    fn,
-    context,
-    once
-) {
+EventEmitter.prototype.removeListener = function removeListener(event, fn, context, once) {
     let evt = prefix ? prefix + event : event;
 
     if (!this._events[evt]) {
@@ -163,11 +158,7 @@ EventEmitter.prototype.removeListener = function removeListener(
     let handlers = this._events[evt];
 
     for (var i = 0, events = [], length = handlers.length; i < length; i++) {
-        if (
-            handlers[i].fn !== fn ||
-            (once && !handlers[i].once) ||
-            (context && handlers[i].context !== context)
-        ) {
+        if (handlers[i].fn !== fn || (once && !handlers[i].once) || (context && handlers[i].context !== context)) {
             events.push(handlers[i]);
         }
     }

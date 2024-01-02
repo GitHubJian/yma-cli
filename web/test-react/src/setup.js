@@ -8,8 +8,7 @@ jest.mock('@emotion/styled', () => {
 
             if (args[0] == null || args[0].raw === undefined) {
                 styles.push.apply(styles, args);
-            }
-            else {
+            } else {
                 styles.push(args[0][0]);
                 let len = args.length;
                 let i = 1;

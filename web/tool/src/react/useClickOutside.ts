@@ -10,10 +10,7 @@ import {useRef, useEffect} from 'react';
  *
  * @returns {[ref]}
  */
-export default function useClickOutside(
-    el: HTMLElement,
-    callback: (event: Event) => void
-) {
+export default function useClickOutside(el: HTMLElement, callback: (event: Event) => void) {
     const ref = useRef(el);
     const callbackRef = useRef(callback);
     callbackRef.current = callback;

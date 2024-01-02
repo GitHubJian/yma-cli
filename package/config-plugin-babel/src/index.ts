@@ -6,9 +6,7 @@ function getDepPathRegex(dependencies: Array<string | RegExp>): RegExp | null {
     const deps = dependencies.map(dep => {
         if (typeof dep === 'string') {
             const depPath = path.join('node_modules', dep, '/');
-            return isWindows
-            ? depPath.replace(/\\/g, '\\\\')
-            : depPath
+            return isWindows ? depPath.replace(/\\/g, '\\\\') : depPath;
         } else if (dep instanceof RegExp) {
             return dep.source;
         }

@@ -1,7 +1,4 @@
-function splitOnFirst(
-    string: string,
-    separator?: string
-): [string, string] | [] {
+function splitOnFirst(string: string, separator?: string): [string, string] | [] {
     if (!(typeof string === 'string' && typeof separator === 'string')) {
         throw new TypeError('Expected the arguments to be of type `string`');
     }
@@ -16,10 +13,7 @@ function splitOnFirst(
         return [];
     }
 
-    return [
-        string.slice(0, separatorIndex),
-        string.slice(separatorIndex + separator.length),
-    ];
+    return [string.slice(0, separatorIndex), string.slice(separatorIndex + separator.length)];
 }
 
 function encode(value: string | number | boolean) {
@@ -32,7 +26,9 @@ function decode(value: string) {
 
 // 生成 query string
 function stringify(object?: Record<string, any>) {
-    if (!object) return '';
+    if (!object) {
+        return '';
+    }
 
     const result: string[] = [];
     for (const key in object) {

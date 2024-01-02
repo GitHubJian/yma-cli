@@ -19,7 +19,7 @@ export function loadOptions<T>(filename: string, cwd: string = process.cwd()): T
         }
     }
 
-    if (fileConfigPath!) {
+    if (fileConfigPath) {
         try {
             fileConfig = loadModule(fileConfigPath, cwd);
 

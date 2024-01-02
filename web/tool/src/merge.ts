@@ -2,21 +2,21 @@ import {isFunction, isPlainObject, isArray} from './is';
 
 function merge(deep: boolean, source: Record<string, any>, target: Record<string, any>): Record<string, any>;
 function merge() {
-    var clone;
-    var options;
-    var name;
-    var copy;
-    var deep = false;
+    let clone;
+    let options;
+    let name;
+    let copy;
+    let deep = false;
 
-    var src;
+    let src;
 
-    var copyIsArray;
+    let copyIsArray;
 
-    var target = arguments[0] || {};
+    let target = arguments[0] || {};
 
-    var i = 1;
+    let i = 1;
 
-    var length = arguments.length;
+    let length = arguments.length;
 
     if (typeof target === 'boolean') {
         deep = target;

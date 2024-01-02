@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import VueCompositionApi from '@vue/composition-api';
-import App from './App.vue';
 import axios from 'axios';
-console.log(axios);
 
 import {plus} from 'common/src/export/util';
+import App from './App.vue';
+
+console.log(axios);
 
 console.log(plus(1, 1));
 

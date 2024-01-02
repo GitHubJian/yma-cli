@@ -23,7 +23,7 @@ export function wrap(
     options: WrapOptions = {
         deep: false,
         before: function () {},
-    }
+    },
 ) {
     const {deep, before} = options;
 
@@ -44,8 +44,8 @@ export function wrap(
     }
 
     function wrapper(this) {
-        var args: any[] = [],
-            i = arguments.length;
+        let args: any[] = [];
+        let i = arguments.length;
 
         if (before && isFunction(before)) {
             before.apply(this, toArray(arguments));

@@ -33,9 +33,9 @@ function tryNormalizePath(p) {
 }
 
 module.exports = function ({types: t}, options = {}) {
-    const replace
-        = options.replace
-        || function tryReplace(p) {
+    const replace =
+        options.replace ||
+        function tryReplace(p) {
             // TODO relative path
             if (p.startsWith('@/')) {
                 p = p.replace('@/', '');
@@ -70,7 +70,7 @@ module.exports = function ({types: t}, options = {}) {
 
                     // TODO 输出文件路径
                     console.warn(
-                        `[babel-webpack-chunkname-plugin]: 通过 [${arg.value}] 生成 WebpackChunkName [${webpackChunkName}]，建议手动调整更好的应用 HTTP Cache`
+                        `[babel-webpack-chunkname-plugin]: 通过 [${arg.value}] 生成 WebpackChunkName [${webpackChunkName}]，建议手动调整更好的应用 HTTP Cache`,
                     );
                 }
             },

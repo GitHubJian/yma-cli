@@ -26,7 +26,7 @@ export function useLockFn<T extends Function>(fn: T) {
 
             return ret;
         },
-        [fn]
+        [fn],
     );
 
     return cb;

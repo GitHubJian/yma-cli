@@ -19,11 +19,11 @@ function formatHTML(nodes) {
 expect.addSnapshotSerializer({
     test: element => {
         return (
-            typeof HTMLElement !== 'undefined'
-            && (element instanceof HTMLElement
-                || element instanceof DocumentFragment
-                || element instanceof HTMLCollection
-                || (Array.isArray(element) && element[0] instanceof HTMLElement))
+            typeof HTMLElement !== 'undefined' &&
+            (element instanceof HTMLElement ||
+                element instanceof DocumentFragment ||
+                element instanceof HTMLCollection ||
+                (Array.isArray(element) && element[0] instanceof HTMLElement))
         );
     },
     print: element => {

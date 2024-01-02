@@ -25,7 +25,7 @@ export default function useFocusWithin(selector, options) {
             capture: boolean;
             once: boolean;
             passive: boolean;
-        }> & {selector: string}
+        }> & {selector: string},
     ) {
         const eventHandlerRef = useRef(eventHandler);
         eventHandlerRef.current = eventHandler;
@@ -45,16 +45,12 @@ export default function useFocusWithin(selector, options) {
                 });
 
                 return () => {
-                    targetElement?.removeEventListener(
-                        eventName,
-                        eventListener,
-                        {
-                            capture: options.capture,
-                        }
-                    );
+                    targetElement?.removeEventListener(eventName, eventListener, {
+                        capture: options.capture,
+                    });
                 };
             },
-            [options.capture, options.once, options.passive]
+            [options.capture, options.once, options.passive],
         );
     }
 
@@ -69,7 +65,7 @@ export default function useFocusWithin(selector, options) {
         },
         {
             selector,
-        }
+        },
     );
 
     useEventListener(
@@ -83,7 +79,7 @@ export default function useFocusWithin(selector, options) {
         },
         {
             selector,
-        }
+        },
     );
 
     return [isFocusWithin];

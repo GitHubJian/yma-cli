@@ -41,11 +41,7 @@ function migrateWindowsConfigPath(moduleName) {
 function getRcPath(moduleName) {
     migrateWindowsConfigPath(moduleName);
 
-    return (
-        process.env.CLI_CONFIG_PATH ||
-        xdgConfigPath(moduleName) ||
-        path.join(os.homedir(), `.${moduleName}rc`)
-    );
+    return process.env.CLI_CONFIG_PATH || xdgConfigPath(moduleName) || path.join(os.homedir(), `.${moduleName}rc`);
 }
 
 export function rc(name, defaults = {}) {
@@ -62,20 +58,19 @@ export function rc(name, defaults = {}) {
                 cachedOptions = JSON.parse(fs.readFileSync(rcPath, 'utf-8'));
             } catch (e) {
                 console.error(
-                    `Error loading saved preferences: ` +
+                    'Error loading saved preferences: ' +
                         `~/.${name}rc may be corrupted or have syntax errors. ` +
-                        `(${(e as Error).message})`
+                        `(${(e as Error).message})`,
                 );
                 process.exit(1);
             }
             return cachedOptions;
-        } else {
-            return {};
         }
+        return {};
     }
 
     function save(toSave = {}) {
-        const options = deepmerge({}, load(), toSave) as Record<string, any>;
+        const options = deepmerge({}, load(), toSave);
 
         if (defaults) {
             for (const key in options) {
@@ -91,9 +86,9 @@ export function rc(name, defaults = {}) {
             return true;
         } catch (e) {
             console.error(
-                `Error saving preferences: ` +
+                'Error saving preferences: ' +
                     `make sure you have write access to ${rcPath}.\n` +
-                    `(${(e as Error).message})`
+                    `(${(e as Error).message})`,
             );
         }
     }

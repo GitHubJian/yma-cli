@@ -15,8 +15,7 @@ function isPropertyFrozen(target, prop) {
     const frozen = Boolean(
         propertyDescriptor &&
             propertyDescriptor.configurable === false &&
-            (propertyDescriptor.writable === false ||
-                (propertyDescriptor.get && !propertyDescriptor.set))
+            (propertyDescriptor.writable === false || (propertyDescriptor.get && !propertyDescriptor.set)),
     );
 
     targetPropertiesFromCache[prop] = frozen;
@@ -35,23 +34,14 @@ function createFakeGlobal(globalContext, speedy) {
 
     Object.getOwnPropertyNames(globalContext)
         .filter(prop => {
-            const descriptor = Object.getOwnPropertyDescriptor(
-                globalContext,
-                prop
-            );
+            const descriptor = Object.getOwnPropertyDescriptor(globalContext, prop);
             return !(descriptor && descriptor.configurable);
         })
         .forEach(prop => {
-            const descriptor = Object.getOwnPropertyDescriptor(
-                globalContext,
-                prop
-            );
+            const descriptor = Object.getOwnPropertyDescriptor(globalContext, prop);
 
             if (descriptor) {
-                const hasGetter = Object.prototype.hasOwnProperty.call(
-                    descriptor,
-                    'get'
-                );
+                const hasGetter = Object.prototype.hasOwnProperty.call(descriptor, 'get');
 
                 if (
                     prop === 'top' ||
@@ -71,11 +61,7 @@ function createFakeGlobal(globalContext, speedy) {
                     propertiesWithGetter.set(prop, true);
                 }
 
-                Object.defineProperty(
-                    fakeGlobal,
-                    prop,
-                    Object.freeze(descriptor)
-                );
+                Object.defineProperty(fakeGlobal, prop, Object.freeze(descriptor));
             }
         });
 
@@ -100,7 +86,7 @@ class ProxySandbox {
             speedy?: boolean;
             globalVariableWhiteList?: string[];
             useNativeWindowForBindingsProps?: Map<string, any>;
-        } = {}
+        } = {},
     ) {
         this.name = name;
         this.globalContext = globalContext;
@@ -110,39 +96,21 @@ class ProxySandbox {
 
         const speedy = options.speedy || false;
         const globalVariableWhiteList = options.globalVariableWhiteList || [];
-        const useNativeWindowForBindingsProps =
-            options.useNativeWindowForBindingsProps || new Map();
+        const useNativeWindowForBindingsProps = options.useNativeWindowForBindingsProps || new Map();
 
-        const {fakeGlobal, propertiesWithGetter} = createFakeGlobal(
-            globalContext,
-            !!speedy
-        );
+        const {fakeGlobal, propertiesWithGetter} = createFakeGlobal(globalContext, !!speedy);
         const descriptorTargetMap = new Map();
 
         const proxy = new Proxy(fakeGlobal, {
             set: (target, prop, value) => {
                 if (this.sandboxRunning) {
-                    if (
-                        typeof prop === 'string' &&
-                        globalVariableWhiteList.indexOf(prop) !== -1
-                    ) {
-                        this.globalWhitelistPrevDescriptor[prop] =
-                            Object.getOwnPropertyDescriptor(
-                                globalContext,
-                                prop
-                            );
+                    if (typeof prop === 'string' && globalVariableWhiteList.includes(prop)) {
+                        this.globalWhitelistPrevDescriptor[prop] = Object.getOwnPropertyDescriptor(globalContext, prop);
                         globalContext[prop] = value;
                     } else {
-                        if (
-                            !target.hasOwnProperty(prop) &&
-                            globalContext.hasOwnProperty(prop)
-                        ) {
-                            const descriptor = Object.getOwnPropertyDescriptor(
-                                globalContext,
-                                prop
-                            );
-                            const {writable, configurable, enumerable, set} =
-                                descriptor;
+                        if (!target.hasOwnProperty(prop) && globalContext.hasOwnProperty(prop)) {
+                            const descriptor = Object.getOwnPropertyDescriptor(globalContext, prop);
+                            const {writable, configurable, enumerable, set} = descriptor;
 
                             if (writable || set) {
                                 Object.defineProperty(target, prop, {
@@ -195,10 +163,7 @@ class ProxySandbox {
                     return eval;
                 }
 
-                if (
-                    prop === 'string' &&
-                    globalVariableWhiteList.indexOf(prop) !== -1
-                ) {
+                if (prop === 'string' && globalVariableWhiteList.includes(prop)) {
                     return globalContext[prop];
                 }
 
@@ -213,33 +178,21 @@ class ProxySandbox {
                     return value;
                 }
 
-                const boundTarget = useNativeWindowForBindingsProps.get(prop)
-                    ? nativeGlobal
-                    : globalContext;
+                const boundTarget = useNativeWindowForBindingsProps.get(prop) ? nativeGlobal : globalContext;
                 return getTargetValue(boundTarget, value);
             },
             has: (target, prop) => {
-                return (
-                    prop in cachedGlobalObjects ||
-                    prop in target ||
-                    prop in globalContext
-                );
+                return prop in cachedGlobalObjects || prop in target || prop in globalContext;
             },
             getOwnPropertyDescriptor: (target, prop) => {
                 if (target.hasOwnProperty(prop)) {
-                    const descriptor = Object.getOwnPropertyDescriptor(
-                        target,
-                        prop
-                    );
+                    const descriptor = Object.getOwnPropertyDescriptor(target, prop);
                     descriptorTargetMap.set(prop, 'target');
                     return descriptor;
                 }
 
                 if (globalContext.hasOwnProperty(prop)) {
-                    const descriptor = Object.getOwnPropertyDescriptor(
-                        globalContext,
-                        prop
-                    );
+                    const descriptor = Object.getOwnPropertyDescriptor(globalContext, prop);
                     descriptorTargetMap.set(prop, 'globalContext');
                     // A property cannot be reported as non-configurable, if it does not exist as an own property of the target object
                     if (descriptor && !descriptor.configurable) {
@@ -252,22 +205,14 @@ class ProxySandbox {
                 return undefined;
             },
             ownKeys: target => {
-                return uniq(
-                    Reflect.ownKeys(globalContext).concat(
-                        Reflect.ownKeys(target)
-                    )
-                );
+                return uniq(Reflect.ownKeys(globalContext).concat(Reflect.ownKeys(target)));
             },
             defineProperty: (target, prop, attributes) => {
                 const from = descriptorTargetMap.get(prop);
 
                 switch (from) {
                     case 'globalContext':
-                        return Reflect.defineProperty(
-                            globalContext,
-                            prop,
-                            attributes
-                        );
+                        return Reflect.defineProperty(globalContext, prop, attributes);
                     default:
                         return Reflect.defineProperty(target, prop, attributes);
                 }
@@ -296,10 +241,7 @@ class ProxySandbox {
                 return Object.prototype.hasOwnProperty.call(this, key);
             }
 
-            return (
-                fakeGlobal.hasOwnProperty(key) ||
-                globalContext.hasOwnProperty(key)
-            );
+            return fakeGlobal.hasOwnProperty(key) || globalContext.hasOwnProperty(key);
         }
     }
 

@@ -26,7 +26,7 @@ export function isGeneratorFunction(fn) {
     }
 
     if (!hasToStringTag) {
-        var str = toString.call(fn);
+        let str = toString.call(fn);
         return str === '[object GeneratorFunction]';
     }
 

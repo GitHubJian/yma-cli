@@ -11,6 +11,6 @@ export function isError(v) {
     return (
         tag == '[object Error]' ||
         tag == '[object DOMException]' ||
-        (typeof v.message == 'string' && typeof v.name == 'string' && !isPlainObject(v))
+        (typeof v.message === 'string' && typeof v.name === 'string' && !isPlainObject(v))
     );
 }

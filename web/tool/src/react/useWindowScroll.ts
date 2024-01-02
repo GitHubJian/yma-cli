@@ -17,9 +17,7 @@ export default function useWindowScroll() {
         if (typeof x === 'number' && typeof y === 'number') {
             window.scrollTo(x, y);
         } else {
-            throw new Error(
-                'useWindowScroll 期望传入 (x:number, y:number) 参数'
-            );
+            throw new Error('useWindowScroll 期望传入 (x:number, y:number) 参数');
         }
     }, []);
 

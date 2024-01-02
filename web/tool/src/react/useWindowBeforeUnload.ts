@@ -18,7 +18,7 @@ export default function useWindowBeforeUnload(message: string) {
 
             return message;
         },
-        [message]
+        [message],
     );
 
     useEffect(() => {

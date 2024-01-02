@@ -10,8 +10,8 @@ module.exports = {
     process(src, path, config, transformOptions) {
         const babelConfig = createBabelConfig();
 
-        const babelSupport
-            = path.endsWith('.ts') || path.endsWith('.tsx') || path.endsWith('.js') || path.endsWith('.jsx');
+        const babelSupport =
+            path.endsWith('.ts') || path.endsWith('.tsx') || path.endsWith('.js') || path.endsWith('.jsx');
 
         const babelJest = createTransformer(babelConfig);
         const fileName = babelSupport ? path : 'file.js';

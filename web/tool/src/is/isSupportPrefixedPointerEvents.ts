@@ -1,3 +1,3 @@
 export function isSupportPrefixedPointerEvents() {
-    return !!window.navigator['msPointerEnabled'];
+    return !!window.navigator.msPointerEnabled;
 }

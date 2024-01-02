@@ -10,11 +10,7 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "dependencies": {
         "chalk": "4.1.0",
         "deepmerge": "4.2.2",

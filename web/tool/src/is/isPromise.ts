@@ -1,4 +1,5 @@
 import {toString} from './constant';
+
 const hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
 
 export function isPromise(v) {

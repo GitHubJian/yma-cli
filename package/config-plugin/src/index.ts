@@ -2,8 +2,8 @@ import path from 'path';
 import {Configuration} from 'webpack';
 import defaultsDeep from 'lodash.defaultsdeep';
 import confitInheriter from 'yma-config-inheriter';
-import Plugin from './plugin';
 import Chain from '../chain';
+import Plugin from './plugin';
 import {defaults, ProjectOptions} from './options';
 
 type WebpackChainFn$ = (chain: Chain) => void;

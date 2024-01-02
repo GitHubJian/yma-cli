@@ -9,10 +9,7 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": [
-        "util",
-        "index.js"
-    ],
+    "files": ["util", "index.js"],
     "keywords": [],
     "author": "",
     "license": "ISC",

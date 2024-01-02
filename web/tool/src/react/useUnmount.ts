@@ -10,6 +10,6 @@ export default function useUnmount(fn: () => void) {
                 ref.current();
             };
         },
-        [fn]
+        [fn],
     );
 }

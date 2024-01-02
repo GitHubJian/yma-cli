@@ -49,8 +49,8 @@ class Queue {
 }
 
 export function pLimit(concurrency) {
-    var activeCount = 0;
-    var queue = new Queue();
+    let activeCount = 0;
+    let queue = new Queue();
 
     function next() {
         activeCount--;

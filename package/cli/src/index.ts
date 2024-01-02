@@ -1,8 +1,8 @@
 import os from 'os';
+import path from 'path';
 import yargs from 'yargs';
 import execa from 'execa';
 import glob from 'glob';
-import path from 'path';
 
 import dev from 'yma-cli-dev';
 import build from 'yma-cli-build';
@@ -24,9 +24,7 @@ function findGlobalPlugins(ignores: string[]): Array<{
         cwd: os.homedir(),
     });
 
-    const globalDir = isWindows()
-        ? `${stdout}/node_modules/`
-        : `${stdout}/lib/node_modules/`;
+    const globalDir = isWindows() ? `${stdout}/node_modules/` : `${stdout}/lib/node_modules/`;
     const currentDir = path.resolve(process.cwd(), 'node_modules');
     const nodeModulesDir = [currentDir, globalDir];
 
@@ -61,10 +59,7 @@ export default function (argv: string[]) {
     let cli = yargs(argv, process.cwd())
         .options(globalOptions)
         .usage('Usage: $0 <command> [options]')
-        .demandCommand(
-            1,
-            'A command is required. Pass --help to see all available commands and options.'
-        )
+        .demandCommand(1, 'A command is required. Pass --help to see all available commands and options.')
         .recommendCommands()
         .strict()
         .fail((msg, err) => {

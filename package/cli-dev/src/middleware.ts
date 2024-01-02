@@ -66,10 +66,7 @@ export default function createMiddleware(api, mock) {
                             let item = mock[i];
                             const re = pathToRegexp(item.url);
 
-                            if (
-                                re.exec(url) &&
-                                method == item.method.toLowerCase()
-                            ) {
+                            if (re.exec(url) && method == item.method.toLowerCase()) {
                                 response = item.response;
                                 break;
                             }

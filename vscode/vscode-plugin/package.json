@@ -20,9 +20,7 @@
     "engines": {
         "vscode": "^1.80.0"
     },
-    "categories": [
-        "Other"
-    ],
+    "categories": ["Other"],
     "contributes": {
         "commands": [
             {
@@ -57,7 +55,5 @@
             ]
         }
     },
-    "activationEvents": [
-        "onLanguage:json"
-    ]
+    "activationEvents": ["onLanguage:json"]
 }

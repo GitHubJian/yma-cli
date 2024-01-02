@@ -18,9 +18,8 @@ class Ctor {
     static _installedPlugins = [];
 
     static use(plugin: CtorPlugin) {
-        let installedPlugins: CtorPlugin[] =
-            this._installedPlugins || (this._installedPlugins = []);
-        if (installedPlugins.indexOf(plugin) > -1) {
+        let installedPlugins: CtorPlugin[] = this._installedPlugins || (this._installedPlugins = []);
+        if (installedPlugins.includes(plugin)) {
             return this;
         }
 

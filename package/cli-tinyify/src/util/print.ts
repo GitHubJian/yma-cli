@@ -4,9 +4,9 @@
  */
 /* eslint-disable no-console */
 import Table from 'cli-table';
-import {formatRatio, formatSize} from './format';
-import {Repeated, Result} from '../main';
 import chalk from 'chalk';
+import {Repeated, Result} from '../main';
+import {formatRatio, formatSize} from './format';
 
 type Method = 'log' | 'table';
 

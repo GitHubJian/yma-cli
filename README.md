@@ -35,20 +35,18 @@ npm run publish
 
 ## 工程化之规范
 
-- 技术评审 [Technical Review](./doc/technical-review.md)
-- 代码 CR [Code Review](./doc/code-review.md)
-- 单元测试 [Unit Test](./doc/unit-test.md)
-- Vue 组件库 [Vue Component](./doc/vue-component.md)
-- React 组件库 [React Component](./doc/react-component.md)
-- CSS 原子 [CSS Kit](./doc/css-kit.md)
-- Repo 文件夹 [Project Folder](./doc/project-folder.md)
-- 版本控制 [Version Tag](./doc/version-tag.md)
-- Git 工作流 [Git Flow](./doc/git-flow.md)
+-   技术评审 [Technical Review](./doc/technical-review.md)
+-   代码 CR [Code Review](./doc/code-review.md)
+-   单元测试 [Unit Test](./doc/unit-test.md)
+-   Vue 组件库 [Vue Component](./doc/vue-component.md)
+-   React 组件库 [React Component](./doc/react-component.md)
+-   CSS 原子 [CSS Kit](./doc/css-kit.md)
+-   Repo 文件夹 [Project Folder](./doc/project-folder.md)
+-   版本控制 [Version Tag](./doc/version-tag.md)
+-   Git 工作流 [Git Flow](./doc/git-flow.md)
 
 ## 参与
 
-如果你是一个 `初学者`，可以多看 YMA 文档
-如果你是一个 `爱好者`，希望可以多提建议
-如果你是一个 `专家`，希望多给作者一些建议
+如果你是一个 `初学者`，可以多看 YMA 文档如果你是一个 `爱好者`，希望可以多提建议如果你是一个 `专家`，希望多给作者一些建议
 
 如果在使用中遇到什么问题，可以直接发邮件至 `jian958753831@qq.com`

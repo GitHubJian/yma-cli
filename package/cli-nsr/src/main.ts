@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import ini from 'ini';
 import os from 'os';
+import ini from 'ini';
 import inquirer from 'inquirer';
 import {error, done, log} from 'yma-shared-util';
 

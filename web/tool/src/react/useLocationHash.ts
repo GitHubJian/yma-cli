@@ -30,7 +30,7 @@ export default function useLocationHash() {
                 window.location.hash = newHash;
             }
         },
-        [hash]
+        [hash],
     );
 
     return [hash, updateHash];

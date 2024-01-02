@@ -4,8 +4,8 @@
  */
 
 /* eslint-disable no-undef */
-import fse from 'fs-extra';
 import fs from 'fs';
+import fse from 'fs-extra';
 
 /**
  * 读取文件

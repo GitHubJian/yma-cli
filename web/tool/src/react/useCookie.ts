@@ -25,7 +25,7 @@ export function useCookie(
         defaultValue?: string;
     } = {
         defaultValue: '',
-    }
+    },
 ) {
     const [value, setValue] = useState(function () {
         const currentValue = Cookie.get(key);

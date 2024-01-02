@@ -5,13 +5,13 @@ export function looseEqual(a, b) {
         return true;
     }
 
-    var isObjectA = isObject(a);
-    var isObjectB = isObject(b);
+    let isObjectA = isObject(a);
+    let isObjectB = isObject(b);
 
     if (isObjectA && isObjectB) {
         try {
-            var isArrayA = Array.isArray(a);
-            var isArrayB = Array.isArray(b);
+            let isArrayA = Array.isArray(a);
+            let isArrayB = Array.isArray(b);
 
             if (isArrayA && isArrayB) {
                 return (
@@ -23,8 +23,8 @@ export function looseEqual(a, b) {
             } else if (a instanceof Date && b instanceof Date) {
                 return a.getTime() === b.getTime();
             } else if (!isArrayA && !isArrayB) {
-                var keysA = Object.keys(a);
-                var keysB = Object.keys(b);
+                let keysA = Object.keys(a);
+                let keysB = Object.keys(b);
 
                 return (
                     keysA.length === keysB.length &&
@@ -32,9 +32,8 @@ export function looseEqual(a, b) {
                         return looseEqual(a[key], b[key]);
                     })
                 );
-            } else {
-                return false;
             }
+            return false;
         } catch (e) {
             return false;
         }

@@ -28,7 +28,7 @@ let rawXHRCache: Array<
         XMLHttpRequest,
         (this: XMLHttpRequest, ev: ProgressEvent) => any,
         (this: XMLHttpRequest, ev: ProgressEvent) => any,
-        (this: XMLHttpRequest, ev: ProgressEvent) => any
+        (this: XMLHttpRequest, ev: ProgressEvent) => any,
     ]
 > = [];
 
@@ -75,10 +75,7 @@ export function install() {
                     replace(xhr, props[j]);
                 }
 
-                if (
-                    'onreadystatechange' in xhr &&
-                    isFunction(xhr.onreadystatechange)
-                ) {
+                if ('onreadystatechange' in xhr && isFunction(xhr.onreadystatechange)) {
                     stub(xhr, 'onreadystatechange', function (xhrRawFn) {
                         return wrap(xhrRawFn, {
                             before: before,
@@ -86,9 +83,7 @@ export function install() {
                                 type: 'instrument',
                                 data: {
                                     function: 'onreadystatechange',
-                                    handler:
-                                        (xhrRawFn && xhrRawFn.name) ||
-                                        '<anonymous>',
+                                    handler: (xhrRawFn && xhrRawFn.name) || '<anonymous>',
                                 },
                             },
                         });

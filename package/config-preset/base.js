@@ -6,6 +6,6 @@ module.exports = {
             {
                 transpileDependencies: true,
             },
-        ]
+        ],
     ],
 };

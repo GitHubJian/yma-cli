@@ -17,7 +17,7 @@ export default function useRequest<T, S>(
         manual: boolean;
         defaultParams: S;
         callback: (error: null | Error, data: T) => void;
-    }> = {}
+    }> = {},
 ): {
     loading: boolean;
     data: T;
@@ -36,7 +36,8 @@ export default function useRequest<T, S>(
         setLoading(true);
         setData({} as T);
 
-        let res, err;
+        let res;
+        let err;
         try {
             res = await httpRequest(options);
 

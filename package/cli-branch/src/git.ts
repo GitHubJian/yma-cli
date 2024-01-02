@@ -29,10 +29,6 @@ export function pull(cwd) {
 }
 
 export function push(name, cwd) {
-    const {stdout} = execa.sync(
-        'git',
-        ['push', '--set-upstream', 'origin', name],
-        {cwd}
-    );
+    const {stdout} = execa.sync('git', ['push', '--set-upstream', 'origin', name], {cwd});
     console.log(stdout);
 }

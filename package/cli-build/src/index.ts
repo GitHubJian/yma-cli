@@ -8,16 +8,16 @@ export = {
         process.env.NODE_ENV = 'production';
 
         return yargs
-        .options('minimize', {
-            type: 'boolean',
-            description: '是否压缩',
-            default: true
-        })
-        .options('entry', {
-            type: 'string',
-            description: 'Entry 入口类型(spa|mpa|dll)',
-            default: 'mpa',
-        });
+            .options('minimize', {
+                type: 'boolean',
+                description: '是否压缩',
+                default: true,
+            })
+            .options('entry', {
+                type: 'string',
+                description: 'Entry 入口类型(spa|mpa|dll)',
+                default: 'mpa',
+            });
     },
     handler: async function (argv) {
         const api = new PluginAPI(process.cwd(), 'production', {

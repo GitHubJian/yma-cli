@@ -1,3 +1,3 @@
 export function isEveryFalsy(...args) {
-    return args.every(v => !Boolean(v));
+    return args.every(v => !v);
 }

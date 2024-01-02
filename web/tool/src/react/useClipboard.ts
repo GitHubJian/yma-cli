@@ -10,10 +10,7 @@ import {useCallback, useEffect, useState} from 'react';
  *
  * @returns {[state, updateState]} [值, 更新值]
  */
-export default function useClipboard(
-    initValue: string = '',
-    callback: (val: any) => void = function () {}
-) {
+export default function useClipboard(initValue: string = '', callback: (val: any) => void = function () {}) {
     const [state, setState] = useState(initValue);
     const cb = useCallback(callback, []);
 

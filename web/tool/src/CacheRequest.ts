@@ -58,7 +58,7 @@ export default class CachedRequest extends EventEmitter {
                     that.cached[key] = 'reject';
                     that.emit(key, e);
                     that.removeAllListeners(key);
-                }
+                },
             );
         }
     }

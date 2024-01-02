@@ -15,10 +15,7 @@ export function install() {
     rawSetTimeout = window.setTimeout;
     stub(window, 'setTimeout', function (rawFn) {
         return function (this) {
-            let args = toArray(arguments) as [
-                handler: () => void,
-                timeout?: number
-            ];
+            let args = toArray(arguments) as [handler: () => void, timeout?: number];
             const handler = args[0];
 
             if (isFunction(handler)) {
@@ -34,19 +31,15 @@ export function install() {
 
             if (rawFn.apply) {
                 return rawFn.apply(this, args);
-            } else {
-                return rawFn(args[0], args[1] || 0);
             }
+            return rawFn(args[0], args[1] || 0);
         };
     });
 
     rawSetInterval = window.setInterval;
     stub(window, 'setInterval', function (rawFn) {
         return function (this) {
-            let args = toArray(arguments) as [
-                handler: () => void,
-                timeout?: number
-            ];
+            let args = toArray(arguments) as [handler: () => void, timeout?: number];
             const handler = args[0];
 
             if (isFunction(handler)) {
@@ -62,9 +55,8 @@ export function install() {
 
             if (rawFn.apply) {
                 return rawFn.apply(this, args);
-            } else {
-                return rawFn(args[0], args[1] || 0);
             }
+            return rawFn(args[0], args[1] || 0);
         };
     });
 
@@ -80,7 +72,7 @@ export function install() {
                             handler: (rawFn && rawFn.name) || '<anonymous>',
                         },
                     },
-                })
+                }),
             );
         };
     });

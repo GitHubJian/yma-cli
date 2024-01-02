@@ -43,9 +43,7 @@ function read(s) {
  * @return {string} document.cookie
  */
 function get(key?: string): string | undefined | Record<string, string> {
-    let result: string | undefined | Record<string, string> = key
-        ? undefined
-        : {};
+    let result: string | undefined | Record<string, string> = key ? undefined : {};
     let cookies = document.cookie ? document.cookie.split('; ') : [];
     let i = 0;
     let l = cookies.length;
@@ -91,7 +89,7 @@ function set(
         path: string;
         expires: number | Date;
         secure: boolean;
-    }>
+    }>,
 ): string {
     options = options || {};
 

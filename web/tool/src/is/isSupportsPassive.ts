@@ -1,7 +1,7 @@
 export function isSupportsPassive() {
-    var supportsPassive = false;
+    let supportsPassive = false;
     try {
-        var opts = Object.defineProperty({}, 'passive', {
+        let opts = Object.defineProperty({}, 'passive', {
             get: function get() {
                 supportsPassive = true;
             },

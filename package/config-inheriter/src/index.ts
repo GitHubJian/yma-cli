@@ -62,31 +62,31 @@ function isNonNullObject(x) {
 }
 
 type Presets = string[];
-type Plugins = string[] | [string, Record<string, any>?][];
+type Plugins = string[] | Array<[string, Record<string, any>?]>;
 type ConfigData = Partial<{
     presets: Presets;
     plugins: Plugins;
 }>;
 
-type PluginObject = {
+interface PluginObject {
     request: string;
     resourcePath: string;
     options?: Record<string, any>;
-};
+}
 
-type FlatData = {
+interface FlatData {
     plugins?: {
         [key: string]: PluginObject;
     };
 
     [key: string]: any;
-};
+}
 
-export type ConfigureResult = {
+export interface ConfigureResult {
     plugins?: PluginObject[];
 
     [key: string]: any;
-};
+}
 
 export class Configure {
     props: string[];

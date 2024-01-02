@@ -19,11 +19,7 @@
         "webpack": "5.70.0",
         "yma-config-plugin": "^1.0.12"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "keywords": [],
     "author": "",
     "license": "ISC"

@@ -12,9 +12,7 @@ import {useState, useCallback} from 'react';
 export default function useObjectState<T extends Object>(initValue: T) {
     const [state, setState] = useState(initValue);
 
-    const updateState = useCallback(function (
-        stateOrFn: Partial<T> | ((oldState: T) => T)
-    ) {
+    const updateState = useCallback(function (stateOrFn: Partial<T> | ((oldState: T) => T)) {
         if (typeof stateOrFn === 'function') {
             setState(function (oldState: T) {
                 const newState = stateOrFn(oldState);
@@ -32,8 +30,7 @@ export default function useObjectState<T extends Object>(initValue: T) {
                 };
             });
         }
-    },
-    []);
+    }, []);
 
     return [state, updateState];
 }
