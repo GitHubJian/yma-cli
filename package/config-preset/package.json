@@ -2,14 +2,19 @@
     "name": "yma-config-preset",
     "version": "1.0.13",
     "description": "YMA CLI Webpack 预配置",
-    "main": "./src/index.js",
+    "main": "./index.js",
     "scripts": {
         "link": "npm link"
     },
     "files": [
         "bin",
         "dist",
-        "public"
+        "public",
+        "base.js",
+        "h5.js",
+        "index.js",
+        "sdk.js",
+        "ts.js"
     ],
     "dependencies": {
         "yma-babel-preset": "^1.0.13",

@@ -28,7 +28,8 @@
         "yargs": "17.4.0",
         "yma-cli-build": "^1.0.13",
         "yma-cli-dev": "^1.0.13",
-        "yma-cli-lint": "^1.0.13"
+        "yma-cli-lint": "^1.0.13",
+        "yma-config-preset": "^1.0.13"
     },
     "devDependencies": {
         "@types/yargs": "17.0.10"
