@@ -2,8 +2,17 @@ import os from 'os';
 import yargs from 'yargs';
 import execa from 'execa';
 import glob from 'glob';
+import path from 'path';
+
+import dev from 'yma-cli-dev';
+import build from 'yma-cli-build';
+import lint from 'yma-cli-lint';
 
 const prefix = 'yma-cli';
+
+function isWindows() {
+    return process.platform === 'win32';
+}
 
 function findGlobalPlugins(ignores: string[]): Array<{
     command: string;
@@ -11,28 +20,39 @@ function findGlobalPlugins(ignores: string[]): Array<{
     builder: (yargs: any) => any;
     handler: (argv: any) => Promise<void>;
 }> {
-    function isWindows() {
-        return process.platform === 'win32';
-    }
-
     const {stdout} = execa.sync('npm', ['config', 'get', 'prefix'], {
         cwd: os.homedir(),
     });
 
-    const dir = isWindows() ? `${stdout}/node_modules/` : `${stdout}/lib/node_modules/`;
-    const pattern = dir + `${prefix}-*`;
-    const list = glob.sync(pattern);
+    const globalDir = isWindows()
+        ? `${stdout}/node_modules/`
+        : `${stdout}/lib/node_modules/`;
+    const currentDir = path.resolve(process.cwd(), 'node_modules');
+    const nodeModulesDir = [currentDir, globalDir];
 
-    return list
-        .filter(function (p) {
-            // 忽略重复安装项
-            const id = p.substring(dir.length).replace(`${prefix}-`, '');
-
-            return !ignores.includes(id);
+    const list = nodeModulesDir
+        .map(function (dir) {
+            const pattern = dir + `${prefix}-*`;
+            const currentList = glob.sync(pattern);
+            return currentList;
         })
-        .map(function (p) {
-            return require(p);
-        });
+        .reduce(function (prev, cur) {
+            prev.push(...cur);
+            return prev;
+        }, []);
+
+    const installedModules = list.filter(function (p) {
+        // 忽略重复安装项
+        const pPairs = p.split('/');
+        const foldername = pPairs.pop() || '';
+        const id = foldername.replace(`${prefix}-`, '');
+
+        return !ignores.includes(id);
+    });
+
+    return Array.from(new Set(installedModules)).map(function (p) {
+        return require(p);
+    });
 }
 
 export default function (argv: string[]) {
@@ -41,7 +61,10 @@ export default function (argv: string[]) {
     let cli = yargs(argv, process.cwd())
         .options(globalOptions)
         .usage('Usage: $0 <command> [options]')
-        .demandCommand(1, 'A command is required. Pass --help to see all available commands and options.')
+        .demandCommand(
+            1,
+            'A command is required. Pass --help to see all available commands and options.'
+        )
         .recommendCommands()
         .strict()
         .fail((msg, err) => {
@@ -59,9 +82,9 @@ export default function (argv: string[]) {
         .wrap(yargs.terminalWidth())
         .epilogue('For more information, find our manual at ');
 
-    const allPlugins = findGlobalPlugins([]);
-    // const buildinPlugins = [];
-    // const allPlugins = buildinPlugins.concat(customPlugins);
+    const customPlugins = findGlobalPlugins(['dev', 'build', 'lint']);
+    const buildinPlugins = [dev, build, lint];
+    const allPlugins = buildinPlugins.concat(customPlugins);
 
     allPlugins.forEach(plugin => {
         cli = cli.command(plugin);

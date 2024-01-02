@@ -14,7 +14,7 @@ interface CSSLoaderOptions {
               filter: (url: string, media: string, resourcePath: string) => boolean;
           };
     modules: boolean;
-    sourceMap: false;
+    sourceMap: boolean;
     limit: number;
     esModule: boolean;
     fallback: {

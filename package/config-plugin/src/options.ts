@@ -25,6 +25,8 @@ export interface ProjectOptions {
     css?: {
         publicPath?: string;
         extract?: boolean;
+        sourceMap?: boolean;
+        loaderOptions?: Record<string, any>;
     };
     transpileDependencies?: boolean | Array<string | RegExp>;
     chainWebpack?: (chain: Config) => void;

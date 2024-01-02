@@ -25,7 +25,10 @@
         "execa": "5.0.0",
         "glob": "7.1.6",
         "semver": "7.3.8",
-        "yargs": "17.4.0"
+        "yargs": "17.4.0",
+        "yma-cli-dev": "^1.0.12",
+        "yma-cli-build": "^1.0.12",
+        "yma-cli-lint": "^1.0.12"
     },
     "devDependencies": {
         "@types/yargs": "17.0.10"
