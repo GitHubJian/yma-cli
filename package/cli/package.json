@@ -1,6 +1,6 @@
 {
     "name": "yma-cli",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "YMA CLI 工具包",
     "main": "./dist/index.js",
     "bin": {
@@ -13,7 +13,10 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist"],
+    "files": [
+        "bin",
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -23,9 +26,9 @@
         "glob": "7.1.6",
         "semver": "7.3.8",
         "yargs": "17.4.0",
-        "yma-cli-dev": "^1.0.12",
-        "yma-cli-build": "^1.0.12",
-        "yma-cli-lint": "^1.0.12"
+        "yma-cli-build": "^1.0.13",
+        "yma-cli-dev": "^1.0.13",
+        "yma-cli-lint": "^1.0.13"
     },
     "devDependencies": {
         "@types/yargs": "17.0.10"

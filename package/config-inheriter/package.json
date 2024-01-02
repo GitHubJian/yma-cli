@@ -1,6 +1,6 @@
 {
     "name": "yma-config-inheriter",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "简易获取配置文件，支持 Presets & Plugins",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,11 +10,14 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["dist", "src"],
+    "files": [
+        "dist",
+        "src"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "yma-shared-util": "^1.0.12"
+        "yma-shared-util": "^1.0.13"
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-env",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "调整开发环境",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,13 +10,16 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist"],
+    "files": [
+        "bin",
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "execa": "5.0.0",
         "semver": "7.3.7",
-        "yma-shared-util": "^1.0.12"
+        "yma-shared-util": "^1.0.13"
     }
 }

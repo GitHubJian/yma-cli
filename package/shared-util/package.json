@@ -1,6 +1,6 @@
 {
     "name": "yma-shared-util",
-    "version": "1.0.12",
+    "version": "1.0.13",
     "description": "YMA CLI 统一工具库函数",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,7 +10,11 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "dependencies": {
         "chalk": "4.1.0",
         "deepmerge": "4.2.2",
