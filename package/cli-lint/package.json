@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-lint",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "description": "LINT 集成工具",
     "bin": {
         "yma-lint": "bin/cli.js"
@@ -38,7 +38,7 @@
         "stylelint": "13.8.0",
         "stylelint-order": "4.1.0",
         "typescript": "5.1.6",
-        "yma-shared-util": "^1.0.17"
+        "yma-shared-util": "^1.0.18"
     },
     "devDependencies": {
         "@types/glob": "7.2.0",
