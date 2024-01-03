@@ -4,6 +4,16 @@ import PluginAPI from '..';
 import Chain from '../../chain';
 import getAssetPath from '../util/get-asset-path';
 
+// 全局搜索 GLOBAL_BROWSERS_LIST，默认值
+const GLOBAL_BROWSERS_LIST = [
+    'Chrome >= 46',
+    'Firefox >= 45',
+    'Safari >= 10',
+    'Edge >= 13',
+    'iOS >= 10',
+    'Electron >= 0.36',
+];
+
 export default function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
         const shadowMode = false;
@@ -31,7 +41,7 @@ export default function (api: PluginAPI) {
 
         const plugins: any[] = [];
 
-        const browsers = loadOptions<string[]>('browserslist.config.js', api.context);
+        const browsers = loadOptions<string[]>('browserslist.config.js', api.context) || GLOBAL_BROWSERS_LIST;
 
         plugins.push([
             'postcss-preset-env',

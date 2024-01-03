@@ -2,14 +2,22 @@ const path = require('path');
 const semver = require('semver');
 const {loadOptions} = require('yma-shared-util');
 
+// 全局搜索 GLOBAL_BROWSERS_LIST，默认值
+const GLOBAL_BROWSERS_LIST = [
+    'Chrome >= 46',
+    'Firefox >= 45',
+    'Safari >= 10',
+    'Edge >= 13',
+    'iOS >= 10',
+    'Electron >= 0.36',
+];
+
 module.exports = function (context, options = {}) {
-    const absoluteRuntime = path.dirname(
-        require.resolve('@babel/runtime/package.json')
-    );
+    const absoluteRuntime = path.dirname(require.resolve('@babel/runtime/package.json'));
     const version = require('@babel/runtime/package.json').version;
     const {useBuiltIns = 'usage'} = options;
 
-    const browsers = loadOptions('browserslist.config.js', process.cwd());
+    const browsers = loadOptions('browserslist.config.js', process.cwd()) || GLOBAL_BROWSERS_LIST;
 
     const presets = [
         [
@@ -17,9 +25,7 @@ module.exports = function (context, options = {}) {
             {
                 modules: false,
                 useBuiltIns: useBuiltIns,
-                corejs: useBuiltIns
-                    ? require('core-js/package.json').version
-                    : false,
+                corejs: useBuiltIns ? require('core-js/package.json').version : false,
                 debug: false,
                 shippedProposals: true,
                 targets: {
