@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-gen-index",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "description": "Webpack Dev 构建命令",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,5 +20,6 @@
     "license": "ISC",
     "dependencies": {
         "fs-extra": "10.0.0"
-    }
+    },
+    "gitHead": "aaf265b7282241267a03e50ba8f4627ff9da9e99"
 }
