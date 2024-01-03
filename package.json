@@ -4,7 +4,7 @@
     "description": "YMA CLI 工具包",
     "main": "index.js",
     "scripts": {
-        "preinit": "npm install && npm install -g lerna@6.5.1 yarn@1.22.19",
+        "preinit": "npm install -g lerna@6.5.1 yarn@1.22.19 && npm install",
         "init": "npm run clear && npm run bootstrap",
         "clear": "del-cli -f node_modules && npm run clean",
         "bootstrap": "lerna bootstrap",

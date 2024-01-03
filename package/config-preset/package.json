@@ -17,7 +17,6 @@
         "ts.js"
     ],
     "dependencies": {
-        "yma-babel-preset": "^1.0.15",
         "yma-config-plugin-babel": "^1.0.15",
         "yma-config-plugin-chunk": "^1.0.15",
         "yma-config-plugin-flexible": "^1.0.15",
