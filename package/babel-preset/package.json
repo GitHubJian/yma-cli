@@ -1,6 +1,6 @@
 {
     "name": "yma-babel-preset",
-    "version": "1.0.18",
+    "version": "1.0.19",
     "description": "适用于大多项目，简易的 babel preset 配置",
     "main": "./index.js",
     "scripts": {
@@ -29,13 +29,15 @@
         "@babel/preset-react": "7.22.5",
         "@babel/runtime-corejs3": "7.22.6",
         "@vue/babel-helper-vue-jsx-merge-props": "1.4.0",
+        "@vue/babel-plugin-jsx": "1.1.5",
         "@vue/babel-plugin-transform-vue-jsx": "1.4.0",
+        "@vue/babel-preset-jsx": "1.4.0",
         "babel-helper-vue-jsx-merge-props": "^2.0.3",
         "babel-plugin-syntax-jsx": "^6.18.0",
         "babel-plugin-transform-vue-jsx": "^3.7.0",
         "core-js": "3.31.1",
         "semver": "7.3.4",
-        "yma-config-plugin": "^1.0.18"
+        "yma-config-plugin": "^1.0.19"
     },
     "gitHead": "aaf265b7282241267a03e50ba8f4627ff9da9e99"
 }

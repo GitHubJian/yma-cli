@@ -91,6 +91,7 @@ export default async function (api: PluginAPI) {
             .loader(require.resolve('babel-loader'))
             .options({
                 cacheCompression: false,
+                configFile: babelrc
             });
     });
 }
