@@ -1,6 +1,6 @@
 ##
 
-### Mock Data
+### Http 方案
 
 ```js
 module.exports = {
@@ -17,4 +17,22 @@ module.exports = {
         });
     },
 };
+```
+
+### Vite 方案
+
+```js
+module.exports = [
+    {
+        url: '/api/xxx',
+        method: 'get', // default get
+        response: (req, res) => {
+            return {
+                code: 0,
+                message: '',
+                data: {},
+            };
+        },
+    },
+];
 ```

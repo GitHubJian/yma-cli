@@ -39,7 +39,7 @@ export default function createMiddleware(api, mock) {
                     const url = req.path;
                     const method = req.method.toUpperCase();
 
-                    if (isPlainObject(isPlainObject)) {
+                    if (isPlainObject(mockContent)) {
                         const key = `${method} ${url}`;
 
                         const mock = mockContent[key];
@@ -62,11 +62,11 @@ export default function createMiddleware(api, mock) {
                         }
                     } else {
                         let response;
-                        for (let i = 0; i < mock.length; i++) {
-                            let item = mock[i];
+                        for (let i = 0; i < mockContent.length; i++) {
+                            let item = mockContent[i];
                             const re = pathToRegexp(item.url);
 
-                            if (re.exec(url) && method == item.method.toLowerCase()) {
+                            if (re.exec(url) && method == (item.method || 'get').toUpperCase()) {
                                 response = item.response;
                                 break;
                             }
