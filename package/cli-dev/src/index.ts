@@ -8,9 +8,9 @@ const options = {
         process.env.NODE_ENV = 'development';
 
         yargs.options('mock', {
-            type: 'string',
-            description: '传入 MockData 文件夹路径',
-            default: 'mock',
+            type: 'boolean',
+            description: '是否启用本地 Mock 服务',
+            default: false,
         });
 
         return yargs;

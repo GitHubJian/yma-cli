@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-babel",
-    "version": "1.0.21",
+    "version": "1.0.22",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -13,12 +13,12 @@
     "dependencies": {
         "@babel/core": "7.17.8",
         "babel-loader": "8.2.4",
-        "yma-babel-preset": "^1.0.21",
-        "yma-shared-util": "^1.0.21"
+        "yma-babel-preset": "^1.0.22",
+        "yma-shared-util": "^1.0.22"
     },
     "devDependencies": {
         "webpack": "5.70.0",
-        "yma-config-plugin": "^1.0.21"
+        "yma-config-plugin": "^1.0.22"
     },
     "files": [
         "bin",

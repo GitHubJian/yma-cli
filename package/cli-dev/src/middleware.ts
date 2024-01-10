@@ -7,7 +7,25 @@ function isPlainObject(value) {
 }
 
 export default function createMiddleware(api, mock) {
-    const mockPath = api.resolve(mock);
+    if (!mock) {
+        warn(`未开启本地 Mock 服务`, 'CLI DEV');
+
+        return function (middlewares, devServer) {
+            if (!devServer) {
+                throw new Error('webpack-dev-server is not defined');
+            }
+
+            return middlewares;
+        };
+    }
+
+    const mockPath = api.resolve('mock');
+
+    const delay = function (fn) {
+        setTimeout(function () {
+            fn();
+        }, 1000);
+    };
 
     if (fs.existsSync(mockPath)) {
         return function (middlewares, devServer) {
@@ -43,19 +61,32 @@ export default function createMiddleware(api, mock) {
                         const key = `${method} ${url}`;
 
                         const mock = mockContent[key];
+
                         if (typeof mock === 'function') {
-                            mock.call(null, req, res);
+                            delay(function () {
+                                mock.call(null, req, res, next);
+                            });
                         } else if (isPlainObject(mock)) {
-                            res.send(mock);
+                            delay(function () {
+                                if (mock.enabled === false) {
+                                    next();
+                                } else {
+                                    res.send(mock);
+                                }
+                            });
                         } else if (typeof mock === 'string') {
-                            res.send({
-                                code: 200,
-                                message: mock,
+                            delay(function () {
+                                res.send({
+                                    code: 200,
+                                    message: mock,
+                                });
                             });
                         } else if (typeof mock === 'number') {
-                            res.send({
-                                code: mock,
-                                message: 'success',
+                            delay(function () {
+                                res.send({
+                                    code: mock,
+                                    message: 'success',
+                                });
                             });
                         } else {
                             next();
@@ -66,7 +97,10 @@ export default function createMiddleware(api, mock) {
                             let item = mockContent[i];
                             const re = pathToRegexp(item.url);
 
-                            if (re.exec(url) && method == (item.method || 'get').toUpperCase()) {
+                            if (
+                                re.exec(url) &&
+                                method == (item.method || 'get').toUpperCase()
+                            ) {
                                 response = item.response;
                                 break;
                             }
@@ -74,7 +108,14 @@ export default function createMiddleware(api, mock) {
 
                         if (response) {
                             const result = response(req, res);
-                            res.send(result);
+
+                            delay(function () {
+                                if (result === false) {
+                                    next();
+                                } else {
+                                    res.send(result);
+                                }
+                            });
                         } else {
                             next();
                         }
@@ -84,15 +125,15 @@ export default function createMiddleware(api, mock) {
 
             return middlewares;
         };
+    } else {
+        log(`未能找到 Mock 文件夹（${mock}）`, 'CLI DEV');
+
+        return (middlewares, devServer) => {
+            if (!devServer) {
+                throw new Error('webpack-dev-server is not defined');
+            }
+
+            return middlewares;
+        };
     }
-
-    log(`未能找到 Mock 文件夹（${mock}）`, 'CLI DEV');
-
-    return (middlewares, devServer) => {
-        if (!devServer) {
-            throw new Error('webpack-dev-server is not defined');
-        }
-
-        return middlewares;
-    };
 }
