@@ -1,0 +1,10 @@
+{
+    "name": "yma-node",
+    "version": "1.0.0",
+    "description": "我是一个模板",
+    "main": "./src/index.js",
+    "scripts": {},
+    "keywords": [],
+    "author": "yma",
+    "license": "ISC"
+}

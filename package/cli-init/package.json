@@ -1,0 +1,26 @@
+{
+    "name": "yma-cli-init",
+    "version": "1.0.23",
+    "description": "创建项目",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "del-cli -f package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "del-cli -f dist",
+        "link": "npm link"
+    },
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "4.1.0",
+        "fs-extra": "9.1.0",
+        "inquirer": "7.1.0"
+    }
+}
