@@ -16,8 +16,35 @@ function getDepPathRegex(dependencies: Array<string | RegExp>): RegExp | null {
     return deps.length ? new RegExp(deps.join('|')) : null;
 }
 
+function getAssetPath(filePath: string, assetsDir?: string): string {
+    return assetsDir ? path.posix.join(assetsDir, filePath) : filePath;
+}
+
 export default async function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
+        let babelrc;
+        try {
+            // TODO others https://www.babeljs.cn/docs/config-files
+            babelrc = require.resolve(api.resolve('babel.config.js'));
+        } catch (error) {
+            babelrc = require.resolve(path.resolve(__dirname, '../public/babel.config.js'));
+        }
+
+        const filename = getAssetPath(
+            `js/[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`,
+            api.projectOptions.assetsDir,
+        );
+
+        // 处理 .worker.js
+        chain.module
+            .rule('wjs')
+            .test(/\.worker\.m?js$/)
+            .use('worker-loader')
+            .loader(require.resolve('worker-loader'))
+            .options({
+                filename: filename, // 自定义输出文件名
+            });
+
         const jsRule = chain.module
             .rule('js')
             .test(/\.m?js$/)
@@ -64,14 +91,6 @@ export default async function (api: PluginAPI) {
                 return filepath.includes('node_modules') ? SHOULD_SKIP : SHOULD_TRANSPILE;
             })
             .end();
-
-        let babelrc;
-        try {
-            // TODO others https://www.babeljs.cn/docs/config-files
-            babelrc = require.resolve(api.resolve('babel.config.js'));
-        } catch (error) {
-            babelrc = require.resolve(path.resolve(__dirname, '../public/babel.config.js'));
-        }
 
         jsRule.use('babel-loader').loader(require.resolve('babel-loader')).options({
             cacheCompression: false,

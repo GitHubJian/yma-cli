@@ -32,7 +32,7 @@ export default function (api: PluginAPI) {
 
         const genAssetSubPath = (dir: string): string => {
             return getAssetPath(
-                `${dir}/[name]${api.projectOptions.filenameHashing ? '.[hash:8]' : ''}.[ext]`,
+                `${dir}/[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.[ext]`,
                 api.projectOptions.assetsDir,
             );
         };
