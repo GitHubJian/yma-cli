@@ -68,7 +68,15 @@ export function updateVersion(filepath: string, version: string) {
         lines.unshift(`# version ${version}\r\n`);
     }
 
-    const newContent = lines.join('\n');
+    const newContent = lines
+        .filter(v => {
+            if (v === '\r' || v === '\r\n') {
+                return false;
+            } else {
+                return true;
+            }
+        })
+        .join('\n');
 
     fse.writeFileSync(filepath, newContent, {encoding: 'utf-8'});
 

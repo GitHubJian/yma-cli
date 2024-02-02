@@ -17,16 +17,7 @@ export default function main({type, cwd}) {
 
     const filepath = path.resolve(cwd, 'Dockerfile');
 
-    const localVersions = getLocalVersions(name);
-    let version = '';
-    if (localVersions.length > 0) {
-        const localVersion = localVersions.pop() as string;
-        version = localVersion;
-    } else {
-        const fileVersion = getVersion(filepath);
-        version = fileVersion;
-    }
-
+    const version = getVersion(filepath);
     // 如果 version 为 '' 则是第一次使用，直接将使用 1.0.0 版本
     const nextVersion = createNextVersion(version, type);
     updateVersion(filepath, nextVersion);
