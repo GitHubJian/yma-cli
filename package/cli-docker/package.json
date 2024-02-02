@@ -1,7 +1,7 @@
 {
-    "name": "yma-shared-util",
+    "name": "yma-cli-docker",
     "version": "1.0.27",
-    "description": "YMA CLI 统一工具库函数",
+    "description": "构建 web 项目的 Docker 镜像",
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
@@ -12,17 +12,15 @@
     },
     "files": [
         "bin",
-        "dist",
-        "public"
+        "dist"
     ],
-    "dependencies": {
-        "chalk": "4.1.0",
-        "deepmerge": "4.2.2",
-        "fs-extra": "10.0.1",
-        "ora": "5.3.0"
-    },
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "gitHead": "aaf265b7282241267a03e50ba8f4627ff9da9e99"
+    "dependencies": {
+        "execa": "5.0.0",
+        "fs-extra": "11.2.0",
+        "semver": "7.5.4",
+        "yma-shared-util": "^1.0.27"
+    }
 }
