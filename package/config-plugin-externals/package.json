@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-externals",
-    "version": "1.0.30",
+    "version": "1.0.31",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -16,10 +16,10 @@
         "public"
     ],
     "dependencies": {
-        "yma-shared-util": "^1.0.30"
+        "yma-shared-util": "^1.0.31"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.30"
+        "yma-config-plugin": "^1.0.31"
     },
     "keywords": [],
     "author": "",

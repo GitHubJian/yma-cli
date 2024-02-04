@@ -39,7 +39,6 @@ function getFilepaths(filename, nodeArguments) {
         regularExpression = args[2].pattern;
     }
 
-    const foldername = path.dirname(filename);
     const folderDir = path.resolve(path.dirname(filename), directory);
 
     const relativeFilepaths = glob
@@ -52,13 +51,9 @@ function getFilepaths(filename, nodeArguments) {
             return new RegExp(regularExpression).test(p);
         });
 
-    const absoulteFilepaths = relativeFilepaths
-        .map(function (p) {
-            return path.resolve(folderDir, p);
-        })
-        .map(function (p) {
-            return path.relative(foldername, p);
-        });
+    const absoulteFilepaths = relativeFilepaths.map(function (p) {
+        return path.resolve(folderDir, p);
+    });
 
     return absoulteFilepaths;
 }
