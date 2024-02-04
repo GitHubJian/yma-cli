@@ -1,6 +1,6 @@
 {
     "name": "yma-shared-util",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "YMA CLI 统一工具库函数",
     "main": "./dist/index.js",
     "scripts": {
@@ -23,5 +23,6 @@
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
 }

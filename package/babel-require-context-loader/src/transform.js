@@ -67,34 +67,33 @@ module.exports = function (filename, source) {
         enter(p) {
             if (p.isCallExpression()) {
                 if (t.isMemberExpression(p.node.callee)) {
-                    if (
-                        t.isIdentifier(p.node.callee.object) &&
-                        p.node.callee.object.name === FUNCTION_NAME &&
-                        t.isIdentifier(p.node.callee.property) &&
-                        p.node.callee.property.name === PROPERTY_IMPORT
-                    ) {
+                    if (p.node.callee.name === FUNCTION_NAME) {
                         const args = p.node.arguments;
+
                         const absoulteFilepaths = getFilepaths(filename, args);
 
-                        const nodes = createImportStatement(absoulteFilepaths);
+                        const nodes = createRequireStatement(absoulteFilepaths);
 
                         p.parentPath.replaceWithMultiple(nodes);
+                    } else {
+                        if (
+                            t.isIdentifier(p.node.callee.object) &&
+                            p.node.callee.object.name === FUNCTION_NAME &&
+                            t.isIdentifier(p.node.callee.property) &&
+                            p.node.callee.property.name === PROPERTY_IMPORT
+                        ) {
+                            const args = p.node.arguments;
+                            const absoulteFilepaths = getFilepaths(
+                                filename,
+                                args
+                            );
+
+                            const nodes =
+                                createImportStatement(absoulteFilepaths);
+
+                            p.parentPath.replaceWithMultiple(nodes);
+                        }
                     }
-                }
-            }
-
-            if (p.isCallExpression()) {
-                if (
-                    t.isIdentifier(p.node.callee) &&
-                    p.node.callee.name === FUNCTION_NAME
-                ) {
-                    const args = p.node.arguments;
-
-                    const absoulteFilepaths = getFilepaths(filename, args);
-
-                    const nodes = createRequireStatement(absoulteFilepaths);
-
-                    p.parentPath.replaceWithMultiple(nodes);
                 }
             }
         },

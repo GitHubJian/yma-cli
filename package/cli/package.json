@@ -1,6 +1,6 @@
 {
     "name": "yma-cli",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "YMA CLI 工具包",
     "main": "./dist/index.js",
     "bin": {
@@ -26,15 +26,16 @@
         "glob": "7.1.6",
         "semver": "7.3.8",
         "yargs": "17.4.0",
-        "yma-cli-build": "^1.0.31",
-        "yma-cli-dev": "^1.0.31",
-        "yma-cli-lint": "^1.0.31",
-        "yma-config-preset": "^1.0.31"
+        "yma-cli-build": "^1.0.32",
+        "yma-cli-dev": "^1.0.32",
+        "yma-cli-lint": "^1.0.32",
+        "yma-config-preset": "^1.0.32"
     },
     "devDependencies": {
         "@types/yargs": "17.0.10"
     },
     "engines": {
         "node": ">=14.17.0"
-    }
+    },
+    "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
 }

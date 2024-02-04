@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-mono",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -22,10 +22,11 @@
         "html-webpack-tags-plugin": "3.0.2",
         "lodash.uniqby": "4.7.0",
         "webpack": "5.70.0",
-        "yma-config-plugin": "^1.0.31",
-        "yma-shared-util": "^1.0.31"
+        "yma-config-plugin": "^1.0.32",
+        "yma-shared-util": "^1.0.32"
     },
     "keywords": [],
     "author": "",
-    "license": "ISC"
+    "license": "ISC",
+    "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
 }

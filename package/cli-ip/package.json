@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-ip",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "获取本机 IP",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,6 +20,7 @@
     "dependencies": {
         "address": "1.1.2",
         "clipboardy": "2.3.0",
-        "yma-shared-util": "^1.0.31"
-    }
+        "yma-shared-util": "^1.0.32"
+    },
+    "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
 }
