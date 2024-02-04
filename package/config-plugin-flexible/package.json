@@ -28,6 +28,5 @@
     "devDependencies": {
         "webpack": "5.70.0",
         "yma-config-plugin": "^1.0.30"
-    },
-    "gitHead": "47acadfd487ffbde98d48364ae407f6023a14855"
+    }
 }

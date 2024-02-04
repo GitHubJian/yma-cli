@@ -54,6 +54,5 @@
     "types": "./dist/index.d.ts",
     "directories": {
         "example": "example"
-    },
-    "gitHead": "47acadfd487ffbde98d48364ae407f6023a14855"
+    }
 }

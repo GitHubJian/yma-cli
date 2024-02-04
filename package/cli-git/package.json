@@ -24,6 +24,5 @@
         "execa": "5.0.0",
         "table": "6.8.1",
         "yma-shared-util": "^1.0.30"
-    },
-    "gitHead": "47acadfd487ffbde98d48364ae407f6023a14855"
+    }
 }
