@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-flexible",
-    "version": "1.0.32",
+    "version": "1.0.33",
     "description": "基于 yma-config-plugin 的 适配 H5 打包插件",
     "main": "./dist/index.js",
     "scripts": {
@@ -23,11 +23,11 @@
         "postcss-preset-env": "7.4.3",
         "safe-require": "1.0.4",
         "uglify-js": "3.15.3",
-        "yma-shared-util": "^1.0.32"
+        "yma-shared-util": "^1.0.33"
     },
     "devDependencies": {
         "webpack": "5.70.0",
-        "yma-config-plugin": "^1.0.32"
+        "yma-config-plugin": "^1.0.33"
     },
     "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
 }

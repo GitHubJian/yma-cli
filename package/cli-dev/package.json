@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-dev",
-    "version": "1.0.32",
+    "version": "1.0.33",
     "description": "Webpack Dev 构建命令",
     "main": "./dist/index.js",
     "scripts": {
@@ -23,8 +23,8 @@
         "path-to-regexp": "6.2.1",
         "portfinder": "1.0.28",
         "webpack-dev-server": "4.7.4",
-        "yma-config-plugin": "^1.0.32",
-        "yma-shared-util": "^1.0.32"
+        "yma-config-plugin": "^1.0.33",
+        "yma-shared-util": "^1.0.33"
     },
     "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
 }

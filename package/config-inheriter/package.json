@@ -1,6 +1,6 @@
 {
     "name": "yma-config-inheriter",
-    "version": "1.0.32",
+    "version": "1.0.33",
     "description": "简易获取配置文件，支持 Presets & Plugins",
     "main": "./dist/index.js",
     "scripts": {
@@ -18,7 +18,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "yma-shared-util": "^1.0.32"
+        "yma-shared-util": "^1.0.33"
     },
     "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
 }
