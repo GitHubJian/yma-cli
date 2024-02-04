@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-babel",
-    "version": "1.0.29",
+    "version": "1.0.30",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -14,13 +14,13 @@
         "@babel/core": "7.17.8",
         "babel-loader": "8.2.4",
         "worker-loader": "3.0.8",
-        "yma-babel-preset": "^1.0.29",
-        "yma-babel-require-context-loader": "^1.0.29",
-        "yma-shared-util": "^1.0.29"
+        "yma-babel-preset": "^1.0.30",
+        "yma-babel-require-context-loader": "^1.0.30",
+        "yma-shared-util": "^1.0.30"
     },
     "devDependencies": {
         "webpack": "5.70.0",
-        "yma-config-plugin": "^1.0.29"
+        "yma-config-plugin": "^1.0.30"
     },
     "files": [
         "bin",
@@ -30,5 +30,5 @@
     "keywords": [],
     "author": "",
     "license": "ISC",
-    "gitHead": "aaf265b7282241267a03e50ba8f4627ff9da9e99"
+    "gitHead": "47acadfd487ffbde98d48364ae407f6023a14855"
 }
