@@ -1,6 +1,6 @@
 {
-    "name": "yma-babel-plugin-async-name",
-    "version": "1.0.28",
+    "name": "yma-babel-plugin-asyncchunk-name",
+    "version": "1.0.29",
     "description": "",
     "main": "./src/index.js",
     "scripts": {},

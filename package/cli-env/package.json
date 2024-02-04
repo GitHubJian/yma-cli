@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-env",
-    "version": "1.0.28",
+    "version": "1.0.29",
     "description": "调整开发环境",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,7 +20,7 @@
     "dependencies": {
         "execa": "5.0.0",
         "semver": "7.3.7",
-        "yma-shared-util": "^1.0.28"
+        "yma-shared-util": "^1.0.29"
     },
     "gitHead": "aaf265b7282241267a03e50ba8f4627ff9da9e99"
 }
