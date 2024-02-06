@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-build",
-    "version": "1.0.33",
+    "version": "1.0.34",
     "description": "Webpack Build 构建命令",
     "main": "./dist/index.js",
     "scripts": {
@@ -21,8 +21,8 @@
     "dependencies": {
         "fs-extra": "10.1.0",
         "webpack-bundle-analyzer": "4.5.0",
-        "yma-config-plugin": "^1.0.33",
-        "yma-shared-util": "^1.0.33"
+        "yma-config-plugin": "^1.0.34",
+        "yma-shared-util": "^1.0.34"
     },
     "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
 }

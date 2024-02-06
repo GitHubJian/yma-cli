@@ -108,16 +108,16 @@ export default async function (api: PluginAPI) {
             .end();
 
         jsRule
+            .use('require-context-loader')
+            .loader(require.resolve('yma-babel-require-context-loader'))
+            .options({});
+
+        jsRule
             .use('babel-loader')
             .loader(require.resolve('babel-loader'))
             .options({
                 cacheCompression: false,
                 configFile: babelrc,
             });
-
-        jsRule
-            .use('require-context-loader')
-            .loader(require.resolve('yma-babel-require-context-loader'))
-            .options({});
     });
 }
