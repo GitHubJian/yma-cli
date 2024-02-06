@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-chunk",
-    "version": "1.0.34",
+    "version": "1.0.35",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -16,10 +16,10 @@
         "public"
     ],
     "dependencies": {
-        "yma-shared-util": "^1.0.34"
+        "yma-shared-util": "^1.0.35"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.34"
+        "yma-config-plugin": "^1.0.35"
     },
     "keywords": [],
     "author": "",
