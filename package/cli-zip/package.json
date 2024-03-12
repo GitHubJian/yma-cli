@@ -1,24 +1,26 @@
 {
-    "name": "yma-cli-branch",
+    "name": "yma-cli-zip",
     "version": "1.0.36",
-    "description": "Git 快速创建分支",
+    "description": "压缩文件夹",
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
         "clean": "del-cli -f dist",
-        "link": "npm link"
+        "link": "npm link",
+        "unlink": "npm unlink yma-cli-zip"
     },
     "files": [
         "bin",
-        "dist",
-        "public"
+        "dist"
     ],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "archiver": "7.0.1",
+        "dayjs": "1.11.9",
         "fs-extra": "10.1.0",
         "yma-shared-util": "^1.0.36"
     }

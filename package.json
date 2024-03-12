@@ -4,7 +4,7 @@
     "description": "YMA CLI 工具包",
     "main": "index.js",
     "scripts": {
-        "preinit": "npm install -g lerna@6.5.1 yarn@1.22.19 && npm install",
+        "preinit": "npm install -g lerna@6.5.1 yarn@1.22.19 && yarn",
         "init": "npm run clear && npm run bootstrap",
         "clear": "del-cli -f node_modules && npm run clean",
         "bootstrap": "lerna bootstrap",
@@ -18,14 +18,13 @@
     },
     "dependencies": {
         "del-cli": "5.1.0",
-        "global": "4.4.0",
-        "yma-cli": "^1.0.0"
+        "global": "4.4.0"
     },
     "devDependencies": {
         "@types/node": "20.4.4",
+        "lerna": "6.5.1",
         "typescript": "4.7.4",
-        "yarn": "1.22.19",
-        "lerna": "6.5.1"
+        "yarn": "1.22.19"
     },
     "repository": {
         "type": "git",
@@ -38,7 +37,9 @@
         "url": "https://github.com/GitHubJian/yma-cli/issues"
     },
     "homepage": "https://github.com/GitHubJian/yma-cli#readme",
-    "workspaces": ["package/*"],
+    "workspaces": [
+        "package/*"
+    ],
     "engines": {
         "node": ">=14.17.0"
     },

@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin",
-    "version": "1.0.35",
+    "version": "1.0.36",
     "description": "基于 Webpack5.0 开发的 YMA 打包插件层配置",
     "main": "./dist/index.js",
     "scripts": {
@@ -42,8 +42,8 @@
         "url-loader": "4.1.1",
         "vue-loader": "15.9.3",
         "webpack": "5.70.0",
-        "yma-config-inheriter": "^1.0.35",
-        "yma-shared-util": "^1.0.35"
+        "yma-config-inheriter": "^1.0.36",
+        "yma-shared-util": "^1.0.36"
     },
     "devDependencies": {
         "vue": "2.6.11",
@@ -58,6 +58,5 @@
         "vue-template-compiler": {
             "optional": true
         }
-    },
-    "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
+    }
 }

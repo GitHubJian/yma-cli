@@ -1,25 +1,25 @@
 {
-    "name": "yma-cli-branch",
+    "name": "yma-cli-open",
     "version": "1.0.36",
-    "description": "Git 快速创建分支",
+    "description": "打开资源管理器",
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
         "clean": "del-cli -f dist",
-        "link": "npm link"
+        "link": "npm link",
+        "unlink": "npm unlink yma-cli-open"
     },
     "files": [
         "bin",
-        "dist",
-        "public"
+        "dist"
     ],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "fs-extra": "10.1.0",
+        "execa": "5.0.0",
         "yma-shared-util": "^1.0.36"
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-init",
-    "version": "1.0.35",
+    "version": "1.0.36",
     "description": "创建项目",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,8 +20,7 @@
     "license": "ISC",
     "dependencies": {
         "chalk": "4.1.0",
-        "fs-extra": "9.1.0",
+        "fs-extra": "10.1.0",
         "inquirer": "7.1.0"
-    },
-    "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
+    }
 }

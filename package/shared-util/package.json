@@ -1,6 +1,6 @@
 {
     "name": "yma-shared-util",
-    "version": "1.0.35",
+    "version": "1.0.36",
     "description": "YMA CLI 统一工具库函数",
     "main": "./dist/index.js",
     "scripts": {
@@ -18,11 +18,10 @@
     "dependencies": {
         "chalk": "4.1.0",
         "deepmerge": "4.2.2",
-        "fs-extra": "10.0.1",
+        "fs-extra": "10.1.0",
         "ora": "5.3.0"
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
-    "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
+    "license": "ISC"
 }

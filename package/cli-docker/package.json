@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-docker",
-    "version": "1.0.35",
+    "version": "1.0.36",
     "description": "构建 web 项目的 Docker 镜像",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,9 +20,8 @@
     "license": "ISC",
     "dependencies": {
         "execa": "5.0.0",
-        "fs-extra": "11.2.0",
+        "fs-extra": "10.1.0",
         "semver": "7.5.4",
-        "yma-shared-util": "^1.0.35"
-    },
-    "gitHead": "f5081f1160f3d2013e54a323df5f25a4c24bc6b6"
+        "yma-shared-util": "^1.0.36"
+    }
 }

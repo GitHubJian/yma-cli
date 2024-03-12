@@ -14,7 +14,7 @@ function whitescreen(
         xPathSelectors: ['html', 'body', '#app'],
         hasSkeleton: false,
         callback: () => {},
-    },
+    }
 ) {
     const current: string[] = []; // 采样结果
     const workInProgress: string[] = []; // 当前采样节点
@@ -50,8 +50,14 @@ function whitescreen(
     function sampling() {
         let emptyPoints = 0;
         for (let i = 1; i <= 9; i++) {
-            const xElements = document.elementsFromPoint((window.innerWidth * i) / 10, window.innerHeight / 2);
-            const yElements = document.elementsFromPoint(window.innerWidth / 2, (window.innerHeight * i) / 10);
+            const xElements = document.elementsFromPoint(
+                (window.innerWidth * i) / 10,
+                window.innerHeight / 2
+            );
+            const yElements = document.elementsFromPoint(
+                window.innerWidth / 2,
+                (window.innerHeight * i) / 10
+            );
 
             if (isContainer(xElements[0] as HTMLElement)) {
                 emptyPoints++;
@@ -73,6 +79,7 @@ function whitescreen(
 
                 if (current.join() === workInProgress.join()) {
                     return callback({
+                        // @ts-ignore
                         st: window.__whitescreen_monitor_st__ || null,
                         status: Status.ERROR,
                     });
@@ -91,6 +98,7 @@ function whitescreen(
 
         // 17个点都是容器节点算作白屏
         callback({
+            // @ts-ignore
             st: window.__whitescreen_monitor_st__ || null,
             status: emptyPoints === 17 ? Status.ERROR : Status.OK,
         });
@@ -100,7 +108,9 @@ function whitescreen(
         const selector = getSelector(el);
 
         if (hasSkeleton) {
-            _whiteLoopNum ? workInProgress.push(selector) : current.push(selector);
+            _whiteLoopNum
+                ? workInProgress.push(selector)
+                : current.push(selector);
         }
 
         return xPathSelectors?.indexOf(selector) != -1;

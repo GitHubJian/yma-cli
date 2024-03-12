@@ -1,7 +1,7 @@
 {
-    "name": "yma-cli-branch",
+    "name": "yma-cli-static-server",
     "version": "1.0.36",
-    "description": "Git 快速创建分支",
+    "description": "启动 Node 静态服务",
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
@@ -20,6 +20,15 @@
     "license": "ISC",
     "dependencies": {
         "fs-extra": "10.1.0",
+        "ip": "2.0.1",
+        "koa": "2.15.0",
+        "koa-send": "5.0.0",
+        "path-to-regexp": "6.2.1",
+        "portfinder": "1.0.28",
         "yma-shared-util": "^1.0.36"
+    },
+    "devDependencies": {
+        "@types/koa": "2.15.0",
+        "@types/koa-send": "4.1.6"
     }
 }
