@@ -17,6 +17,7 @@ export declare interface DevServer {
 
 export interface ProjectOptions {
     publicPath: string;
+    htmlPublicPath?: string;
     outputDir: string;
     assetsDir: string;
     filenameHashing: boolean;

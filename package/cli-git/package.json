@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-git",
-    "version": "1.0.36",
+    "version": "1.0.37",
     "description": "统计团队 Repo 代码行数据",
     "main": "./dist/index.js",
     "scripts": {
@@ -19,10 +19,10 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "chalk": "4.1.2",
+        "chalk": "4.1.0",
         "dayjs": "1.11.9",
         "execa": "5.0.0",
         "table": "6.8.1",
-        "yma-shared-util": "^1.0.36"
+        "yma-shared-util": "^1.0.37"
     }
 }

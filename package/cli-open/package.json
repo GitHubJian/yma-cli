@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-open",
-    "version": "1.0.36",
+    "version": "1.0.37",
     "description": "打开资源管理器",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,6 +20,6 @@
     "license": "ISC",
     "dependencies": {
         "execa": "5.0.0",
-        "yma-shared-util": "^1.0.36"
+        "yma-shared-util": "^1.0.37"
     }
 }

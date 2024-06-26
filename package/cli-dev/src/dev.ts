@@ -59,6 +59,7 @@ export default async function dev(
     server: WebpackDevServer;
     url: string;
 }> {
+    // TODO devServer target 如果为空，则与本地服务一致
     info('Starting development server...');
     const options: ProjectOptions = api.projectOptions;
 

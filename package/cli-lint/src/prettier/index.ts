@@ -6,6 +6,7 @@ import findFiles from '../util/find-files';
 import options from './options';
 
 const Parser = {
+    '.xml': 'html',
     '.html': 'html',
     '.ejs': 'html',
     '.js': 'babel',
@@ -38,8 +39,19 @@ function format(filepath): null | Error {
         if (extname === '.conf') {
             realOptions.plugins = realOptions.plugins || [];
 
-            // @ts-ignore
-            realOptions.plugins.push(require.resolve('../../public/plugin/ng.js'));
+            realOptions.plugins.push(
+                // @ts-ignore
+                require.resolve('../../public/plugin/ng.js')
+            );
+        }
+
+        if (extname === '.xml') {
+            realOptions.plugins = realOptions.plugins || [];
+
+            realOptions.plugins.push(
+                // @ts-ignore
+                require.resolve('@prettier/plugin-xml')
+            );
         }
 
         const newCotent = prettier.format(content, realOptions);

@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-lint",
-    "version": "1.0.36",
+    "version": "1.0.37",
     "description": "LINT 集成工具",
     "bin": {
         "yma-lint": "bin/cli.js"
@@ -21,6 +21,7 @@
     "dependencies": {
         "@babel/eslint-parser": "7.18.2",
         "@babel/eslint-plugin": "7.17.7",
+        "@prettier/plugin-xml": "2.2.0",
         "@typescript-eslint/eslint-plugin": "5.27.1",
         "@typescript-eslint/parser": "5.27.1",
         "chalk": "4.1.0",
@@ -32,13 +33,13 @@
         "eslint-plugin-react-hooks": "4.5.0",
         "eslint-plugin-vue": "7.20.0",
         "fs-extra": "10.1.0",
-        "glob": "7.1.6",
+        "glob": "7.2.0",
         "prettier": "2.7.1",
         "react": "18.0.0",
         "stylelint": "13.8.0",
         "stylelint-order": "4.1.0",
         "typescript": "5.1.6",
-        "yma-shared-util": "^1.0.36"
+        "yma-shared-util": "^1.0.37"
     },
     "devDependencies": {
         "@types/glob": "7.2.0",

@@ -32,6 +32,7 @@ export interface MultiPageConfig {
 
 export default async function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
+        const htmlPublicPath = api.projectOptions.htmlPublicPath || api.projectOptions.publicPath;
         const outputDir = api.resolve(api.projectOptions.outputDir);
 
         const outputFilename = getAssetPath(
@@ -76,7 +77,9 @@ export default async function (api: PluginAPI) {
             const pageConfig = normalizePageConfig(multiPageConfig[name]);
             const {entry, template = `public/${name}.html`, filename = `${name}.html`, chunks = [name]} = pageConfig;
 
-            const customHtmlOptions = {};
+            const customHtmlOptions = {
+                publicPath: htmlPublicPath
+            };
             for (const key in pageConfig) {
                 if (!['entry', 'template', 'filename', 'chunks'].includes(key)) {
                     customHtmlOptions[key] = pageConfig[key];

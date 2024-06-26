@@ -27,6 +27,10 @@ export default function (name: string, {cwd, type, tag}: ZipOption) {
         },
     });
 
+    output.on('close', function () {
+        log(`压缩完成，共 ${archive.pointer()} Bytes`, '[Zip]');
+    });
+
     output.on('end', function () {
         log(`压缩完成，共 ${archive.pointer()} Bytes`, '[Zip]');
     });

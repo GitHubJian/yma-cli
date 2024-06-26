@@ -7,6 +7,7 @@
         "preinit": "npm install -g lerna@6.5.1 yarn@1.22.19 && yarn",
         "init": "npm run clear && npm run bootstrap",
         "clear": "del-cli -f node_modules && npm run clean",
+        "clear:dist": "lerna run clean",
         "bootstrap": "lerna bootstrap",
         "clean": "lerna clean --yes",
         "nlink": "lerna run link --scope yma-cli-* && lerna run link --scope yma-config-*",
