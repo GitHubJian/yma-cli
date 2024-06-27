@@ -1,5 +1,5 @@
 import webpack from 'webpack';
-import safeRequire from 'safe-require';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import createScriptTag from './create-script-tag';
 
@@ -9,6 +9,8 @@ interface PluginOptions {
     isUglify?: boolean;
 }
 
+const PLUGIN_NAME = 'FlexibleWebpackPlugin';
+
 export default class FlexibleWebpackPlugin {
     isUglify: boolean;
 
@@ -17,25 +19,42 @@ export default class FlexibleWebpackPlugin {
     }
 
     apply(compiler: webpack.Compiler): void {
-        compiler.hooks.compilation.tap(this.constructor.name, compilation => {
-            const HtmlWebpackPlugin = safeRequire('html-webpack-plugin');
+        let HWPCtor;
+        compiler.hooks.environment.tap(PLUGIN_NAME, function () {
+            const plugins = compiler.options.plugins;
 
-            const emit = HtmlWebpackPlugin.getHooks(compilation).beforeEmit;
-
-            emit.tapAsync(this.constructor.name, (data, cb) => {
-                let html = data.html;
-                if (html.includes(OUTLET)) {
-                    const replacement = createScriptTag(this.isUglify);
-
-                    data.html = html.replace(OUTLET, replacement);
-                } else {
-                    console.error(`[FlexibleWebpackPlugin]: not found outlet(${OUTLET})`);
-
-                    process.exit(0);
+            for (let i = 0, len = plugins.length; i < len; i++) {
+                let plugin = plugins[i] as HtmlWebpackPlugin;
+                if (
+                    plugin['__pluginConstructorName'] == HtmlWebpackPlugin.name
+                ) {
+                    if (!HWPCtor) {
+                        HWPCtor = plugin.constructor;
+                    }
                 }
+            }
+        });
 
-                cb(null, data);
-            });
+        compiler.hooks.compilation.tap(PLUGIN_NAME, compilation => {
+            if (HWPCtor) {
+                const beforeEmit = HWPCtor.getHooks(compilation).beforeEmit;
+                beforeEmit.tapAsync(PLUGIN_NAME, (data, cb) => {
+                    let html = data.html;
+                    if (html.includes(OUTLET)) {
+                        const replacement = createScriptTag(this.isUglify);
+
+                        data.html = html.replace(OUTLET, replacement);
+                    } else {
+                        console.error(
+                            `[FlexibleWebpackPlugin]: not found outlet(${OUTLET})`
+                        );
+
+                        process.exit(0);
+                    }
+
+                    cb(null, data);
+                });
+            }
         });
     }
 }

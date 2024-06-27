@@ -38,6 +38,7 @@ export default class PluginAPI {
         const customOptions = confitInheriter<ProjectOptions>('yma.config.js', {
             props: [
                 'publicPath',
+                'htmlPublicPath',
                 'outputDir',
                 'assetsDir',
                 'filenameHashing',

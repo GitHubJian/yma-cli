@@ -24,14 +24,14 @@ function findGlobalPlugins(ignores: string[]): Array<{
     });
 
     const globalDir = isWindows()
-        ? `${stdout}/node_modules/`
-        : `${stdout}/lib/node_modules/`;
+        ? path.resolve(stdout, 'node_modules')
+        : path.resolve(stdout, 'lib', 'node_modules');
     const currentDir = path.resolve(process.cwd(), 'node_modules');
     const nodeModulesDir = [currentDir, globalDir];
 
     const list = nodeModulesDir
         .map(function (dir) {
-            const pattern = dir + `${prefix}-*`;
+            const pattern = dir + path.sep + `${prefix}-*`;
             const currentList = glob.sync(pattern);
             return currentList;
         })

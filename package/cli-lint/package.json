@@ -1,10 +1,7 @@
 {
     "name": "yma-cli-lint",
-    "version": "1.0.37",
+    "version": "1.0.38",
     "description": "LINT 集成工具",
-    "bin": {
-        "yma-lint": "bin/cli.js"
-    },
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
@@ -39,7 +36,7 @@
         "stylelint": "13.8.0",
         "stylelint-order": "4.1.0",
         "typescript": "5.1.6",
-        "yma-shared-util": "^1.0.37"
+        "yma-shared-util": "^1.0.38"
     },
     "devDependencies": {
         "@types/glob": "7.2.0",

@@ -1,7 +1,7 @@
 {
-    "name": "yma-cli-gen-index",
+    "name": "yma-config-plugin-version",
     "version": "1.0.38",
-    "description": "Webpack Dev 构建命令",
+    "description": "",
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
@@ -15,10 +15,15 @@
         "dist",
         "public"
     ],
+    "dependencies": {
+        "cheerio": "1.0.0-rc.12",
+        "html-webpack-plugin": "5.5.0",
+        "yma-shared-util": "^1.0.38"
+    },
+    "devDependencies": {
+        "yma-config-plugin": "^1.0.38"
+    },
     "keywords": [],
     "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "fs-extra": "10.1.0"
-    }
+    "license": "ISC"
 }
