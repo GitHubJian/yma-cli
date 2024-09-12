@@ -1,7 +1,7 @@
 {
-    "name": "yma-cli-dev",
+    "name": "yma-devserver-mock",
     "version": "1.0.39",
-    "description": "Webpack Dev 构建命令",
+    "description": "",
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
@@ -15,15 +15,14 @@
         "dist",
         "public"
     ],
+    "dependencies": {
+        "path-to-regexp": "6.2.1",
+        "yma-shared-util": "^1.0.39"
+    },
+    "devDependencies": {
+        "yma-config-plugin": "^1.0.39"
+    },
     "keywords": [],
     "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "address": "1.1.2",
-        "portfinder": "1.0.28",
-        "webpack-dev-server": "4.7.4",
-        "yma-config-plugin": "^1.0.39",
-        "yma-devserver-mock": "^1.0.39",
-        "yma-shared-util": "^1.0.39"
-    }
+    "license": "ISC"
 }

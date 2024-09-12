@@ -6,8 +6,22 @@ function isPlainObject(value) {
     return Object.prototype.toString.call(value) === '[object Object]';
 }
 
-export default function createMiddleware(api, mock) {
-    if (!mock) {
+const delay = function (fn) {
+    setTimeout(function () {
+        fn();
+    }, 500);
+};
+
+const isMock = process.env.YMA_MOCK_ENABLE == 'true';
+
+/**
+ * createMiddleware
+ * 
+ * @param folderpath 绝对路径
+ * @return fn 返回 devServer 的 middleware
+ */
+export default function createMiddleware(folderpath: string) {
+    if (!isMock) {
         warn(`未开启本地 Mock 服务`, 'CLI DEV');
 
         return function (middlewares, devServer) {
@@ -19,15 +33,7 @@ export default function createMiddleware(api, mock) {
         };
     }
 
-    const mockPath = api.resolve('mock');
-
-    const delay = function (fn) {
-        setTimeout(function () {
-            fn();
-        }, 1000);
-    };
-
-    if (fs.existsSync(mockPath)) {
+    if (fs.existsSync(folderpath)) {
         return function (middlewares, devServer) {
             if (!devServer) {
                 throw new Error('webpack-dev-server is not defined');
@@ -43,11 +49,11 @@ export default function createMiddleware(api, mock) {
                     let mockContent;
 
                     try {
-                        let filepath = require.resolve(mockPath);
+                        let filepath = require.resolve(folderpath);
                         delete require.cache[filepath];
-                        mockContent = require(mockPath);
+                        mockContent = require(folderpath);
                     } catch (error) {
-                        warn(`未能找到 Mock 文件（${mockPath}）`, 'CLI DEV');
+                        warn(`未能找到 Mock 文件（${folderpath}）`, 'CLI DEV');
 
                         next();
 
@@ -126,7 +132,7 @@ export default function createMiddleware(api, mock) {
             return middlewares;
         };
     } else {
-        log(`未能找到 Mock 文件夹（${mock}）`, 'CLI DEV');
+        log(`未能找到 Mock 文件夹（${folderpath}）`, 'CLI DEV');
 
         return (middlewares, devServer) => {
             if (!devServer) {

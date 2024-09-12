@@ -111,6 +111,15 @@ export default async function (api: PluginAPI) {
                     template: templatePath,
                     filename: ensureRelative(outputDir, filename),
                     inject: 'body',
+                    minify: {
+                        collapseWhitespace: true,
+                        keepClosingSlash: true,
+                        removeComments: false, // 保留注释
+                        removeRedundantAttributes: true,
+                        removeScriptTypeAttributes: true,
+                        removeStyleLinkTypeAttributes: true,
+                        useShortDoctype: true
+                    }
                 },
                 ...customHtmlOptions,
             };
