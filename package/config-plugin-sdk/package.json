@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-sdk",
-    "version": "1.0.39",
+    "version": "1.0.40",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -16,10 +16,10 @@
         "public"
     ],
     "dependencies": {
-        "yma-shared-util": "^1.0.39"
+        "yma-shared-util": "^1.0.40"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.39"
+        "yma-config-plugin": "^1.0.40"
     },
     "keywords": [],
     "author": "",

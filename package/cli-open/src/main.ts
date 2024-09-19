@@ -13,7 +13,8 @@ export default function open() {
     log('正在打开文件夹...', '[Open]');
     log();
 
-    let stdout, stderr;
+    let stdout;
+    let stderr;
     if (isWindows()) {
         const res = execa.sync('explorer', ['.']);
         stdout = res.stdout;

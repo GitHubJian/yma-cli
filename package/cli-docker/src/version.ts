@@ -18,22 +18,15 @@ export function getVersion(filepath: string): string {
         }
 
         return version;
-    } else {
-        return '';
     }
+    return '';
 }
 
-export function createNextVersion(
-    version: string,
-    type: 'major' | 'minor' | 'patch'
-): string {
+export function createNextVersion(version: string, type: 'major' | 'minor' | 'patch'): string {
     let nextVersion = '1.0.0';
 
     if (!version) {
-        warn(
-            `Dockerfile 中不存在 Version 版本号，将自动更新为 ${version}。\n`,
-            '[Docker]: '
-        );
+        warn(`Dockerfile 中不存在 Version 版本号，将自动更新为 ${version}。\n`, '[Docker]: ');
 
         return nextVersion;
     }
@@ -72,9 +65,8 @@ export function updateVersion(filepath: string, version: string) {
         .filter(v => {
             if (v === '\r' || v === '\r\n') {
                 return false;
-            } else {
-                return true;
             }
+            return true;
         })
         .join('\n');
 

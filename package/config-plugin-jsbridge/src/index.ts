@@ -2,10 +2,9 @@ import PluginAPI, {Chain} from 'yma-config-plugin';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import createScriptTag from './create-script-tag';
+import {load} from 'cheerio';
 
 const PLUGIN_NAME = 'JSBridgeWebpackPlugin';
-
-const OUTLET = '<!-- jsbridge-webpack-plugin-outlet -->';
 
 const isMock = process.env.YMA_MOCK_ENABLE == 'true';
 
@@ -29,9 +28,8 @@ class JSBridgeWebpackPlugin {
 
             for (let i = 0, len = plugins.length; i < len; i++) {
                 let plugin = plugins[i] as HtmlWebpackPlugin;
-                if (
-                    plugin['__pluginConstructorName'] == HtmlWebpackPlugin.name
-                ) {
+                // @ts-ignore
+                if (plugin.__pluginConstructorName == HtmlWebpackPlugin.name) {
                     if (!HWPCtor) {
                         HWPCtor = plugin.constructor;
                     }
@@ -44,18 +42,11 @@ class JSBridgeWebpackPlugin {
                 const beforeEmit = HWPCtor.getHooks(compilation).beforeEmit;
                 beforeEmit.tapAsync(PLUGIN_NAME, (data, cb) => {
                     let html = data.html;
-                    console.log(html);
-                    if (html.includes(OUTLET)) {
-                        const replacement = createScriptTag(ns, isMock);
 
-                        data.html = html.replace(OUTLET, replacement);
-                    } else {
-                        console.error(
-                            `[${PLUGIN_NAME}]: not found outlet(${OUTLET})`
-                        );
-
-                        process.exit(0);
-                    }
+                    const $ = load(html);
+                    const replacement = createScriptTag(ns, isMock)
+                    $('head').append(replacement);
+                    data.html = $.html();
 
                     cb(null, data);
                 });

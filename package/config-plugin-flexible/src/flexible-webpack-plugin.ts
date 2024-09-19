@@ -1,9 +1,7 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-
 import createScriptTag from './create-script-tag';
-
-const OUTLET = '<!-- flexible-webpack-plugin-outlet -->';
+import {load} from 'cheerio';
 
 interface PluginOptions {
     isUglify?: boolean;
@@ -25,9 +23,8 @@ export default class FlexibleWebpackPlugin {
 
             for (let i = 0, len = plugins.length; i < len; i++) {
                 let plugin = plugins[i] as HtmlWebpackPlugin;
-                if (
-                    plugin['__pluginConstructorName'] == HtmlWebpackPlugin.name
-                ) {
+                // @ts-ignore
+                if (plugin.__pluginConstructorName == HtmlWebpackPlugin.name) {
                     if (!HWPCtor) {
                         HWPCtor = plugin.constructor;
                     }
@@ -40,17 +37,10 @@ export default class FlexibleWebpackPlugin {
                 const beforeEmit = HWPCtor.getHooks(compilation).beforeEmit;
                 beforeEmit.tapAsync(PLUGIN_NAME, (data, cb) => {
                     let html = data.html;
-                    if (html.includes(OUTLET)) {
-                        const replacement = createScriptTag(this.isUglify);
-
-                        data.html = html.replace(OUTLET, replacement);
-                    } else {
-                        console.error(
-                            `[FlexibleWebpackPlugin]: not found outlet(${OUTLET})`
-                        );
-
-                        process.exit(0);
-                    }
+                    const replacement = createScriptTag(this.isUglify);
+                    const $ = load(html);
+                    $('head').append(replacement);
+                    data.html = $.html();
 
                     cb(null, data);
                 });

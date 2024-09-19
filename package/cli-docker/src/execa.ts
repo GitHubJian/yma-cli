@@ -1,11 +1,7 @@
 import execa from 'execa';
 import {error} from 'yma-shared-util';
 
-export function build(
-    name: string,
-    version: string,
-    {cwd} = {cwd: '.'}
-): string {
+export function build(name: string, version: string, {cwd} = {cwd: '.'}): string {
     const output = execa.sync(`docker build -t ${name}:${version} ${cwd}`, {
         cwd: cwd,
     });
@@ -15,27 +11,17 @@ export function build(
     return output.stdout;
 }
 
-export function save(
-    name: string,
-    version: string,
-    {cwd} = {cwd: process.cwd()}
-): string {
-    const output = execa.sync(
-        `docker save -o ${name}-${version}.tar ${name}:${version}`,
-        {
-            cwd: cwd,
-        }
-    );
+export function save(name: string, version: string, {cwd} = {cwd: process.cwd()}): string {
+    const output = execa.sync(`docker save -o ${name}-${version}.tar ${name}:${version}`, {
+        cwd: cwd,
+    });
 
     console.log(output.stdout);
 
     return output.stdout;
 }
 
-export function getLocalVersions(
-    name,
-    {cwd} = {cwd: process.cwd()}
-): Array<string> {
+export function getLocalVersions(name, {cwd} = {cwd: process.cwd()}): string[] {
     try {
         const output = execa.sync(`docker images ${name} --format "{{.Tag}}"`, {
             cwd: cwd,

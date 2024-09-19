@@ -3,7 +3,9 @@ const getProp = (obj, path) => {
 
     for (let i = 0; i < name.length - 1; i++) {
         obj = obj[name[i]];
-        if (typeof obj !== 'object' || !obj || Array.isArray(obj)) return;
+        if (typeof obj !== 'object' || !obj || Array.isArray(obj)) {
+            return;
+        }
     }
 
     return obj[name.pop()];
@@ -13,10 +15,15 @@ const setProp = (obj, path, value) => {
     let name = path.split('.');
 
     for (let i = 0; i < name.length - 1; i++) {
-        if (typeof obj[name[i]] !== 'object' && obj[name[i]] !== undefined)
+        if (typeof obj[name[i]] !== 'object' && obj[name[i]] !== undefined) {
             return;
-        if (Array.isArray(obj[name[i]])) return;
-        if (!obj[name[i]]) obj[name[i]] = {};
+        }
+        if (Array.isArray(obj[name[i]])) {
+            return;
+        }
+        if (!obj[name[i]]) {
+            obj[name[i]] = {};
+        }
         obj = obj[name[i]];
     }
 
@@ -45,7 +52,7 @@ function request(argv) {
     xhr.send(argv.data);
 }
 
-const ns = window['__js_bridge_ns__'] || '__js_bridge__';
+const ns = window.__js_bridge_ns__ || '__js_bridge__';
 const jsbridge = (function (ns) {
     const obj = {};
 

@@ -1,5 +1,5 @@
-import fs from 'fs-extra';
 import path from 'path';
+import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 
@@ -14,7 +14,7 @@ export default async function (projectName, options) {
                 {
                     name: 'ok',
                     type: 'confirm',
-                    message: `在当前目录下创建项目？`,
+                    message: '在当前目录下创建项目？',
                 },
             ]);
 
@@ -29,9 +29,7 @@ export default async function (projectName, options) {
                 {
                     name: 'action',
                     type: 'list',
-                    message: `目标目录 ${chalk.cyan(
-                        targetDir
-                    )} 下存在文件，请选择执行方式：`,
+                    message: `目标目录 ${chalk.cyan(targetDir)} 下存在文件，请选择执行方式：`,
                     choices: [
                         {name: '覆盖', value: 'overwrite'},
                         {name: '取消', value: false},
@@ -52,7 +50,7 @@ export default async function (projectName, options) {
         {
             name: 'type',
             type: 'list',
-            message: `请选择创建仓库的类型：`,
+            message: '请选择创建仓库的类型：',
             choices: [
                 {name: 'WEB', value: 'web'},
                 {name: 'NODE', value: 'node'},

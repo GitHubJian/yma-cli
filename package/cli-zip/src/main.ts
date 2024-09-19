@@ -1,6 +1,6 @@
-import fse from 'fs-extra';
 import fs from 'fs';
 import path from 'path';
+import fse from 'fs-extra';
 import archiver from 'archiver';
 import {log, error} from 'yma-shared-util';
 import dayjs from 'dayjs';
@@ -14,10 +14,7 @@ export interface ZipOption {
 export default function (name: string, {cwd, type, tag}: ZipOption) {
     log('正在压缩...', '[Zip]');
 
-    const filepath = path.resolve(
-        cwd,
-        `${name}${tag ? '-' + dayjs().format('MMDDHHmm') : ''}.${type}`
-    );
+    const filepath = path.resolve(cwd, `${name}${tag ? '-' + dayjs().format('MMDDHHmm') : ''}.${type}`);
     fse.ensureFileSync(filepath);
 
     const output = fs.createWriteStream(filepath);

@@ -1,6 +1,6 @@
+import path from 'path';
 import dayjs from 'dayjs';
 import webpack, {EntryPlugin} from 'webpack';
-import path from 'path';
 import safeRequire from 'safe-require';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import {load} from 'cheerio';

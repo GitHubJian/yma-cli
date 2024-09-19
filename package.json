@@ -38,9 +38,7 @@
         "url": "https://github.com/GitHubJian/yma-cli/issues"
     },
     "homepage": "https://github.com/GitHubJian/yma-cli#readme",
-    "workspaces": [
-        "package/*"
-    ],
+    "workspaces": ["package/*"],
     "engines": {
         "node": ">=14.17.0"
     },

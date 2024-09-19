@@ -11,9 +11,7 @@ const PROPERTY_IMPORT = 'import';
 
 function createRequireStatement(paths) {
     return paths.map(function (p) {
-        return t.expressionStatement(
-            t.callExpression(t.identifier('require'), [t.stringLiteral(p)])
-        );
+        return t.expressionStatement(t.callExpression(t.identifier('require'), [t.stringLiteral(p)]));
     });
 }
 
@@ -26,7 +24,9 @@ function createImportStatement(paths) {
 function getFilepaths(filename, nodeArguments) {
     const args = nodeArguments;
 
-    let directory, includeSubdirectories, regularExpression;
+    let directory;
+    let includeSubdirectories;
+    let regularExpression;
     if (t.isStringLiteral(args[0])) {
         directory = args[0].value;
     }
@@ -67,10 +67,7 @@ module.exports = function (filename, source) {
         enter(p) {
             // __require_context__();
             if (p.isCallExpression()) {
-                if (
-                    t.isIdentifier(p.node.callee) &&
-                    p.node.callee.name === FUNCTION_NAME
-                ) {
+                if (t.isIdentifier(p.node.callee) && p.node.callee.name === FUNCTION_NAME) {
                     const args = p.node.arguments;
 
                     const absoulteFilepaths = getFilepaths(filename, args);

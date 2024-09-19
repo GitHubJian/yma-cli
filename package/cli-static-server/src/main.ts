@@ -10,7 +10,7 @@ const host = ip.address();
 async function start(
     config: Partial<{
         folder: string;
-    }>
+    }>,
 ) {
     const options = Object.assign(
         {},
@@ -18,7 +18,7 @@ async function start(
             folder: process.cwd(),
             port: 8421,
         },
-        config
+        config,
     ) as {
         folder: string;
         port: number;
@@ -38,7 +38,7 @@ async function start(
         const networkUrl = `http://${host}:${port}`;
 
         console.log();
-        console.log(`Service running at:`);
+        console.log('Service running at:');
         console.log(`- Local:   ${chalk.cyan(localUrl)}`);
         console.log(`- Network: ${chalk.cyan(networkUrl)}`);
     });

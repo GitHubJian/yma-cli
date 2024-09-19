@@ -9,7 +9,9 @@ export default function assetMiddleware(config: {folder: string}) {
     return async function (ctx, next) {
         let reqPath = ctx.path;
 
-        if (reqPath === '/') reqPath = '/index.html';
+        if (reqPath === '/') {
+            reqPath = '/index.html';
+        }
 
         let filePath = path.resolve(folder, `.${reqPath}`);
         let exists = await fse.pathExists(filePath);
@@ -21,7 +23,7 @@ export default function assetMiddleware(config: {folder: string}) {
                 maxage,
                 setHeaders: function (res, path, stats) {
                     res.setHeader('Author', 'yma-static-server');
-                    res.setHeader('Cache-Control', `max-age=0,must-revalidate`);
+                    res.setHeader('Cache-Control', 'max-age=0,must-revalidate');
                 },
             });
         }

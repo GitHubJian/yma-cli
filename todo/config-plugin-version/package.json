@@ -10,11 +10,7 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "dependencies": {
         "yma-shared-util": "^1.0.36",
         "cheerio": "1.0.0-rc.12",

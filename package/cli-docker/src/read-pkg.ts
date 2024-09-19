@@ -8,9 +8,7 @@ export default function readPkg<T>(projectDir: string): T {
     try {
         pkg = fs.readFileSync(filepath, 'utf-8');
     } catch (err) {
-        throw new Error(
-            `The package.json file at '${filepath}' does not exist`
-        );
+        throw new Error(`The package.json file at '${filepath}' does not exist`);
     }
 
     try {

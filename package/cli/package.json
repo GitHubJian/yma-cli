@@ -1,6 +1,6 @@
 {
     "name": "yma-cli",
-    "version": "1.0.39",
+    "version": "1.0.40",
     "description": "YMA CLI 工具包",
     "main": "./dist/index.js",
     "bin": {
@@ -26,9 +26,9 @@
         "glob": "7.2.0",
         "semver": "7.3.5",
         "yargs": "17.4.0",
-        "yma-cli-build": "^1.0.39",
-        "yma-cli-dev": "^1.0.39",
-        "yma-config-preset": "^1.0.39"
+        "yma-cli-build": "^1.0.40",
+        "yma-cli-dev": "^1.0.40",
+        "yma-config-preset": "^1.0.40"
     },
     "devDependencies": {
         "@types/yargs": "17.0.10"

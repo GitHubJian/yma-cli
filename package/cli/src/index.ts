@@ -23,9 +23,7 @@ function findGlobalPlugins(ignores: string[]): Array<{
         cwd: os.homedir(),
     });
 
-    const globalDir = isWindows()
-        ? path.resolve(stdout, 'node_modules')
-        : path.resolve(stdout, 'lib', 'node_modules');
+    const globalDir = isWindows() ? path.resolve(stdout, 'node_modules') : path.resolve(stdout, 'lib', 'node_modules');
     const currentDir = path.resolve(process.cwd(), 'node_modules');
     const nodeModulesDir = [currentDir, globalDir];
 
@@ -60,10 +58,7 @@ export default function (argv: string[]) {
     let cli = yargs(argv, process.cwd())
         .options(globalOptions)
         .usage('Usage: $0 <command> [options]')
-        .demandCommand(
-            1,
-            'A command is required. Pass --help to see all available commands and options.'
-        )
+        .demandCommand(1, 'A command is required. Pass --help to see all available commands and options.')
         .recommendCommands()
         .strict()
         .fail((msg, err) => {

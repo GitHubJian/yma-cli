@@ -16,7 +16,7 @@ export default {
     endOfLine: 'lf' as 'lf',
     embeddedLanguageFormatting: 'off' as 'off',
     singleAttributePerLine: false,
-    plugins: [], 
+    plugins: [],
     // xmlSelfClosingSpace: true,
     // xmlWhitespaceSensitivity: 'strict',
 };

@@ -3,12 +3,7 @@ import {createCanvas} from 'canvas';
 import {pathToRegexp} from 'path-to-regexp';
 
 function createStream(options) {
-    const {
-        width = 500,
-        height = 300,
-        backgroundColor = 'cccccc',
-        color = '969696',
-    } = options;
+    const {width = 500, height = 300, backgroundColor = 'cccccc', color = '969696'} = options;
 
     const text = options.text || `${width} x ${height}`;
 

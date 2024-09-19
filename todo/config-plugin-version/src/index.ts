@@ -5,6 +5,6 @@ export interface Options {}
 
 export default function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
-        chain.plugin('version-plugin').use(VersionPlugin)
+        chain.plugin('version-plugin').use(VersionPlugin);
     });
 }

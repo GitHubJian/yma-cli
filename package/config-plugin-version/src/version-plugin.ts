@@ -35,16 +35,13 @@ class VersionPlugin {
         });
 
         let HWPCtor;
-
         compiler.hooks.environment.tap(PLUGIN_NAME, function () {
             const plugins = compiler.options.plugins;
 
             for (let i = 0, len = plugins.length; i < len; i++) {
                 let plugin = plugins[i] as HtmlWebpackPlugin;
-
-                if (
-                    plugin['__pluginConstructorName'] == HtmlWebpackPlugin.name
-                ) {
+                // @ts-ignore
+                if (plugin.__pluginConstructorName == HtmlWebpackPlugin.name) {
                     if (plugin.userOptions.chunks) {
                         if (Array.isArray(plugin.userOptions.chunks)) {
                             if (!HWPCtor) {
@@ -62,7 +59,7 @@ class VersionPlugin {
             entry[EntryKey] = {
                 import: [entryjs],
             };
-            debugger
+            debugger;
             EntryOptionPlugin.applyEntryOption(compiler, context, entry);
             return true;
         });

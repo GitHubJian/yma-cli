@@ -2,10 +2,9 @@ import PluginAPI, {Chain} from 'yma-config-plugin';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import {SubresourceIntegrityPlugin} from 'webpack-subresource-integrity';
+import {load} from 'cheerio';
 
 const PLUGIN_NAME = 'CspWebpackPlugin';
-
-const OUTLET = '<!-- csp-webpack-plugin-outlet -->';
 
 interface PluginOptions {
     content: string;
@@ -27,9 +26,8 @@ class CspWebpackPlugin {
 
             for (let i = 0, len = plugins.length; i < len; i++) {
                 let plugin = plugins[i] as HtmlWebpackPlugin;
-                if (
-                    plugin['__pluginConstructorName'] == HtmlWebpackPlugin.name
-                ) {
+                // @ts-ignore
+                if (plugin.__pluginConstructorName == HtmlWebpackPlugin.name) {
                     if (!HWPCtor) {
                         HWPCtor = plugin.constructor;
                     }
@@ -42,17 +40,10 @@ class CspWebpackPlugin {
                 const beforeEmit = HWPCtor.getHooks(compilation).beforeEmit;
                 beforeEmit.tapAsync(PLUGIN_NAME, (data, cb) => {
                     let html = data.html;
-                    if (html.includes(OUTLET)) {
-                        const replacement = `<meta http-equiv="Content-Security-Policy" content="${that.content}">`;
 
-                        data.html = html.replace(OUTLET, replacement);
-                    } else {
-                        console.error(
-                            `[${PLUGIN_NAME}]: not found outlet(${OUTLET})`
-                        );
-
-                        process.exit(0);
-                    }
+                    const $ = load(html);
+                    $('head').append(`<meta http-equiv="Content-Security-Policy" content="${that.content}">`);
+                    data.html = $.html();
 
                     cb(null, data);
                 });
@@ -77,16 +68,14 @@ export default function (api: PluginAPI, options: Options) {
             ]);
 
             chain.output.crossOriginLoading('anonymous');
-            chain
-                .plugin('subresource-integrity')
-                .use(SubresourceIntegrityPlugin, [
-                    {
-                        hashFuncNames: ['sha384'],
-                        enabled: true,
-                        // @ts-ignore
-                        hashLoading: 'lazy',
-                    },
-                ]);
+            chain.plugin('subresource-integrity').use(SubresourceIntegrityPlugin, [
+                {
+                    hashFuncNames: ['sha384'],
+                    enabled: true,
+                    // @ts-ignore
+                    hashLoading: 'lazy',
+                },
+            ]);
         }
     });
 }

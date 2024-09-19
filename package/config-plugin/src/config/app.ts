@@ -78,7 +78,7 @@ export default async function (api: PluginAPI) {
             const {entry, template = `public/${name}.html`, filename = `${name}.html`, chunks = [name]} = pageConfig;
 
             const customHtmlOptions = {
-                publicPath: htmlPublicPath
+                publicPath: htmlPublicPath,
             };
             for (const key in pageConfig) {
                 if (!['entry', 'template', 'filename', 'chunks'].includes(key)) {
@@ -118,8 +118,8 @@ export default async function (api: PluginAPI) {
                         removeRedundantAttributes: true,
                         removeScriptTypeAttributes: true,
                         removeStyleLinkTypeAttributes: true,
-                        useShortDoctype: true
-                    }
+                        useShortDoctype: true,
+                    },
                 },
                 ...customHtmlOptions,
             };

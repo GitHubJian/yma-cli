@@ -41,7 +41,7 @@ function format(filepath): null | Error {
 
             realOptions.plugins.push(
                 // @ts-ignore
-                require.resolve('../../public/plugin/ng.js')
+                require.resolve('../../public/plugin/ng.js'),
             );
         }
 
@@ -50,7 +50,7 @@ function format(filepath): null | Error {
 
             realOptions.plugins.push(
                 // @ts-ignore
-                require.resolve('@prettier/plugin-xml')
+                require.resolve('@prettier/plugin-xml'),
             );
         }
 

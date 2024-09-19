@@ -16,13 +16,13 @@ const isMock = process.env.YMA_MOCK_ENABLE == 'true';
 
 /**
  * createMiddleware
- * 
+ *
  * @param folderpath 绝对路径
  * @return fn 返回 devServer 的 middleware
  */
 export default function createMiddleware(folderpath: string) {
     if (!isMock) {
-        warn(`未开启本地 Mock 服务`, 'CLI DEV');
+        warn('未开启本地 Mock 服务', 'CLI DEV');
 
         return function (middlewares, devServer) {
             if (!devServer) {
@@ -103,10 +103,7 @@ export default function createMiddleware(folderpath: string) {
                             let item = mockContent[i];
                             const re = pathToRegexp(item.url);
 
-                            if (
-                                re.exec(url) &&
-                                method == (item.method || 'get').toUpperCase()
-                            ) {
+                            if (re.exec(url) && method == (item.method || 'get').toUpperCase()) {
                                 response = item.response;
                                 break;
                             }
@@ -131,15 +128,14 @@ export default function createMiddleware(folderpath: string) {
 
             return middlewares;
         };
-    } else {
-        log(`未能找到 Mock 文件夹（${folderpath}）`, 'CLI DEV');
-
-        return (middlewares, devServer) => {
-            if (!devServer) {
-                throw new Error('webpack-dev-server is not defined');
-            }
-
-            return middlewares;
-        };
     }
+    log(`未能找到 Mock 文件夹（${folderpath}）`, 'CLI DEV');
+
+    return (middlewares, devServer) => {
+        if (!devServer) {
+            throw new Error('webpack-dev-server is not defined');
+        }
+
+        return middlewares;
+    };
 }

@@ -3,14 +3,16 @@ const getProp = (obj, path) => {
 
     for (let i = 0; i < name.length - 1; i++) {
         obj = obj[name[i]];
-        if (typeof obj !== 'object' || !obj || Array.isArray(obj)) return;
+        if (typeof obj !== 'object' || !obj || Array.isArray(obj)) {
+            return;
+        }
     }
 
     return obj[name.pop()];
 };
 
 const jsbridge = (function () {
-    const ns = window['__js_bridge_ns__'] || '__js_bridge__';
+    const ns = window.__js_bridge_ns__ || '__js_bridge__';
     const instance = getProp(window, ns);
 
     let listeners = {};
@@ -21,7 +23,7 @@ const jsbridge = (function () {
         }
 
         if (!listeners[eventName]) {
-            const addEventListener = instance && instance['addEventListener'];
+            const addEventListener = instance && instance.addEventListener;
 
             addEventListener.call(instance, eventName, function (result) {
                 emit(eventName, result);
@@ -54,8 +56,7 @@ const jsbridge = (function () {
 
         keys.forEach(function (eName) {
             if (!eventName || (eventName && eventName === eName)) {
-                const removeEventListener =
-                    instance && instance['removeEventListener'];
+                const removeEventListener = instance && instance.removeEventListener;
                 removeEventListener.call(instance, eName);
 
                 // 无法移除 window 的遗留 callback
@@ -91,9 +92,7 @@ const jsbridge = (function () {
 
                 // 启动 mock
                 if (process.env.YMA_MOCK_ENABLE) {
-                    instance &&
-                        instance['mock'] &&
-                        instance['mock'](args, callback);
+                    instance && instance.mock && instance.mock(args, callback);
                 }
             };
 
@@ -117,18 +116,12 @@ const jsbridge = (function () {
 
         return new Promise(function (resolve, reject) {
             fn.call(that, args.params || {}, function (result) {
-                console.log(
-                    `[window.${ns}.${methodName}][callback]: 回调函数返回结果`
-                );
+                console.log(`[window.${ns}.${methodName}][callback]: 回调函数返回结果`);
                 console.log(result);
 
                 if (typeof complete === 'function') {
                     try {
-                        complete.call(
-                            context,
-                            result.code !== 0 ? result : null,
-                            result.data
-                        );
+                        complete.call(context, result.code !== 0 ? result : null, result.data);
                     } catch (e) {
                         const msg = `[window.${ns}.${methodName}][callback]: 回调函数执行异常`;
                         console.error(msg);
