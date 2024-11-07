@@ -30,12 +30,14 @@ export interface MultiPageConfig {
     [key: string]: PageConfig | string;
 }
 
+const isTiled = process.env.YMA_OUTPUT_TILED == 'true';
+
 export default async function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
         const htmlPublicPath = api.projectOptions.htmlPublicPath || api.projectOptions.publicPath;
         const outputDir = api.resolve(api.projectOptions.outputDir);
         let outputFilename;
-        if (api.projectOptions.outputTiled) {
+        if (isTiled) {
             outputFilename = `[name]${api.isProd && api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`;
         } else {
             outputFilename = getAssetPath(

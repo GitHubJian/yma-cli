@@ -14,6 +14,8 @@ const GLOBAL_BROWSERS_LIST = [
     'Electron >= 0.36',
 ];
 
+const isTiled = process.env.YMA_OUTPUT_TILED == 'true';
+
 export default function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
         const shadowMode = false;
@@ -23,7 +25,7 @@ export default function (api: PluginAPI) {
         const shouldExtract = extract !== false && !shadowMode;
 
         let filename;
-        if (api.projectOptions.outputTiled) {
+        if (isTiled) {
             filename = `[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.css`;
         } else {
             filename = getAssetPath(

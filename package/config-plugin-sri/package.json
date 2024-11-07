@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-sri",
-    "version": "1.0.41",
+    "version": "1.0.42",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -18,10 +18,10 @@
     "dependencies": {
         "cheerio": "1.0.0-rc.12",
         "webpack-subresource-integrity": "5.0.0",
-        "yma-shared-util": "^1.0.41"
+        "yma-shared-util": "^1.0.42"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.41"
+        "yma-config-plugin": "^1.0.42"
     },
     "keywords": [],
     "author": "",
