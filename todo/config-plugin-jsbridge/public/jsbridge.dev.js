@@ -89,7 +89,16 @@ const jsbridge = (function () {
             (instance && instance[methodName]) ||
             function (_, callback) {
                 console.error(`[window.${ns}.${methodName}]: 未定义`);
+
+                // 启动 mock
+                if (process.env.YMA_MOCK_ENABLE) {
+                    instance && instance.mock && instance.mock(args, callback);
+                }
             };
+
+        if (process.env.YMA_MOCK_ENABLE) {
+            sync = false;
+        }
 
         if (sync) {
             const result = fn.call(that, args.params || {}) || {
@@ -97,6 +106,9 @@ const jsbridge = (function () {
             };
 
             return new Promise(function (resolve, reject) {
+                console.log(`[window.${ns}.${methodName}][callback]: 同步函数执行后的返回结果`);
+                console.log(result);
+
                 if (result.code == 0) {
                     resolve(result.data);
                 } else {
@@ -107,7 +119,7 @@ const jsbridge = (function () {
 
         return new Promise(function (resolve, reject) {
             fn.call(that, args.params || {}, function (result) {
-                console.log(`[window.${ns}.${methodName}][callback]: 回调函数返回结果`);
+                console.log(`[window.${ns}.${methodName}][callback]: 异步函数执行后的返回结果`);
                 console.log(result);
 
                 if (typeof complete === 'function') {

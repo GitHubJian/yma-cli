@@ -1,8 +1,8 @@
 import PluginAPI, {Chain} from 'yma-config-plugin';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import createScriptTag from './create-script-tag';
 import {load} from 'cheerio';
+import createScriptTag from './create-script-tag';
 
 const PLUGIN_NAME = 'JSBridgeWebpackPlugin';
 
@@ -44,7 +44,7 @@ class JSBridgeWebpackPlugin {
                     let html = data.html;
 
                     const $ = load(html);
-                    const replacement = createScriptTag(ns, isMock)
+                    const replacement = createScriptTag(ns, isMock);
                     $('head').append(replacement);
                     data.html = $.html();
 

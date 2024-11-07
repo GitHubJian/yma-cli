@@ -65,20 +65,17 @@ class VersionPlugin {
         });
 
         compiler.hooks.compilation.tap(PLUGIN_NAME, compilation => {
-            compilation.hooks.afterProcessAssets.tap(
-                PLUGIN_NAME,
-                function (assets) {
-                    // @ts-ignore
-                    assets[EntryKey + '.json'] = {
-                        source: function () {
-                            return content;
-                        },
-                        size: function () {
-                            return content.length;
-                        },
-                    };
-                }
-            );
+            compilation.hooks.afterProcessAssets.tap(PLUGIN_NAME, function (assets) {
+                // @ts-ignore
+                assets[EntryKey + '.json'] = {
+                    source: function () {
+                        return content;
+                    },
+                    size: function () {
+                        return content.length;
+                    },
+                };
+            });
         });
 
         // compiler.hooks.watchRun.tapAsync(PLUGIN_NAME, (_, callback) => {
@@ -98,9 +95,7 @@ class VersionPlugin {
                     let html = data.html;
 
                     const $ = load(html);
-                    $('head').append(
-                        `<script>window.__version__="${version}";</script>`
-                    );
+                    $('head').append(`<script>window.__version__="${version}";</script>`);
 
                     data.html = $.html();
                     callback(null, data);

@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import createScriptTag from './create-script-tag';
 import {load} from 'cheerio';
+import createScriptTag from './create-script-tag';
 
 interface PluginOptions {
     isUglify?: boolean;

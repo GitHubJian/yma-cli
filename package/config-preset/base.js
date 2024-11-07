@@ -7,5 +7,6 @@ module.exports = {
                 transpileDependencies: true,
             },
         ],
+        ['yma-config-plugin-vconsole'],
     ],
 };

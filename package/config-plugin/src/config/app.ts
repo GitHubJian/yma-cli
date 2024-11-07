@@ -34,12 +34,15 @@ export default async function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
         const htmlPublicPath = api.projectOptions.htmlPublicPath || api.projectOptions.publicPath;
         const outputDir = api.resolve(api.projectOptions.outputDir);
-
-        const outputFilename = getAssetPath(
-            `js/[name]${api.isProd && api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`,
-            api.projectOptions.assetsDir,
-        );
-
+        let outputFilename;
+        if (api.projectOptions.outputTiled) {
+            outputFilename = `[name]${api.isProd && api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`;
+        } else {
+            outputFilename = getAssetPath(
+                `js/[name]${api.isProd && api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`,
+                api.projectOptions.assetsDir,
+            );
+        }
         chain.output.filename(outputFilename).chunkFilename(outputFilename);
 
         const htmlOptions: {

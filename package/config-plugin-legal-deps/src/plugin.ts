@@ -3,7 +3,6 @@ import fs from 'fs';
 import uniqby from 'lodash.uniqby';
 import compact from 'lodash.compact';
 import {Stats, StatsCompilation, StatsModule, WebpackError} from 'webpack';
-import validate from './validate';
 
 // Reference: https://github.com/sindresorhus/type-fest/blob/main/source/package-json.d.ts
 interface PackageJSON {
@@ -31,15 +30,16 @@ function extractUniqueModules(compilation: StatsCompilation): string[] {
 }
 
 function parseName(name: string): {name: string; path: string} | null {
-    const lastIndex = name.lastIndexOf('node_modules/');
+    const nodeModulesStr = path.join('node_modules', path.sep);
+    const lastIndex = name.lastIndexOf(nodeModulesStr);
 
     if (lastIndex < 0) {
         return null;
     }
 
-    const pathPrefix = name.slice(0, lastIndex + 'node_modules/'.length);
-    const segments = name.slice(pathPrefix.length).split('/');
-    const packageName = segments[0].startsWith('@') ? `${segments[0]}/${segments[1]}` : segments[0];
+    const pathPrefix = name.slice(0, lastIndex + nodeModulesStr.length);
+    const segments = name.slice(pathPrefix.length).split(path.sep);
+    const packageName = segments[0].startsWith('@') ? path.join(segments[0], path.sep, segments[1]) : segments[0];
 
     return {
         name: packageName,
@@ -68,18 +68,23 @@ type Config = Array<{
     name: string;
     version: string;
 }>;
-export type LegalDepsWebpackPluginConfig = Config | PackageName;
-
+export type LegalDepsWebpackPluginConfig = Record<string, string>;
 export default class LegalDepsWebpackPlugin {
-    config: Config;
+    config: Config = [];
     // TODO 支持 url
-    constructor(config: LegalDepsWebpackPluginConfig) {
+    constructor(config: Record<string, string> | string) {
         if (typeof config === 'string') {
-            config = importDefault<Config>(require(config));
+            config = importDefault<Record<string, string>>(require(config));
         }
-        validate(config);
 
-        this.config = config;
+        const keys = Object.keys(config);
+        keys.forEach(k => {
+            const value = config[k];
+            this.config.push({
+                name: k,
+                version: value,
+            });
+        });
     }
 
     apply(compiler) {

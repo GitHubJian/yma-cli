@@ -22,10 +22,15 @@ export default function (api: PluginAPI) {
 
         const shouldExtract = extract !== false && !shadowMode;
 
-        const filename = getAssetPath(
-            `css/[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.css`,
-            api.projectOptions.assetsDir,
-        );
+        let filename;
+        if (api.projectOptions.outputTiled) {
+            filename = `[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.css`;
+        } else {
+            filename = getAssetPath(
+                `css/[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.css`,
+                api.projectOptions.assetsDir,
+            );
+        }
 
         const extractOptions = Object.assign(
             {

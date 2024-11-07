@@ -19,6 +19,7 @@ export interface ProjectOptions {
     publicPath: string;
     htmlPublicPath?: string;
     outputDir: string;
+    outputTiled: boolean;
     assetsDir: string;
     filenameHashing: boolean;
     svgPaths?: string[];
@@ -43,5 +44,6 @@ export function defaults(): ProjectOptions {
         outputDir: 'dist',
         assetsDir: 'static',
         filenameHashing: true,
+        outputTiled: false,
     };
 }

@@ -56,11 +56,18 @@ export interface Options {
     csp: string;
 }
 
-export default function (api: PluginAPI, options: Options) {
-    const cspContent = options.csp;
+const defaults = function () {
+    return {
+        csp: "script-src 'self' 'unsafe-inline'",
+    };
+};
 
+export default function (api: PluginAPI, options: Options) {
     api.chainWebpack((chain: Chain) => {
         if (api.isProd) {
+            options = Object.assign({}, defaults(), options);
+            const cspContent = options.csp;
+
             chain.plugin('csp-plugin').use(CspWebpackPlugin, [
                 {
                     content: cspContent,

@@ -1,4 +1,10 @@
 import VConsole from 'vconsole';
 
-window.VConsole = VConsole;
-window.vConsole = new VConsole();
+const search = window.location.search;
+const params = new URLSearchParams(search);
+const vconsole = params.get('vconsole');
+
+if (vconsole === 'true') {
+    window.VConsole = VConsole;
+    window.vConsole = new VConsole();
+}
