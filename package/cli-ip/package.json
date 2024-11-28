@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-ip",
-    "version": "1.0.42",
+    "version": "1.0.43",
     "description": "获取本机 IP",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,16 +10,13 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist"
-    ],
+    "files": ["bin", "dist"],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "address": "1.1.2",
         "clipboardy": "2.3.0",
-        "yma-shared-util": "^1.0.42"
+        "yma-shared-util": "^1.0.43"
     }
 }

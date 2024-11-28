@@ -26,11 +26,17 @@ interface CSSLoaderOptions {
     };
 }
 
+const isTiled = process.env.YMA_OUTPUT_TILED == 'true';
+
 export default function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
         const inlineLimit = 4096;
 
         const genAssetSubPath = (dir: string): string => {
+            if (isTiled) {
+                return `[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.[ext]`;
+            }
+
             return getAssetPath(
                 `${dir}/[name]${api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.[ext]`,
                 api.projectOptions.assetsDir,

@@ -1,20 +1,24 @@
 {
-    "name": "yma-cli-gen-index",
+    "name": "yma-cli-base64",
     "version": "1.0.43",
-    "description": "Webpack Dev 构建命令",
+    "description": "将图片资源转为Base64输出",
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
         "clean": "del-cli -f dist",
-        "link": "npm link"
+        "link": "npm link",
+        "unlink": "npm unlink yma-cli-base64"
     },
-    "files": ["bin", "dist", "public"],
+    "files": ["bin", "dist"],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "fs-extra": "10.1.0"
+        "fs-extra": "10.1.0",
+        "glob": "7.2.0",
+        "mime-types": "2.1.33",
+        "yma-shared-util": "^1.0.43"
     }
 }
