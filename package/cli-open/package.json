@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-open",
-    "version": "1.0.43",
+    "version": "1.0.44",
     "description": "打开资源管理器",
     "main": "./dist/index.js",
     "scripts": {
@@ -11,12 +11,15 @@
         "link": "npm link",
         "unlink": "npm unlink yma-cli-open"
     },
-    "files": ["bin", "dist"],
+    "files": [
+        "bin",
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
         "execa": "5.0.0",
-        "yma-shared-util": "^1.0.43"
+        "yma-shared-util": "^1.0.44"
     }
 }

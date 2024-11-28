@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-docker",
-    "version": "1.0.43",
+    "version": "1.0.44",
     "description": "构建 web 项目的 Docker 镜像",
     "main": "./dist/index.js",
     "scripts": {
@@ -11,7 +11,10 @@
         "link": "npm link",
         "unlink": "npm unlink yma-cli-docker"
     },
-    "files": ["bin", "dist"],
+    "files": [
+        "bin",
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -19,6 +22,6 @@
         "execa": "5.0.0",
         "fs-extra": "10.1.0",
         "semver": "7.3.5",
-        "yma-shared-util": "^1.0.43"
+        "yma-shared-util": "^1.0.44"
     }
 }

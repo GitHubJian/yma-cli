@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-copy",
-    "version": "1.0.43",
+    "version": "1.0.44",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -13,9 +13,12 @@
     "dependencies": {
         "clipboardy": "2.3.0",
         "yma-package-manager": "1.0.3",
-        "yma-shared-util": "^1.0.43"
+        "yma-shared-util": "^1.0.44"
     },
-    "files": ["bin", "dist"],
+    "files": [
+        "bin",
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC"
