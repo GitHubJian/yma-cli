@@ -1,6 +1,6 @@
 {
     "name": "yma-zip",
-    "version": "1.0.45",
+    "version": "1.0.46",
     "description": "Archiver 压缩文件夹",
     "main": "./dist/index.js",
     "scripts": {
@@ -22,6 +22,6 @@
         "archiver": "7.0.1",
         "dayjs": "1.11.9",
         "fs-extra": "11.2.0",
-        "yma-shared-util": "^1.0.45"
+        "yma-shared-util": "^1.0.46"
     }
 }

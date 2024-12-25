@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-version",
-    "version": "1.0.45",
+    "version": "1.0.46",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -17,11 +17,11 @@
     ],
     "dependencies": {
         "cheerio": "1.0.0-rc.12",
-        "yma-shared-util": "^1.0.45"
+        "yma-shared-util": "^1.0.46"
     },
     "devDependencies": {
         "html-webpack-plugin": "5.5.0",
-        "yma-config-plugin": "^1.0.45"
+        "yma-config-plugin": "^1.0.46"
     },
     "keywords": [],
     "author": "",

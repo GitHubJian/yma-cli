@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-dll",
-    "version": "1.0.45",
+    "version": "1.0.46",
     "description": "Webpack 配置 DLL 模式",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,6 +20,6 @@
         "html-webpack-tags-plugin": "3.0.2"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.45"
+        "yma-config-plugin": "^1.0.46"
     }
 }
