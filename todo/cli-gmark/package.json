@@ -1,0 +1,23 @@
+{
+    "name": "yma-cli-gmark",
+    "version": "1.0.44",
+    "description": "GIT 本地分支描述记录",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "del-cli -f package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "del-cli -f dist",
+        "link": "npm link",
+        "unlink": "npm unlink yma-cli-gmark"
+    },
+    "files": ["bin", "dist"],
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "execa": "5.0.0",
+        "inquirer": "6.5.2",
+        "yma-shared-util": "^1.0.44"
+    }
+}

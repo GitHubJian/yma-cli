@@ -66,9 +66,11 @@ module.exports = function ({types: t}) {
 
                     t.addComment(arg, 'leading', `webpackChunkName: '${webpackChunkName}'`);
 
+                    t.addComment(arg, 'leading', 'webpackPrefetch: true');
+
                     // TODO 输出文件路径
                     console.warn(
-                        `[babel-webpack-chunkname-plugin]: 通过 [${arg.value}] 生成 WebpackChunkName [${webpackChunkName}]，建议手动调整更好的应用 HTTP Cache`,
+                        `[babel-webpack-chunkname-plugin]: 对 import("${arg.value}") 新增注释 webpackChunkName: ${webpackChunkName} & webpackPrefetch: true`,
                     );
                 }
             },

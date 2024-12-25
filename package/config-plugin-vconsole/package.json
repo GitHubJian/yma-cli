@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-vconsole",
-    "version": "1.0.44",
+    "version": "1.0.45",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -19,7 +19,7 @@
         "vconsole": "3.15.1"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.44"
+        "yma-config-plugin": "^1.0.45"
     },
     "keywords": [],
     "author": "",

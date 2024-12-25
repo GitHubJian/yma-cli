@@ -1,6 +1,6 @@
 {
     "name": "yma-devserver-mock",
-    "version": "1.0.44",
+    "version": "1.0.45",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -17,10 +17,10 @@
     ],
     "dependencies": {
         "path-to-regexp": "6.2.1",
-        "yma-shared-util": "^1.0.44"
+        "yma-shared-util": "^1.0.45"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.44"
+        "yma-config-plugin": "^1.0.45"
     },
     "keywords": [],
     "author": "",

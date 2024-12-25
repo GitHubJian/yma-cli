@@ -1,7 +1,7 @@
 {
     "name": "yma-config-plugin-sdk",
-    "version": "1.0.44",
-    "description": "",
+    "version": "1.0.45",
+    "description": "Webpack 打包生成 UMD 模式 EntryJS",
     "main": "./dist/index.js",
     "scripts": {
         "init": "del-cli -f package-lock.json && npm install",
@@ -16,10 +16,10 @@
         "public"
     ],
     "dependencies": {
-        "yma-shared-util": "^1.0.44"
+        "yma-shared-util": "^1.0.45"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.44"
+        "yma-config-plugin": "^1.0.45"
     },
     "keywords": [],
     "author": "",

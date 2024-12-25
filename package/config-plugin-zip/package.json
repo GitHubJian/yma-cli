@@ -1,0 +1,28 @@
+{
+    "name": "yma-config-plugin-zip",
+    "version": "1.0.45",
+    "description": "Webpack 压缩文件夹",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "del-cli -f package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "del-cli -f dist",
+        "link": "npm link"
+    },
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
+    "dependencies": {
+        "yma-shared-util": "^1.0.45",
+        "yma-zip": "^1.0.45"
+    },
+    "devDependencies": {
+        "yma-config-plugin": "^1.0.45"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

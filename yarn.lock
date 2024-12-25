@@ -11139,7 +11139,7 @@ svgo@^2.7.0:
 
 table@6.8.1:
   version "6.8.1"
-  resolved "https://registry.npmjs.org/table/-/table-6.8.1.tgz"
+  resolved "https://registry.yarnpkg.com/table/-/table-6.8.1.tgz#ea2b71359fe03b017a5fbc296204471158080bdf"
   integrity sha512-Y4X9zqrCftUhMeH2EptSSERdVKt/nEdijTOacGD/97EKjhQ/Qs8RTlEGABSJNNN8lac9kheH+af7yAkEWlgneA==
   dependencies:
     ajv "^8.0.1"

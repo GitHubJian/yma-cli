@@ -65,6 +65,7 @@ export default async function dev(
 
     const devServerOptions = Object.assign(webpackConfig.devServer || {}, options.devServer || {});
 
+    // TODO https
     const protocol = 'http';
     const host = process.env.HOST || devServerOptions.host || defaults.host;
     portfinder.basePort = +(process.env.PORT || devServerOptions.port || defaults.port);

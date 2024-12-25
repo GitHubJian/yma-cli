@@ -1,25 +1,23 @@
 import PluginAPI, {Chain} from 'yma-config-plugin';
 import {resolvePkg} from 'yma-shared-util';
 
-export interface Options {
+export interface PluginOptions {
     name: string;
-    default?: boolean;
-    externals?: string[];
+    default: boolean;
+    filetype: false | 'hash' | 'min';
 }
 
-export default function (api: PluginAPI, options: Options) {
+export default function (api: PluginAPI, pluginOptions: Partial<PluginOptions> = {}) {
     const pkg = resolvePkg<{name: string}>(api.context) as {name: string};
-    const name = options.name || pkg.name;
+    const name = pluginOptions.name || pkg.name;
 
     api.chainWebpack((chain: Chain) => {
-        chain.output.filename('[name].js').chunkFilename('[name].chunk.js').library(name).libraryTarget('umd');
+        const filename = `[name]${api.isProd && api.projectOptions.filenameHashing ? '.[contenthash:8]' : ''}.js`;
 
-        if (options.default) {
+        chain.output.filename(filename).chunkFilename(filename).library(name).libraryTarget('umd');
+
+        if (pluginOptions.default) {
             chain.output.libraryExport('default');
-        }
-
-        if (options.externals && options.externals.length > 0) {
-            chain.externals(options.externals);
         }
     });
 
@@ -30,6 +28,13 @@ export default function (api: PluginAPI, options: Options) {
             if (key.startsWith('html')) {
                 chain.plugins.delete(key);
             }
+        }
+
+        // 异步加载
+        const splitChunksOptions = chain.optimization.get('splitChunks');
+        if (splitChunksOptions) {
+            splitChunksOptions.chunks = 'async';
+            chain.optimization.splitChunks(splitChunksOptions);
         }
     };
 

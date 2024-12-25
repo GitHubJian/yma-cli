@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-init",
-    "version": "1.0.44",
+    "version": "1.0.45",
     "description": "创建项目",
     "main": "./dist/index.js",
     "scripts": {

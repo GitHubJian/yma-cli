@@ -25,8 +25,8 @@ function createChunks(
         // TODO name 唯一性
         chunks[name] = {
             name: name,
-            test: function (module: {context: string}): boolean {
-                return module?.context?.includes(chunkDirname);
+            test: function (module: {resource: string}): boolean {
+                return module?.resource?.includes(chunkDirname);
             },
             reuseExistingChunk: true,
             minChunks: 1,
@@ -74,10 +74,10 @@ export default function (api: PluginAPI, options: Partial<Options> = {}) {
                         test: function (module) {
                             return (
                                 vendorsOptions.exclude.every(function (v) {
-                                    return module?.context?.indexOf(v) === -1;
+                                    return module?.resource?.indexOf(v) === -1;
                                 }) &&
                                 vendorsOptions.include.some(function (v) {
-                                    return module?.context?.indexOf(v) > -1;
+                                    return module?.resource?.indexOf(v) > -1;
                                 })
                             );
                         },
@@ -90,10 +90,10 @@ export default function (api: PluginAPI, options: Partial<Options> = {}) {
                         test: function (module) {
                             return (
                                 autarkiesOptions.exclude.every(function (v) {
-                                    return module?.context?.indexOf(v) === -1;
+                                    return module?.resource?.indexOf(v) === -1;
                                 }) &&
                                 autarkiesOptions.include.some(function (v) {
-                                    return module?.context?.indexOf(v) > -1;
+                                    return module?.resource?.indexOf(v) > -1;
                                 })
                             );
                         },

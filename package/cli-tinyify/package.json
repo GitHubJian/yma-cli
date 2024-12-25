@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-tinyify",
-    "version": "1.0.44",
+    "version": "1.0.45",
     "description": "TinyPNG 压缩图片",
     "main": "./dist/index.js",
     "scripts": {
@@ -27,6 +27,6 @@
         "progress": "2.0.3",
         "semver": "7.3.5",
         "tinify": "1.6.1",
-        "yma-shared-util": "^1.0.44"
+        "yma-shared-util": "^1.0.45"
     }
 }
