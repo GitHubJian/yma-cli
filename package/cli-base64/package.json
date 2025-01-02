@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-base64",
-    "version": "1.0.46",
+    "version": "1.0.47",
     "description": "将图片资源转为Base64输出",
     "main": "./dist/index.js",
     "scripts": {
@@ -22,6 +22,6 @@
         "fs-extra": "10.1.0",
         "glob": "7.2.0",
         "mime-types": "2.1.33",
-        "yma-shared-util": "^1.0.46"
+        "yma-shared-util": "^1.0.47"
     }
 }

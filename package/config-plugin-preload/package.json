@@ -1,0 +1,29 @@
+{
+    "name": "yma-config-plugin-preload",
+    "version": "1.0.47",
+    "description": "Webpack 构建时，Preload.js 预加载资源",
+    "main": "./dist/index.js",
+    "scripts": {
+        "init": "del-cli -f package-lock.json && npm install",
+        "start": "npm run build -- -w",
+        "build": "npm run clean && tsc -p src",
+        "clean": "del-cli -f dist",
+        "link": "npm link"
+    },
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
+    "dependencies": {
+        "cheerio": "1.0.0-rc.12",
+        "webpack-subresource-integrity": "5.0.0",
+        "yma-shared-util": "^1.0.47"
+    },
+    "devDependencies": {
+        "yma-config-plugin": "^1.0.47"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

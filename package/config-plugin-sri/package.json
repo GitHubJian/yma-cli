@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-sri",
-    "version": "1.0.46",
+    "version": "1.0.47",
     "description": "Webpack 构建时在 HTML 中加入 SRI 内容",
     "main": "./dist/index.js",
     "scripts": {
@@ -18,10 +18,10 @@
     "dependencies": {
         "cheerio": "1.0.0-rc.12",
         "webpack-subresource-integrity": "5.0.0",
-        "yma-shared-util": "^1.0.46"
+        "yma-shared-util": "^1.0.47"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.46"
+        "yma-config-plugin": "^1.0.47"
     },
     "keywords": [],
     "author": "",

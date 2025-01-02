@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-zip",
-    "version": "1.0.46",
+    "version": "1.0.47",
     "description": "Webpack 压缩文件夹",
     "main": "./dist/index.js",
     "scripts": {
@@ -16,11 +16,11 @@
         "public"
     ],
     "dependencies": {
-        "yma-shared-util": "^1.0.46",
-        "yma-zip": "^1.0.46"
+        "yma-shared-util": "^1.0.47",
+        "yma-zip": "^1.0.47"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.46"
+        "yma-config-plugin": "^1.0.47"
     },
     "keywords": [],
     "author": "",
