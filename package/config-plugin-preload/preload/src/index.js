@@ -1,6 +1,6 @@
 const createSeries = require('yma-series');
 const {importLink} = require('./import-link');
-const {on, hasOwn} = require('./util');
+const {on, hasOwn, ensureSlash} = require('./util');
 
 function httpRequest(url, completeCallback) {
     const xhr = new XMLHttpRequest();
@@ -34,12 +34,34 @@ function httpRequest(url, completeCallback) {
     xhr.send();
 }
 
-function main() {
-    const force = window.__preload__force__ === true;
-    const dns = window.__preload__dns__ || './';
-    const callback = window.__preload__callback__ || function () {};
+const defaults = function () {
+    return {
+        dns: './',
+        force: false,
+        filename: 'assets-manifest.json',
+        callback: function () {
+            console.log('[Preload] 执行回调');
+        },
+    };
+};
 
-    httpRequest(dns + 'assets-manifest.json', function (e, manifest) {
+let isInit = false;
+function main(options) {
+    if (isInit) {
+        console.log('[Preload] 函数已被执行');
+        return;
+    }
+
+    isInit = true;
+
+    options = Object.assign({}, defaults(), options);
+
+    const force = options.force;
+    const dns = ensureSlash(options.dns);
+    const callback = options.callback;
+    const filename = options.filename;
+
+    httpRequest(dns + filename, function (e, manifest) {
         if (e) {
             console.error(e);
         } else {
@@ -50,13 +72,14 @@ function main() {
             for (const key in manifest) {
                 if (hasOwn(manifest, key)) {
                     const val = manifest[key];
+                    const uri = dns + val;
 
                     series.tap(function (ctx, next) {
-                        importLink(val, {
+                        importLink(uri, {
                             force: force,
                             completeCallback: function (e) {
                                 if (e) {
-                                    ctx.errors.push([val, e]);
+                                    ctx.errors.push([uri, e]);
                                 }
 
                                 next();
@@ -73,8 +96,59 @@ function main() {
     });
 }
 
-if ('complete' === document.readyState || 'interactive' === document.readyState) {
-    main();
+if (
+    'complete' === document.readyState ||
+    'interactive' === document.readyState
+) {
+    const options = {
+        force: !!window.__preload__force__,
+    };
+
+    if (
+        typeof window.__preload__dns__ === 'string' &&
+        window.__preload__dns__.length > 0
+    ) {
+        options.dns = window.__preload__dns__;
+    }
+
+    if (
+        typeof window.__preload__filename__ === 'string' &&
+        window.__preload__filename__.length > 0
+    ) {
+        options.filename = window.__preload__filename__;
+    }
+
+    if (typeof window.__preload__callback__ === 'function') {
+        options.callback = window.__preload__callback__;
+    }
+
+    main(options);
 } else {
-    on(document, 'DOMContentLoaded', main);
+    on(document, 'DOMContentLoaded', function () {
+        const options = {
+            force: !!window.__preload__force__,
+        };
+
+        if (
+            typeof window.__preload__dns__ === 'string' &&
+            window.__preload__dns__.length > 0
+        ) {
+            options.dns = window.__preload__dns__;
+        }
+
+        if (
+            typeof window.__preload__filename__ === 'string' &&
+            window.__preload__filename__.length > 0
+        ) {
+            options.filename = window.__preload__filename__;
+        }
+
+        if (typeof window.__preload__callback__ === 'function') {
+            options.callback = window.__preload__callback__;
+        }
+
+        main(options);
+    });
 }
+
+module.exports = main;

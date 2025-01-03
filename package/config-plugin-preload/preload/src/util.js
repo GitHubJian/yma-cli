@@ -35,3 +35,7 @@ exports.off = (function () {
         }
     };
 })();
+
+exports.ensureSlash = function ensureSlash(val) {
+    return val.replace(/([^/])$/, '$1/');
+};

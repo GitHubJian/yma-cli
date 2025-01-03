@@ -1,6 +1,6 @@
 {
     "name": "yma-babel-preset",
-    "version": "1.0.47",
+    "version": "1.0.48",
     "description": "适用于大多项目，简易的 babel preset 配置",
     "main": "./index.js",
     "scripts": {
@@ -37,6 +37,6 @@
         "babel-plugin-transform-vue-jsx": "^3.7.0",
         "core-js": "3.35.0",
         "semver": "7.3.5",
-        "yma-config-plugin": "^1.0.47"
+        "yma-config-plugin": "^1.0.48"
     }
 }

@@ -249,9 +249,137 @@ exports.importLink = function importLink(uri, options) {
 
 /***/ }),
 
-/***/ 8491:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ 7959:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+__webpack_require__(429);
+var createSeries = __webpack_require__(9695);
+var _require = __webpack_require__(4826),
+  importLink = _require.importLink;
+var _require2 = __webpack_require__(8491),
+  on = _require2.on,
+  hasOwn = _require2.hasOwn,
+  ensureSlash = _require2.ensureSlash;
+function httpRequest(url, completeCallback) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (200 <= xhr.status && xhr.status < 300) {
+        try {
+          var data = JSON.parse(xhr.responseText);
+          completeCallback && completeCallback(null, data);
+        } catch (e) {
+          completeCallback && completeCallback({
+            code: 1,
+            message: '[Prefetch] Manifest 资源解析异常'
+          });
+        }
+      } else {
+        completeCallback && completeCallback({
+          code: 1,
+          message: '[Prefetch] Manifest 资源请求异常'
+        });
+      }
+    }
+  };
+  xhr.send();
+}
+var defaults = function defaults() {
+  return {
+    dns: './',
+    force: false,
+    filename: 'assets-manifest.json',
+    callback: function callback() {
+      console.log('[Preload] 执行回调');
+    }
+  };
+};
+var isInit = false;
+function main(options) {
+  if (isInit) {
+    console.log('[Preload] 函数已被执行');
+    return;
+  }
+  isInit = true;
+  options = Object.assign({}, defaults(), options);
+  var force = options.force;
+  var dns = ensureSlash(options.dns);
+  var callback = options.callback;
+  var filename = options.filename;
+  httpRequest(dns + filename, function (e, manifest) {
+    if (e) {
+      console.error(e);
+    } else {
+      var series = createSeries({
+        errors: []
+      });
+      var _loop = function _loop() {
+        if (hasOwn(manifest, key)) {
+          var val = manifest[key];
+          var uri = dns + val;
+          series.tap(function (ctx, next) {
+            importLink(uri, {
+              force: force,
+              completeCallback: function completeCallback(e) {
+                if (e) {
+                  ctx.errors.push([uri, e]);
+                }
+                next();
+              }
+            });
+          });
+        }
+      };
+      for (var key in manifest) {
+        _loop();
+      }
+      series.call(function (ctx) {
+        callback(ctx);
+      });
+    }
+  });
+}
+if ('complete' === document.readyState || 'interactive' === document.readyState) {
+  var options = {
+    force: !!window.__preload__force__
+  };
+  if (typeof window.__preload__dns__ === 'string' && window.__preload__dns__.length > 0) {
+    options.dns = window.__preload__dns__;
+  }
+  if (typeof window.__preload__filename__ === 'string' && window.__preload__filename__.length > 0) {
+    options.filename = window.__preload__filename__;
+  }
+  if (typeof window.__preload__callback__ === 'function') {
+    options.callback = window.__preload__callback__;
+  }
+  main(options);
+} else {
+  on(document, 'DOMContentLoaded', function () {
+    var options = {
+      force: !!window.__preload__force__
+    };
+    if (typeof window.__preload__dns__ === 'string' && window.__preload__dns__.length > 0) {
+      options.dns = window.__preload__dns__;
+    }
+    if (typeof window.__preload__filename__ === 'string' && window.__preload__filename__.length > 0) {
+      options.filename = window.__preload__filename__;
+    }
+    if (typeof window.__preload__callback__ === 'function') {
+      options.callback = window.__preload__callback__;
+    }
+    main(options);
+  });
+}
+module.exports = main;
+
+/***/ }),
+
+/***/ 8491:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+__webpack_require__(4043);
+__webpack_require__(7267);
 exports.hasOwn = function hasOwn(object, key) {
   var hasOwnProperty = Object.prototype.hasOwnProperty;
   return object != null && hasOwnProperty.call(object, key);
@@ -285,6 +413,9 @@ exports.off = function () {
     }
   };
 }();
+exports.ensureSlash = function ensureSlash(val) {
+  return val.replace(/([^/])$/, '$1/');
+};
 
 /***/ }),
 
@@ -1169,6 +1300,60 @@ module.exports = function (V, P) {
 
 /***/ }),
 
+/***/ 7017:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var uncurryThis = __webpack_require__(8844);
+var toObject = __webpack_require__(690);
+
+var floor = Math.floor;
+var charAt = uncurryThis(''.charAt);
+var replace = uncurryThis(''.replace);
+var stringSlice = uncurryThis(''.slice);
+// eslint-disable-next-line redos/no-vulnerable -- safe
+var SUBSTITUTION_SYMBOLS = /\$([$&'`]|\d{1,2}|<[^>]*>)/g;
+var SUBSTITUTION_SYMBOLS_NO_NAMED = /\$([$&'`]|\d{1,2})/g;
+
+// `GetSubstitution` abstract operation
+// https://tc39.es/ecma262/#sec-getsubstitution
+module.exports = function (matched, str, position, captures, namedCaptures, replacement) {
+  var tailPos = position + matched.length;
+  var m = captures.length;
+  var symbols = SUBSTITUTION_SYMBOLS_NO_NAMED;
+  if (namedCaptures !== undefined) {
+    namedCaptures = toObject(namedCaptures);
+    symbols = SUBSTITUTION_SYMBOLS;
+  }
+  return replace(replacement, symbols, function (match, ch) {
+    var capture;
+    switch (charAt(ch, 0)) {
+      case '$': return '$';
+      case '&': return matched;
+      case '`': return stringSlice(str, 0, position);
+      case "'": return stringSlice(str, tailPos);
+      case '<':
+        capture = namedCaptures[stringSlice(ch, 1, -1)];
+        break;
+      default: // \d\d?
+        var n = +ch;
+        if (n === 0) return match;
+        if (n > m) {
+          var f = floor(n / 10);
+          if (f === 0) return match;
+          if (f <= m) return captures[f - 1] === undefined ? charAt(ch, 1) : captures[f - 1] + charAt(ch, 1);
+          return match;
+        }
+        capture = captures[n - 1];
+    }
+    return capture === undefined ? '' : capture;
+  });
+};
+
+
+/***/ }),
+
 /***/ 9037:
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
@@ -1759,6 +1944,71 @@ var toString = __webpack_require__(4327);
 module.exports = function (argument, $default) {
   return argument === undefined ? arguments.length < 2 ? '' : $default : toString(argument);
 };
+
+
+/***/ }),
+
+/***/ 5394:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var DESCRIPTORS = __webpack_require__(7697);
+var uncurryThis = __webpack_require__(8844);
+var call = __webpack_require__(2615);
+var fails = __webpack_require__(3689);
+var objectKeys = __webpack_require__(300);
+var getOwnPropertySymbolsModule = __webpack_require__(7518);
+var propertyIsEnumerableModule = __webpack_require__(9556);
+var toObject = __webpack_require__(690);
+var IndexedObject = __webpack_require__(4413);
+
+// eslint-disable-next-line es/no-object-assign -- safe
+var $assign = Object.assign;
+// eslint-disable-next-line es/no-object-defineproperty -- required for testing
+var defineProperty = Object.defineProperty;
+var concat = uncurryThis([].concat);
+
+// `Object.assign` method
+// https://tc39.es/ecma262/#sec-object.assign
+module.exports = !$assign || fails(function () {
+  // should have correct order of operations (Edge bug)
+  if (DESCRIPTORS && $assign({ b: 1 }, $assign(defineProperty({}, 'a', {
+    enumerable: true,
+    get: function () {
+      defineProperty(this, 'b', {
+        value: 3,
+        enumerable: false
+      });
+    }
+  }), { b: 2 })).b !== 1) return true;
+  // should work with symbols and should have deterministic property order (V8 bug)
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line es/no-symbol -- safe
+  var symbol = Symbol('assign detection');
+  var alphabet = 'abcdefghijklmnopqrst';
+  A[symbol] = 7;
+  alphabet.split('').forEach(function (chr) { B[chr] = chr; });
+  return $assign({}, A)[symbol] !== 7 || objectKeys($assign({}, B)).join('') !== alphabet;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars -- required for `.length`
+  var T = toObject(target);
+  var argumentsLength = arguments.length;
+  var index = 1;
+  var getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
+  var propertyIsEnumerable = propertyIsEnumerableModule.f;
+  while (argumentsLength > index) {
+    var S = IndexedObject(arguments[index++]);
+    var keys = getOwnPropertySymbols ? concat(objectKeys(S), getOwnPropertySymbols(S)) : objectKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) {
+      key = keys[j++];
+      if (!DESCRIPTORS || call(propertyIsEnumerable, S, key)) T[key] = S[key];
+    }
+  } return T;
+} : $assign;
 
 
 /***/ }),
@@ -3123,6 +3373,24 @@ exportWebAssemblyErrorCauseWrapper('RuntimeError', function (init) {
 
 /***/ }),
 
+/***/ 429:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var $ = __webpack_require__(9989);
+var assign = __webpack_require__(5394);
+
+// `Object.assign` method
+// https://tc39.es/ecma262/#sec-object.assign
+// eslint-disable-next-line es/no-object-assign -- required for testing
+$({ target: 'Object', stat: true, arity: 2, forced: Object.assign !== assign }, {
+  assign: assign
+});
+
+
+/***/ }),
+
 /***/ 4043:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -3136,6 +3404,156 @@ var exec = __webpack_require__(6308);
 $({ target: 'RegExp', proto: true, forced: /./.exec !== exec }, {
   exec: exec
 });
+
+
+/***/ }),
+
+/***/ 7267:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var apply = __webpack_require__(1735);
+var call = __webpack_require__(2615);
+var uncurryThis = __webpack_require__(8844);
+var fixRegExpWellKnownSymbolLogic = __webpack_require__(8678);
+var fails = __webpack_require__(3689);
+var anObject = __webpack_require__(5027);
+var isCallable = __webpack_require__(9985);
+var isNullOrUndefined = __webpack_require__(981);
+var toIntegerOrInfinity = __webpack_require__(8700);
+var toLength = __webpack_require__(3126);
+var toString = __webpack_require__(4327);
+var requireObjectCoercible = __webpack_require__(4684);
+var advanceStringIndex = __webpack_require__(1514);
+var getMethod = __webpack_require__(4849);
+var getSubstitution = __webpack_require__(7017);
+var regExpExec = __webpack_require__(6100);
+var wellKnownSymbol = __webpack_require__(4201);
+
+var REPLACE = wellKnownSymbol('replace');
+var max = Math.max;
+var min = Math.min;
+var concat = uncurryThis([].concat);
+var push = uncurryThis([].push);
+var stringIndexOf = uncurryThis(''.indexOf);
+var stringSlice = uncurryThis(''.slice);
+
+var maybeToString = function (it) {
+  return it === undefined ? it : String(it);
+};
+
+// IE <= 11 replaces $0 with the whole match, as if it was $&
+// https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
+var REPLACE_KEEPS_$0 = (function () {
+  // eslint-disable-next-line regexp/prefer-escape-replacement-dollar-char -- required for testing
+  return 'a'.replace(/./, '$0') === '$0';
+})();
+
+// Safari <= 13.0.3(?) substitutes nth capture where n>m with an empty string
+var REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE = (function () {
+  if (/./[REPLACE]) {
+    return /./[REPLACE]('a', '$0') === '';
+  }
+  return false;
+})();
+
+var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
+  var re = /./;
+  re.exec = function () {
+    var result = [];
+    result.groups = { a: '7' };
+    return result;
+  };
+  // eslint-disable-next-line regexp/no-useless-dollar-replacements -- false positive
+  return ''.replace(re, '$<a>') !== '7';
+});
+
+// @@replace logic
+fixRegExpWellKnownSymbolLogic('replace', function (_, nativeReplace, maybeCallNative) {
+  var UNSAFE_SUBSTITUTE = REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE ? '$' : '$0';
+
+  return [
+    // `String.prototype.replace` method
+    // https://tc39.es/ecma262/#sec-string.prototype.replace
+    function replace(searchValue, replaceValue) {
+      var O = requireObjectCoercible(this);
+      var replacer = isNullOrUndefined(searchValue) ? undefined : getMethod(searchValue, REPLACE);
+      return replacer
+        ? call(replacer, searchValue, O, replaceValue)
+        : call(nativeReplace, toString(O), searchValue, replaceValue);
+    },
+    // `RegExp.prototype[@@replace]` method
+    // https://tc39.es/ecma262/#sec-regexp.prototype-@@replace
+    function (string, replaceValue) {
+      var rx = anObject(this);
+      var S = toString(string);
+
+      if (
+        typeof replaceValue == 'string' &&
+        stringIndexOf(replaceValue, UNSAFE_SUBSTITUTE) === -1 &&
+        stringIndexOf(replaceValue, '$<') === -1
+      ) {
+        var res = maybeCallNative(nativeReplace, rx, S, replaceValue);
+        if (res.done) return res.value;
+      }
+
+      var functionalReplace = isCallable(replaceValue);
+      if (!functionalReplace) replaceValue = toString(replaceValue);
+
+      var global = rx.global;
+      var fullUnicode;
+      if (global) {
+        fullUnicode = rx.unicode;
+        rx.lastIndex = 0;
+      }
+
+      var results = [];
+      var result;
+      while (true) {
+        result = regExpExec(rx, S);
+        if (result === null) break;
+
+        push(results, result);
+        if (!global) break;
+
+        var matchStr = toString(result[0]);
+        if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
+      }
+
+      var accumulatedResult = '';
+      var nextSourcePosition = 0;
+      for (var i = 0; i < results.length; i++) {
+        result = results[i];
+
+        var matched = toString(result[0]);
+        var position = max(min(toIntegerOrInfinity(result.index), S.length), 0);
+        var captures = [];
+        var replacement;
+        // NOTE: This is equivalent to
+        //   captures = result.slice(1).map(maybeToString)
+        // but for some reason `nativeSlice.call(result, 1, result.length)` (called in
+        // the slice polyfill when slicing native arrays) "doesn't work" in safari 9 and
+        // causes a crash (https://pastebin.com/N21QzeQA) when trying to debug it.
+        for (var j = 1; j < result.length; j++) push(captures, maybeToString(result[j]));
+        var namedCaptures = result.groups;
+        if (functionalReplace) {
+          var replacerArgs = concat([matched], captures, position, S);
+          if (namedCaptures !== undefined) push(replacerArgs, namedCaptures);
+          replacement = toString(apply(replaceValue, undefined, replacerArgs));
+        } else {
+          replacement = getSubstitution(matched, S, position, captures, namedCaptures, replaceValue);
+        }
+        if (position >= nextSourcePosition) {
+          accumulatedResult += stringSlice(S, nextSourcePosition, position) + replacement;
+          nextSourcePosition = position + matched.length;
+        }
+      }
+
+      return accumulatedResult + stringSlice(S, nextSourcePosition);
+    }
+  ];
+}, !REPLACE_SUPPORTS_NAMED_GROUPS || !REPLACE_KEEPS_$0 || REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE);
 
 
 /***/ }),
@@ -3345,83 +3763,12 @@ fixRegExpWellKnownSymbolLogic('split', function (SPLIT, nativeSplit, maybeCallNa
 /******/ 	})();
 /******/ 	
 /************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
-var createSeries = __webpack_require__(9695);
-var _require = __webpack_require__(4826),
-  importLink = _require.importLink;
-var _require2 = __webpack_require__(8491),
-  on = _require2.on,
-  hasOwn = _require2.hasOwn;
-function httpRequest(url, completeCallback) {
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      if (200 <= xhr.status && xhr.status < 300) {
-        try {
-          var data = JSON.parse(xhr.responseText);
-          completeCallback && completeCallback(null, data);
-        } catch (e) {
-          completeCallback && completeCallback({
-            code: 1,
-            message: '[Prefetch] Manifest 资源解析异常'
-          });
-        }
-      } else {
-        completeCallback && completeCallback({
-          code: 1,
-          message: '[Prefetch] Manifest 资源请求异常'
-        });
-      }
-    }
-  };
-  xhr.send();
-}
-function main() {
-  var force = window.__preload__force__ === true;
-  var dns = window.__preload__dns__ || './';
-  var callback = window.__preload__callback__ || function () {};
-  httpRequest(dns + 'assets-manifest.json', function (e, manifest) {
-    if (e) {
-      console.error(e);
-    } else {
-      var series = createSeries({
-        errors: []
-      });
-      var _loop = function _loop() {
-        if (hasOwn(manifest, key)) {
-          var val = manifest[key];
-          series.tap(function (ctx, next) {
-            importLink(val, {
-              force: force,
-              completeCallback: function completeCallback(e) {
-                if (e) {
-                  ctx.errors.push([val, e]);
-                }
-                next();
-              }
-            });
-          });
-        }
-      };
-      for (var key in manifest) {
-        _loop();
-      }
-      series.call(function (ctx) {
-        callback(ctx);
-      });
-    }
-  });
-}
-if ('complete' === document.readyState || 'interactive' === document.readyState) {
-  main();
-} else {
-  on(document, 'DOMContentLoaded', main);
-}
-})();
-
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
+/******/ 	var __webpack_exports__ = __webpack_require__(7959);
+/******/ 	
 /******/ 	return __webpack_exports__;
 /******/ })()
 ;

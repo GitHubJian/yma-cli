@@ -6,7 +6,7 @@ const MAX_GROUP_LENGTH = 3;
 
 function createChunks(
     context: string,
-    libs: {[key: string]: string},
+    libs: {[key: string]: string}
 ): Record<
     string,
     {
@@ -38,12 +38,13 @@ function createChunks(
 }
 
 export interface Options {
+    forceEnabled?: boolean;
     autarkies: string[];
 }
 
 export default function (api: PluginAPI, options: Partial<Options> = {}) {
     api.chainWebpack((chain: Chain) => {
-        if (api.isProd) {
+        if (options.forceEnabled === true || api.isProd) {
             const libs = findEntry(api.context, EntryType.LIB);
 
             if (Object.keys(libs).length > MAX_GROUP_LENGTH) {
