@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-branch",
-    "version": "1.0.48",
+    "version": "1.0.49",
     "description": "Git 快速创建分支",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,6 +20,6 @@
     "license": "ISC",
     "dependencies": {
         "fs-extra": "10.1.0",
-        "yma-shared-util": "^1.0.48"
+        "yma-shared-util": "^1.0.49"
     }
 }

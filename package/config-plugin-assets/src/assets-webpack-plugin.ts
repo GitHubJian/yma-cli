@@ -16,6 +16,7 @@ class AssetsWebpackPlugin {
     assetNames!: Map<string, string>;
     assets!: Record<string, string>;
     compiler!: webpack.Compiler;
+    currentAsset: any;
 
     constructor(options = {}) {
         this.assetNames = new Map();
@@ -48,10 +49,10 @@ class AssetsWebpackPlugin {
             chunkGroupChildren: false,
         });
 
-        const {assets} = this.getCompilationAssets(compilation);
+        const {assets, hmrFiles} = this.getCompilationAssets(compilation);
         this.processStatsAssets(stats.assets);
 
-        this.processAssetsByChunkName(stats.assetsByChunkName);
+        this.processAssetsByChunkName(stats.assetsByChunkName, hmrFiles);
 
         const findAssetKeys = findMapKeysByValue(this.assetNames);
         for (const asset of assets) {
@@ -62,18 +63,22 @@ class AssetsWebpackPlugin {
                 sourceFilenames.push(name);
             }
             sourceFilenames.forEach(key => {
+                this.currentAsset = asset;
                 this.set(key, asset.name);
+                this.currentAsset = null;
             });
         }
 
         await this.emitAssetsManifest(compilation);
     }
 
-    processAssetsByChunkName(assets) {
+    processAssetsByChunkName(assets, hmrFiles) {
         Object.keys(assets).forEach(chunkName => {
-            maybeArrayWrap(assets[chunkName]).forEach(filename => {
-                this.assetNames.set(chunkName + this.getExtension(filename), filename);
-            });
+            maybeArrayWrap(assets[chunkName])
+                .filter(filename => !hmrFiles.has(filename))
+                .forEach(filename => {
+                    this.assetNames.set(chunkName + this.getExtension(filename), filename);
+                });
         });
 
         return this.assetNames;
@@ -107,12 +112,18 @@ class AssetsWebpackPlugin {
     }
 
     getCompilationAssets(compilation) {
+        const hmrFiles = new Set();
         const assets = compilation.getAssets().filter(asset => {
+            if (asset.info.hotModuleReplacement) {
+                hmrFiles.add(asset.name);
+                return false;
+            }
             return !asset.info.assetsManifest;
         });
 
         return {
             assets,
+            hmrFiles,
         };
     }
 
