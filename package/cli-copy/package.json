@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-copy",
-    "version": "1.0.49",
+    "version": "1.0.50",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -13,7 +13,7 @@
     "dependencies": {
         "clipboardy": "2.3.0",
         "yma-package-manager": "1.0.3",
-        "yma-shared-util": "^1.0.49"
+        "yma-shared-util": "^1.0.50"
     },
     "files": [
         "bin",

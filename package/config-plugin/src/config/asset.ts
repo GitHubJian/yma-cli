@@ -43,13 +43,13 @@ export default function (api: PluginAPI) {
             );
         };
 
-        const genUrlLoaderOption = (dir: string): CSSLoaderOptions => {
+        const genUrlLoaderOption = (dir: string, limit: number = inlineLimit): CSSLoaderOptions => {
             return {
                 url: false,
                 import: false,
                 modules: false,
                 sourceMap: false,
-                limit: inlineLimit,
+                limit: limit,
                 esModule: false,
                 fallback: {
                     loader: require.resolve('file-loader'),
@@ -64,10 +64,30 @@ export default function (api: PluginAPI) {
         chain.module
             .rule('images')
             .test(/\.(png|jpe?g|gif|webp)(\?.*)?$/)
+            .exclude.add(filepath => {
+                if (!filepath) {
+                    return true;
+                }
+
+                if (/\.unpack\.(png|jpe?g|gif|webp)$/.test(filepath)) {
+                    return true;
+                }
+
+                return false
+            })
+            .end()
             .type('javascript/auto')
             .use('url-loader')
             .loader(require.resolve('url-loader'))
             .options(genUrlLoaderOption('img'));
+
+        chain.module
+            .rule('unpack-images')
+            .test(/\.unpack\.(png|jpe?g|gif|webp)$/)
+            .type('javascript/auto')
+            .use('url-loader')
+            .loader(require.resolve('url-loader'))
+            .options(genUrlLoaderOption('img', 1));
 
         let customSvgPaths: string[] = [];
         if (api.projectOptions.svgPaths && Array.isArray(api.projectOptions.svgPaths)) {
