@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-externals",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,12 +10,16 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "dependencies": {
-        "yma-shared-util": "^1.0.50"
+        "yma-shared-util": "^1.0.51"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.50"
+        "yma-config-plugin": "^1.0.51"
     },
     "keywords": [],
     "author": "",

@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-legal-deps",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "引入合法的第三方依赖",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,7 +10,11 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -20,6 +24,6 @@
         "lodash.uniqby": "4.7.0"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.50"
+        "yma-config-plugin": "^1.0.51"
     }
 }

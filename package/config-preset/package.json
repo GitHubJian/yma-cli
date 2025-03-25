@@ -1,19 +1,28 @@
 {
     "name": "yma-config-preset",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "YMA CLI Webpack 预配置",
     "main": "./index.js",
     "scripts": {
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public", "base.js", "h5.js", "index.js", "sdk.js", "ts.js"],
+    "files": [
+        "bin",
+        "dist",
+        "public",
+        "base.js",
+        "h5.js",
+        "index.js",
+        "sdk.js",
+        "ts.js"
+    ],
     "dependencies": {
-        "yma-config-plugin-babel": "^1.0.50",
-        "yma-config-plugin-chunk": "^1.0.50",
-        "yma-config-plugin-flexible": "^1.0.50",
-        "yma-config-plugin-sdk": "^1.0.50",
-        "yma-config-plugin-typescript": "^1.0.50",
-        "yma-config-plugin-vconsole": "^1.0.50"
+        "yma-config-plugin-babel": "^1.0.51",
+        "yma-config-plugin-chunk": "^1.0.51",
+        "yma-config-plugin-flexible": "^1.0.51",
+        "yma-config-plugin-sdk": "^1.0.51",
+        "yma-config-plugin-typescript": "^1.0.51",
+        "yma-config-plugin-vconsole": "^1.0.51"
     },
     "keywords": [],
     "author": "",

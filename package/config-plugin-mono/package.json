@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-mono",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,7 +10,11 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "dependencies": {
         "add-asset-html-webpack-plugin": "5.0.2",
         "assets-webpack-plugin": "7.1.1",
@@ -18,8 +22,8 @@
         "html-webpack-tags-plugin": "3.0.2",
         "lodash.uniqby": "4.7.0",
         "webpack": "5.70.0",
-        "yma-config-plugin": "^1.0.50",
-        "yma-shared-util": "^1.0.50"
+        "yma-config-plugin": "^1.0.51",
+        "yma-shared-util": "^1.0.51"
     },
     "keywords": [],
     "author": "",

@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-lint",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "LINT 集成工具",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,7 +10,11 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "dependencies": {
         "@babel/eslint-parser": "7.18.2",
         "@babel/eslint-plugin": "7.17.7",
@@ -32,7 +36,7 @@
         "stylelint": "13.8.0",
         "stylelint-order": "4.1.0",
         "typescript": "5.1.6",
-        "yma-shared-util": "^1.0.50"
+        "yma-shared-util": "^1.0.51"
     },
     "devDependencies": {
         "@types/glob": "7.2.0",

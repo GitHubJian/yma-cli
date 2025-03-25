@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-dev",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "Webpack Dev 构建命令",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,7 +10,11 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -18,8 +22,8 @@
         "address": "1.1.2",
         "portfinder": "1.0.28",
         "webpack-dev-server": "4.7.4",
-        "yma-config-plugin": "^1.0.50",
-        "yma-devserver-mock": "^1.0.50",
-        "yma-shared-util": "^1.0.50"
+        "yma-config-plugin": "^1.0.51",
+        "yma-devserver-mock": "^1.0.51",
+        "yma-shared-util": "^1.0.51"
     }
 }

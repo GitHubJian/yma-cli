@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-zip",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "压缩文件夹",
     "main": "./dist/index.js",
     "scripts": {
@@ -11,12 +11,15 @@
         "link": "npm link",
         "unlink": "npm unlink yma-cli-zip"
     },
-    "files": ["bin", "dist"],
+    "files": [
+        "bin",
+        "dist"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "yma-shared-util": "^1.0.50",
-        "yma-zip": "^1.0.50"
+        "yma-shared-util": "^1.0.51",
+        "yma-zip": "^1.0.51"
     }
 }

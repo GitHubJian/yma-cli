@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-nsr",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "切换 npm 的 registry",
     "main": "./dist/index.js",
     "scripts": {
@@ -10,7 +10,11 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC",
@@ -19,6 +23,6 @@
         "ini": "3.0.1",
         "inquirer": "6.5.2",
         "semver": "7.3.5",
-        "yma-shared-util": "^1.0.50"
+        "yma-shared-util": "^1.0.51"
     }
 }

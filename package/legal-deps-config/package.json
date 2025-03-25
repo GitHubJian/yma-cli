@@ -1,6 +1,6 @@
 {
     "name": "yma-legal-deps-config",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "常用第三方合法的依赖表",
     "main": "./src/index.js",
     "scripts": {
@@ -10,7 +10,11 @@
         "clean": "",
         "link": "npm link"
     },
-    "files": ["bin", "dist", "public"],
+    "files": [
+        "bin",
+        "dist",
+        "public"
+    ],
     "keywords": [],
     "author": "",
     "license": "ISC"

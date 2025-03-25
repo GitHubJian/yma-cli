@@ -1,6 +1,6 @@
 {
     "name": "yma-babel-require-context-loader",
-    "version": "1.0.50",
+    "version": "1.0.51",
     "description": "ES Module 使用 require.context",
     "main": "./src/index.js",
     "scripts": {},
