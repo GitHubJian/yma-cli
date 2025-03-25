@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-zip",
-    "version": "1.0.51",
+    "version": "1.0.52",
     "description": "压缩文件夹",
     "main": "./dist/index.js",
     "scripts": {
@@ -20,7 +20,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "yma-shared-util": "^1.0.51",
-        "yma-zip": "^1.0.51"
+        "yma-shared-util": "^1.0.52",
+        "yma-zip": "^1.0.52"
     }
 }

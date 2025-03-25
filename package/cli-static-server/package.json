@@ -1,6 +1,6 @@
 {
     "name": "yma-cli-static-server",
-    "version": "1.0.51",
+    "version": "1.0.52",
     "description": "启动 Node 静态服务",
     "main": "./dist/index.js",
     "scripts": {
@@ -26,7 +26,7 @@
         "koa-send": "5.0.0",
         "path-to-regexp": "6.2.1",
         "portfinder": "1.0.28",
-        "yma-shared-util": "^1.0.51"
+        "yma-shared-util": "^1.0.52"
     },
     "devDependencies": {
         "@types/koa": "2.15.0",

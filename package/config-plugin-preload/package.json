@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-preload",
-    "version": "1.0.51",
+    "version": "1.0.52",
     "description": "Webpack 构建时，Preload.js 预加载资源",
     "main": "./dist/index.js",
     "scripts": {
@@ -19,10 +19,10 @@
     "dependencies": {
         "cheerio": "1.0.0-rc.12",
         "webpack-subresource-integrity": "5.0.0",
-        "yma-shared-util": "^1.0.51"
+        "yma-shared-util": "^1.0.52"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.51"
+        "yma-config-plugin": "^1.0.52"
     },
     "keywords": [],
     "author": "",
