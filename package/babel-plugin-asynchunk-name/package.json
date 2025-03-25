@@ -3,12 +3,10 @@
     "version": "1.0.51",
     "description": "",
     "main": "./src/index.js",
-    "scripts": {},
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "scripts": {
+        "publish": "npm publish"
+    },
+    "files": ["bin", "dist", "public"],
     "keywords": [],
     "author": "",
     "license": "ISC"

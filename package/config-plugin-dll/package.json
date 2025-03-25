@@ -8,7 +8,8 @@
         "start": "npm run build -- -w",
         "build": "npm run clean && tsc -p src",
         "clean": "del-cli -f dist",
-        "link": "npm link"
+        "link": "npm link",
+        "publish": "npm publish"
     },
     "keywords": [],
     "author": "",

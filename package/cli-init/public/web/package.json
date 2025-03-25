@@ -7,7 +7,6 @@
         "start": "yma dev",
         "build": "yma build",
         "lint": "yma lint",
-        "prepare": "husky install",
         "sh": "sh ./script/build.sh",
         "docker": "sh ./script/docker.sh"
     },
@@ -20,7 +19,5 @@
         "yma-cli": "1.0.37",
         "copy-webpack-plugin": "11.0.0"
     },
-    "devDependencies": {
-        "husky": "8.0.0"
-    }
+    "devDependencies": {}
 }

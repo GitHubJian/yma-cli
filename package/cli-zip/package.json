@@ -9,7 +9,8 @@
         "build": "npm run clean && tsc -p src",
         "clean": "del-cli -f dist",
         "link": "npm link",
-        "unlink": "npm unlink yma-cli-zip"
+        "unlink": "npm unlink yma-cli-zip",
+        "publish": "npm publish"
     },
     "files": [
         "bin",

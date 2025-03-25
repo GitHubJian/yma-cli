@@ -8,7 +8,8 @@
         "start": "",
         "build": "",
         "clean": "",
-        "link": "npm link"
+        "link": "npm link",
+        "publish": "npm publish"
     },
     "files": [
         "bin",

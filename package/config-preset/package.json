@@ -4,7 +4,8 @@
     "description": "YMA CLI Webpack 预配置",
     "main": "./index.js",
     "scripts": {
-        "link": "npm link"
+        "link": "npm link",
+        "publish": "npm publish"
     },
     "files": [
         "bin",
