@@ -10,11 +10,7 @@
         "clean": "",
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "keywords": [],
     "author": "",
     "license": "ISC"

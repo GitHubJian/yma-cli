@@ -10,11 +10,7 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "dependencies": {
         "add-asset-html-webpack-plugin": "5.0.2",
         "assets-webpack-plugin": "7.1.1",

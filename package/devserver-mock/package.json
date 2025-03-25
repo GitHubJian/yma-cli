@@ -10,11 +10,7 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "dependencies": {
         "path-to-regexp": "6.2.1",
         "yma-shared-util": "^1.0.50"

@@ -16,6 +16,29 @@ const GLOBAL_BROWSERS_LIST = [
 
 const isTiled = process.env.YMA_OUTPUT_TILED == 'true';
 
+function postcssGlobalSelector(options: {prefix: string}) {
+    const prefix = options.prefix;
+
+    return {
+        postcssPlugin: 'postcss-global-selector',
+        Rule(rule) {
+            if (prefix.length > 0) {
+                rule.selectors = rule.selectors.map(selector => {
+                    if (['html', 'body'].includes(selector)) {
+                        return prefix;
+                    }
+
+                    if (selector.indexOf(prefix) > -1 || selector.indexOf('ignore') !== -1) {
+                        return selector;
+                    }
+
+                    return `${prefix} ${selector}`;
+                });
+            }
+        },
+    };
+}
+
 export default function (api: PluginAPI) {
     api.chainWebpack((chain: Chain) => {
         const shadowMode = false;
@@ -47,6 +70,7 @@ export default function (api: PluginAPI) {
             : '../'.repeat(extractOptions.filename.replace(/^\.[\/\\]/, '').split(/[\/\\]/g).length - 1);
 
         const plugins: any[] = [];
+        const postcssLoaderOptions = loaderOptions.postcss || {};
 
         const browsers = loadOptions<string[]>('browserslist.config.js', api.context) || GLOBAL_BROWSERS_LIST;
 
@@ -55,6 +79,12 @@ export default function (api: PluginAPI) {
             {
                 browsers: browsers,
             },
+        ]);
+
+        plugins.push([
+            postcssGlobalSelector({
+                prefix: postcssLoaderOptions.prefix || '',
+            }),
         ]);
 
         const postcssOptions = {

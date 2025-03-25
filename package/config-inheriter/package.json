@@ -10,10 +10,7 @@
         "clean": "del-cli -f dist",
         "link": "npm link"
     },
-    "files": [
-        "dist",
-        "src"
-    ],
+    "files": ["dist", "src"],
     "keywords": [],
     "author": "",
     "license": "ISC",

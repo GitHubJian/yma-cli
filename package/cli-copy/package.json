@@ -15,10 +15,7 @@
         "yma-package-manager": "1.0.3",
         "yma-shared-util": "^1.0.50"
     },
-    "files": [
-        "bin",
-        "dist"
-    ],
+    "files": ["bin", "dist"],
     "keywords": [],
     "author": "",
     "license": "ISC"

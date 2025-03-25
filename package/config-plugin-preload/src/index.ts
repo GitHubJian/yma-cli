@@ -2,7 +2,7 @@ import PluginAPI, {Chain} from 'yma-config-plugin';
 import PreloadWebpackPlugin from './preload-webpack-plugin';
 
 interface ChainOptions {
-    forceEnabled?: boolean
+    forceEnabled?: boolean;
 }
 
 export default function (api: PluginAPI, options: ChainOptions = {}) {

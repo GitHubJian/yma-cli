@@ -36,25 +36,6 @@ module.exports = function (context, options = {}) {
         ],
     ];
 
-    if (options.jsx !== false) {
-        let jsxOptions = {};
-        if (typeof options.jsx === 'object') {
-            jsxOptions = options.jsx;
-        }
-
-        let vueVersion = 2;
-        try {
-            const Vue = require('vue');
-            vueVersion = semver.major(Vue.version);
-        } catch (e) {}
-
-        if (vueVersion === 2) {
-            presets.push([require('@vue/babel-preset-jsx'), jsxOptions]);
-        } else if (vueVersion === 3) {
-            plugins.push([require('@vue/babel-plugin-jsx'), jsxOptions]);
-        }
-    }
-
     const plugins = [
         [
             '@babel/plugin-transform-runtime',
@@ -76,6 +57,25 @@ module.exports = function (context, options = {}) {
         ['@babel/plugin-proposal-class-properties', {loose: true}],
         ['@babel/plugin-transform-private-property-in-object', {loose: true}],
     ];
+
+    if (options.jsx !== false) {
+        let jsxOptions = {};
+        if (typeof options.jsx === 'object') {
+            jsxOptions = options.jsx;
+        }
+
+        let vueVersion = 2;
+        try {
+            const Vue = require('vue');
+            vueVersion = semver.major(Vue.version);
+        } catch (e) {}
+
+        if (vueVersion === 2) {
+            presets.push([require('@vue/babel-preset-jsx'), jsxOptions]);
+        } else if (vueVersion === 3) {
+            plugins.push([require('@vue/babel-plugin-jsx'), jsxOptions]);
+        }
+    }
 
     return {
         sourceType: 'unambiguous',

@@ -73,7 +73,7 @@ export default function (api: PluginAPI) {
                     return true;
                 }
 
-                return false
+                return false;
             })
             .end()
             .type('javascript/auto')

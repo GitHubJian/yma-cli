@@ -4,11 +4,7 @@
     "description": "",
     "main": "./src/index.js",
     "scripts": {},
-    "files": [
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["bin", "dist", "public"],
     "keywords": [],
     "author": "",
     "license": "ISC"

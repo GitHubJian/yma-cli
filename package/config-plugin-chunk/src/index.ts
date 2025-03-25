@@ -6,7 +6,7 @@ const MAX_GROUP_LENGTH = 3;
 
 function createChunks(
     context: string,
-    libs: {[key: string]: string}
+    libs: {[key: string]: string},
 ): Record<
     string,
     {

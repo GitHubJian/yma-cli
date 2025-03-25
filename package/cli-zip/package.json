@@ -11,10 +11,7 @@
         "link": "npm link",
         "unlink": "npm unlink yma-cli-zip"
     },
-    "files": [
-        "bin",
-        "dist"
-    ],
+    "files": ["bin", "dist"],
     "keywords": [],
     "author": "",
     "license": "ISC",

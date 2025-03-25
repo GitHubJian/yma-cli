@@ -96,25 +96,16 @@ function main(options) {
     });
 }
 
-if (
-    'complete' === document.readyState ||
-    'interactive' === document.readyState
-) {
+if ('complete' === document.readyState || 'interactive' === document.readyState) {
     const options = {
         force: !!window.__preload__force__,
     };
 
-    if (
-        typeof window.__preload__dns__ === 'string' &&
-        window.__preload__dns__.length > 0
-    ) {
+    if (typeof window.__preload__dns__ === 'string' && window.__preload__dns__.length > 0) {
         options.dns = window.__preload__dns__;
     }
 
-    if (
-        typeof window.__preload__filename__ === 'string' &&
-        window.__preload__filename__.length > 0
-    ) {
+    if (typeof window.__preload__filename__ === 'string' && window.__preload__filename__.length > 0) {
         options.filename = window.__preload__filename__;
     }
 
@@ -129,17 +120,11 @@ if (
             force: !!window.__preload__force__,
         };
 
-        if (
-            typeof window.__preload__dns__ === 'string' &&
-            window.__preload__dns__.length > 0
-        ) {
+        if (typeof window.__preload__dns__ === 'string' && window.__preload__dns__.length > 0) {
             options.dns = window.__preload__dns__;
         }
 
-        if (
-            typeof window.__preload__filename__ === 'string' &&
-            window.__preload__filename__.length > 0
-        ) {
+        if (typeof window.__preload__filename__ === 'string' && window.__preload__filename__.length > 0) {
             options.filename = window.__preload__filename__;
         }
 

@@ -6,16 +6,7 @@
     "scripts": {
         "link": "npm link"
     },
-    "files": [
-        "bin",
-        "dist",
-        "public",
-        "base.js",
-        "h5.js",
-        "index.js",
-        "sdk.js",
-        "ts.js"
-    ],
+    "files": ["bin", "dist", "public", "base.js", "h5.js", "index.js", "sdk.js", "ts.js"],
     "dependencies": {
         "yma-config-plugin-babel": "^1.0.50",
         "yma-config-plugin-chunk": "^1.0.50",
