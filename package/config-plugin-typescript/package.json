@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-typescript",
-    "version": "1.0.52",
+    "version": "1.0.53",
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
@@ -24,7 +24,7 @@
     },
     "devDependencies": {
         "webpack": "5.70.0",
-        "yma-config-plugin": "^1.0.52"
+        "yma-config-plugin": "^1.0.53"
     },
     "keywords": [],
     "author": "",

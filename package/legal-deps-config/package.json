@@ -1,6 +1,6 @@
 {
     "name": "yma-legal-deps-config",
-    "version": "1.0.52",
+    "version": "1.0.53",
     "description": "常用第三方合法的依赖表",
     "main": "./src/index.js",
     "scripts": {

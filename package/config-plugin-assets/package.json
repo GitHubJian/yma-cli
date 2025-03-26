@@ -1,6 +1,6 @@
 {
     "name": "yma-config-plugin-assets",
-    "version": "1.0.52",
+    "version": "1.0.53",
     "description": "Webpack 构建，生成 Assets 文件",
     "main": "./dist/index.js",
     "scripts": {
@@ -19,10 +19,10 @@
     "dependencies": {
         "cheerio": "1.0.0-rc.12",
         "webpack-subresource-integrity": "5.0.0",
-        "yma-shared-util": "^1.0.52"
+        "yma-shared-util": "^1.0.53"
     },
     "devDependencies": {
-        "yma-config-plugin": "^1.0.52"
+        "yma-config-plugin": "^1.0.53"
     },
     "keywords": [],
     "author": "",
