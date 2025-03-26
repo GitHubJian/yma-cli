@@ -16,23 +16,26 @@ const GLOBAL_BROWSERS_LIST = [
 
 const isTiled = process.env.YMA_OUTPUT_TILED == 'true';
 
-function postcssGlobalSelector(options: {prefix: string}) {
+function postcssGlobalSelector(options) {
     const prefix = options.prefix;
+    const fallback = options.fallback;
 
     return {
         postcssPlugin: 'postcss-global-selector',
         Rule(rule) {
             if (prefix.length > 0) {
+                fallback(rule);
+
                 rule.selectors = rule.selectors.map(selector => {
                     if (['html', 'body'].includes(selector)) {
-                        return prefix;
+                        return `${prefix}-${selector}`;
                     }
 
                     if (selector.indexOf(prefix) > -1 || selector.indexOf('ignore') !== -1) {
                         return selector;
                     }
 
-                    return `${prefix} ${selector}`;
+                    return `${prefix}-html ${selector}`;
                 });
             }
         },
@@ -84,6 +87,7 @@ export default function (api: PluginAPI) {
         plugins.push([
             postcssGlobalSelector({
                 prefix: postcssLoaderOptions.prefix || '',
+                fallback: postcssLoaderOptions.fallback || function () {},
             }),
         ]);
 

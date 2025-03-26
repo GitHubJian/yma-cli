@@ -11,12 +11,7 @@
         "link": "npm link",
         "publish": "npm publish"
     },
-    "files": [
-        "chain",
-        "bin",
-        "dist",
-        "public"
-    ],
+    "files": ["chain", "bin", "dist", "public"],
     "keywords": [],
     "author": "",
     "license": "ISC",
